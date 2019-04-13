@@ -8,13 +8,25 @@ const environments = {};
 // Staging (default) environment
 environments.staging = {
   'port': 5000,
-  'envName': 'staging'
+  'envName': 'staging',
+  'dbConnection': {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'khoa0319',
+    'database': 'SocialHub'
+  }
 };
 
 // Production environment
 environments.production = {
   'port': 5001,
-  'envName': 'production'
+  'envName': 'production',
+  'dbConnection': {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'khoa0319',
+    'database': 'SocialHub'
+  }
 }
 
 // Determine which environment was passed as a CLI argument
