@@ -1,0 +1,11 @@
+{
+  "name": "social-hub-server",
+  "version": "1.0.0",
+  "description": "RESTful API for socialhub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Khoa Huynh, Hung Dang, Duy Pham, Ha Nguyen, Phu Pham",
+  "license": "ISC"
+}
