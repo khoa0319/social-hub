@@ -4,8 +4,14 @@
   "description": "RESTful API for socialhub",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "export NODE_ENV=staging && node index.js",
+    "production": "export NODE_ENV=production && node index.js"
   },
   "author": "Khoa Huynh, Hung Dang, Duy Pham, Ha Nguyen, Phu Pham",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  }
 }
