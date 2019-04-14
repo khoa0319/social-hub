@@ -10,4 +10,8 @@ router.get('/:id', (req, res) => {
   res.end();
 })
 
+router.post('/register', (req, res) => {
+  
+});
+
 module.exports = router;
