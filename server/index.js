@@ -5,6 +5,7 @@ const mysql = require('mysql');
 const config = require('./config/config');
 
 const app = express();
+
 const { host, user, password, database } = config.dbConnection;
 const connection = mysql.createConnection({ host, user, password, database });
 connection.connect((err) => {
@@ -12,6 +13,8 @@ connection.connect((err) => {
   console.log('Connected as id', connection.threadId);
 });
 
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use('/api/users', require('./routes/api/users'));
 const port = config.port || 5000;
 
