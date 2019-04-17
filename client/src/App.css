@@ -1,33 +1,67 @@
-.App {
-  text-align: center;
+body
+{
+  background-image: url('/img/Background.jpg');
+  background-size: 70%;
+  background-position-x: center;
+  background-repeat: no-repeat; 
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+#profilePic
+{
+  margin-top: 7px;
+  width: 30px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.nav-stuff>*
+{
+  width: 100px;
 }
-
-.App-link {
-  color: #61dafb;
+.nav-stuff
+{
+  margin: auto;
 }
+.nav-stuff button img
+{
+  width: 22px;
+  height: 22px;
+}
+/* .nav-stuff button
+{
+  height: 40px;
+} */
+.nav-stuff button i
+{
+  padding-top: 5px;
+}
+.logo
+{
+  width: 40px;
+}
+/* #BigInput
+{
+  width: 200px;
+} */
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-stuff
+{
+  margin-top: 10px;
+}
+.navbar
+{
+  background-color: #96c1de;
+}
+.btn-myapp
+{
+  background-color: #f7e7b6;
+}
+.btn-myapp2
+{
+  background-color: #bce4df;
+}
+.app-content
+{
+  margin-top: 140px;
+}
+.bg-main
+{
+  background-color: #96c1de;
 }
