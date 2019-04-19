@@ -6,15 +6,17 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\" ",
     "production": "export NODE_ENV=production && node index.js",
-    "server": "export NODE_ENV=staging && node index.js",
+    "server": "export NODE_ENV=staging && nodemon index.js",
     "client": "node start-client.js"
   },
   "author": "Khoa Huynh, Hung Dang, Duy Pham, Ha Nguyen, Phu Pham",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.16.0"
   }
 }

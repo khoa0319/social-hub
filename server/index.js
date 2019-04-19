@@ -1,7 +1,7 @@
 /* 3rd party modules */
 const express = require('express');
 const mysql = require('mysql');
-/* app modules */
+/* App modules */
 const config = require('./config/config');
 
 const app = express();
@@ -15,7 +15,7 @@ connection.connect((err) => {
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use('/api/users', require('./routes/api/users'));
+app.use('/api/users', require('./components/users/userAPI'));
 const port = config.port || 5000;
 
 app.listen(port, () => {
