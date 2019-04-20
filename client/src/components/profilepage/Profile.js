@@ -6,6 +6,9 @@ import UpcomingAD from "./dashboard/UpcomingAD";
 import BtnGroup from "./featurebutton/BtnGroup";
 import {BrowserRouter} from 'react-router-dom';
 import {Route,Switch} from 'react-router-dom';
+import NotiD from './dashboard/NotiD'
+import NotificationDashB from "./dashboard/NotificationDashB";
+import SearchDashB from "./dashboard/SearchDashB";
 class Profile extends Component {
   render() {
     return (
@@ -21,10 +24,7 @@ class Profile extends Component {
           <BtnGroup/>
       </div>
       <div className="col-md-6">
-
-        <Switch>
-        <Route path="/profile" exact component={MainDashB}/>
-        </Switch>
+        <Route path="/profile" exact component={SearchDashB}/>
       </div>
       <div className="col-md-3 d-none d-sm-block">
         <UpcomingAD/>
