@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\" ",
     "production": "export NODE_ENV=production && node index.js",
-    "server": "export NODE_ENV=staging && nodemon index.js",
+    "server": "export NODE_ENV=staging && node spawnDatabase.js && nodemon index.js",
     "client": "node start-client.js"
   },
   "author": "Khoa Huynh, Hung Dang, Duy Pham, Ha Nguyen, Phu Pham",

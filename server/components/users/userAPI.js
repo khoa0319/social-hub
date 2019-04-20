@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
 
 // router.get('/logout', _userData.handleLogOut);
 
-// router.post('/account/update', _userData.handleUpdate);
+// router.post('/update', _userData.handleUpdate);
 
 // router.post('/join-yc', _userData.handleJoinYoungCommunist);
 

@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS SocialHub;
+
 USE SocialHub;
 
 CREATE TABLE IF NOT EXISTS STUDENT(
@@ -33,7 +35,8 @@ CREATE TABLE IF NOT EXISTS JOINT_STDCM_FORM(
     JOIN_YC_DATE date,
     JOIN_CP_DATE date,
     TITLE varchar(50),
-    STATE enum('Pending','Accepted','Rejected') NOT NULL
+    STATE enum('Pending','Accepted','Rejected') NOT NULL,
+    FOREIGN KEY (ID) REFERENCES STUDENT(ID)
 );
 
 CREATE TABLE IF NOT EXISTS JOIN_YC(
@@ -54,7 +57,7 @@ CREATE TABLE IF NOT EXISTS YC_FEE(
 );
 
 CREATE TABLE IF NOT EXISTS FACULTY(
-	F_ID tinyint unsigned PRIMARY KEY,
+	F_ID tinyint unsigned PRIMARY KEY auto_increment,
     FNAME varchar(50) NOT NULL
 );
 
