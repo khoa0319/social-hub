@@ -57,11 +57,19 @@ body
 {
   background-color: #bce4df;
 }
+.btn-myapp3
+{
+  background-color: #f45630;
+}
 .app-content
 {
-  margin-top: 140px;
+  margin-top: 100px;
 }
 .bg-main
 {
   background-color: #96c1de;
+}
+.txt-white
+{
+  color: white;
 }
