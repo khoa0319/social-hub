@@ -69,8 +69,8 @@ CREATE TABLE IF NOT EXISTS MAJOR(
 );
 
 CREATE TABLE IF NOT EXISTS CLASS(
-	C_ID tinyint unsigned auto_increment PRIMARY KEY,
-    C_NAME char(6) NOT NULL,
+	C_ID mediumint unsigned auto_increment PRIMARY KEY,
+    C_NAME char(10) NOT NULL UNIQUE,
     M_ID tinyint unsigned,
     FOREIGN KEY (M_ID) REFERENCES MAJOR(M_ID)
 );
