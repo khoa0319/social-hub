@@ -1,1 +1,54 @@
-[{"khoa":"Du lịch - Khách sạn","nganh":["Quản trị dịch vụ du lịch và lữ hành","Quản trị khách sạn"]},{"khoa":"Công nghệ thông tin","nganh":["Công nghệ thông tin"]},{"khoa":"Kinh tế - Tài chính","nganh":["Kế toán","Tài chính - Ngân hàng"]},{"khoa":"Bộ môn Luật","nganh":["Luật kinh tế"]},{"khoa":"Quản trị kinh doanh quốc tế","nganh":["Quản trị kinh doanh","Kinh doanh quốc tế"]},{"khoa":"Ngôn ngữ và Văn hóa phương Đông","nganh":["Đông Phương học"]},{"khoa":"Quan hệ quốc tế","nganh":["Quan hệ quốc tế"]},{"khoa":"Ngoại ngữ","nganh":["Ngôn ngữ Anh","Ngôn ngữ Trung Quốc"]}]
+[
+  {
+    "khoa": "Du lịch - Khách sạn",
+    "nganh": [
+      "Quản trị dịch vụ du lịch và lữ hành",
+      "Quản trị khách sạn"
+    ]
+  },
+  {
+    "khoa": "Công nghệ thông tin",
+    "nganh": [
+      "Công nghệ thông tin"
+    ]
+  },
+  {
+    "khoa": "Kinh tế - Tài chính",
+    "nganh": [
+      "Kế toán",
+      "Tài chính - Ngân hàng"
+    ]
+  },
+  {
+    "khoa": "Bộ môn Luật",
+    "nganh": [
+      "Luật kinh tế"
+    ]
+  },
+  {
+    "khoa": "Quản trị kinh doanh quốc tế",
+    "nganh": [
+      "Quản trị kinh doanh",
+      "Kinh doanh quốc tế"
+    ]
+  },
+  {
+    "khoa": "Ngôn ngữ và Văn hóa phương Đông",
+    "nganh": [
+      "Đông Phương học"
+    ]
+  },
+  {
+    "khoa": "Quan hệ quốc tế",
+    "nganh": [
+      "Quan hệ quốc tế"
+    ]
+  },
+  {
+    "khoa": "Ngoại ngữ",
+    "nganh": [
+      "Ngôn ngữ Anh",
+      "Ngôn ngữ Trung Quốc"
+    ]
+  }
+]

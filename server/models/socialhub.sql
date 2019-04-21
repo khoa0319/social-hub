@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS FACULTY(
 );
 
 CREATE TABLE IF NOT EXISTS MAJOR(
-	M_ID tinyint unsigned PRIMARY KEY,
+	M_ID tinyint unsigned PRIMARY KEY auto_increment,
     MNAME varchar(100) NOT NULL,
     F_ID tinyint unsigned NOT NULL,
     FOREIGN KEY (F_ID) references FACULTY(F_ID)

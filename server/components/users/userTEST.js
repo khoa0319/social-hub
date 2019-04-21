@@ -89,3 +89,7 @@ app.getComposeData = (data,fdata) => {
     }
   })
 }
+
+app.getComposeClassData = (data, fmData) => {
+  
+}
