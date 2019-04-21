@@ -11,6 +11,7 @@ import NotificationDashB from "./dashboard/NotificationDashB";
 import SearchDashB from "./dashboard/SearchDashB";
 import NoMatch from "./NoMatch";
 import ActivityBtn from "./featurebutton/ActivityBtn";
+import Information from "./dashboard/Information";
 class Profile extends Component {
   render() {
     console.log(this.props.match.path);
@@ -28,11 +29,11 @@ class Profile extends Component {
           <BtnGroup/>
       </div>
       <div className="col-md-6">
-      <ActivityBtn/>
       <Switch> 
       <Route path={`${this.props.match.path}`} exact component={ActivityD}/>
       <Route path={`${this.props.match.path}/noti`} component={NotificationDashB}/>
       <Route path={`${this.props.match.path}/search/:name`} exact component={SearchDashB}/> 
+      <Route path={`${this.props.match.path}/information`} exact component={Information}/> 
       <Route component={NoMatch}/>
       </Switch>   
       </div>

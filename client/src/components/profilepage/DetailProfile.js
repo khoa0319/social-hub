@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom'
 class DetailProfile extends Component {
     render() {
         return (
@@ -15,6 +15,14 @@ class DetailProfile extends Component {
               <p><strong>Email</strong>: Duy@gmail.com</p>
               <p><strong>Ngày Sinh</strong>: 16/3/1999</p>
               </div>
+              <div className="card-footer text-center ">
+              <div>
+                <button className="btn btn-secondary">Chỉnh Sửa Thông Tin</button>
+                </div>
+                <div>
+                <button className="btn btn-myapp3 txt-white mt-2">Hoạt Động Của Bạn</button>
+                </div>
+                 </div>
             </div>
         );
     }
