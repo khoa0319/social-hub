@@ -8,6 +8,8 @@ import {Route,Switch} from 'react-router-dom';
 import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
+import Table from './components/adminpage/Table'
+
 class App extends Component {
   render() {
     return (
@@ -18,6 +20,7 @@ class App extends Component {
 
       <Route path="/" exact component={Loginpage}/>
       <Route path="/profile" exact component={Profile}/>  
+      <Route path="/admin" exact component={Table}/>
       </div>
       </div>
       <Activity/>

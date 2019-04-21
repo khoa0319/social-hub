@@ -73,3 +73,11 @@ body
 {
   color: white;
 }
+
+table {
+  width: 100%;
+}
+
+h1 {
+  text-align: left;
+}
