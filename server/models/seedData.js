@@ -1,7 +1,7 @@
 const pool = require('./database');
 const fData = require('../data/faculties.json');
-const fmData = require('../data/faculty_major.json');
-const cmData = require('../data/class_major.json');
+const mData = require('../data/Majors.json');
+const cData = require('../data/classes.json');
 // table Faculty, major, class, student
 const seedData = {};
 
@@ -12,53 +12,65 @@ seedData.seedFaculty = async (facultyData) => {
   for (const key in facultyData) {
     if (facultyData.hasOwnProperty(key)) {
       const fItem = { FNAME: facultyData[key] };
-      const result = await pool.query(`INSERT INTO FACULTY SET ?`, fItem);
+      pool.query(`INSERT INTO FACULTY SET ?`, fItem)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(console.log)
     }
   }
 }
 
 seedData.seedMajor = async (majorData) => {
-  majorData.forEach(async item => {
-    const result = await pool.query(`SELECT F_ID FROM FACULTY WHERE FNAME = ?`, `${item.khoa}`);
-    item.nganh.forEach(async nganh => {
-      let major = {
-        MNAME: nganh,
-        F_ID: result[0].F_ID
-      }
-      const info = await pool.query(`INSERT INTO MAJOR SET ?`, major);      
-    })
-  })  
+  for (const key in majorData) {
+    if (majorData.hasOwnProperty(key)) {
+      const mItem = { MNAME: majorData[key] };
+      pool.query(`INSERT INTO MAJOR SET ?`, mItem)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(console.log)
+    }
+  }
 }
 
 seedData.seedClass = async (classData) => {
-  classData.forEach(async item => {    
-    const result = await pool.query(`SELECT M_ID FROM MAJOR WHERE MNAME = ?`, item.nganh);    
-    item.lop.forEach(async lop => {
-      let stdClass = {
-        C_NAME: lop,
-        M_ID: result[0].M_ID
-      }
-      try {
-        await pool.query(`INSERT INTO CLASS SET ?`, stdClass);
-      } catch (error) {
-        console.log("Err", error.message);
-      }
-      //console.log(info);
-    })
-    
+  for (const key in classData) {
+    if (classData.hasOwnProperty(key)) {
+      const cItem = { CNAME: classData[key] };
+      pool.query(`INSERT INTO CLASS SET ?`, cItem)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(console.log)
+    }
+  }
+}
+
+seedData.seedUserType = async () => {
+  const arr = ['Đoàn Trường', 'HSV Trường', 'Đoàn Khoa', 'HSV Khoa', 'Bí Thư', 'Lớp Trường', 'Sinh Viên'];
+  arr.forEach(item => {
+    const roleItem = { ROLENAME: item };
+    pool.query(`INSERT INTO USERTYPE SET ?`, roleItem)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(console.log)
   })
 }
 
 
 seedData.init = async () => {
-  try {
-    //await seedData.seedFaculty(fData);
-    //await seedData.seedMajor(fmData);
-    await seedData.seedClass(cmData);
-  } catch (error) {
-    console.err(error);
-  }
+  seedData.seedFaculty(fData);
+  seedData.seedMajor(mData);
+  seedData.seedClass(cData);
+  seedData.seedUserType();  
 }
 
-seedData.init();
+try {
+  seedData.init();  
+} catch (error) {
+  console.error(error);
+}
+
 module.exports = seedData;

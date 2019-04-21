@@ -2,8 +2,31 @@ CREATE DATABASE IF NOT EXISTS SocialHub;
 
 USE SocialHub;
 
+CREATE TABLE IF NOT EXISTS USERTYPE(
+	UT_ID tinyint unsigned PRIMARY KEY auto_increment,
+    ROLENAME varchar(50) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS FACULTY(
+	F_ID tinyint unsigned PRIMARY KEY auto_increment,
+    FNAME varchar(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS MAJOR(
+	M_ID tinyint unsigned PRIMARY KEY auto_increment,
+    MNAME varchar(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS CLASS(
+	C_ID smallint unsigned PRIMARY KEY auto_increment,
+    CNAME char(10) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS STUDENT(
 	ID char(10) NOT NULL PRIMARY KEY,
+    UT_ID tinyint unsigned NOT NULL,
+    F_ID tinyint unsigned NOT NULL,
+    M_ID tinyint unsigned NOT NULL,
+    C_ID smallint unsigned NOT NULL,
     FULLNAME varchar(100) NOT NULL,
     BIRTHDATE date NOT NULL,
     GENDER bool NOT NULL,
@@ -11,26 +34,15 @@ CREATE TABLE IF NOT EXISTS STUDENT(
     PHONE varchar(12),
     EMAIL varchar(100),
     ACADEMIC_YEAR char(9),
-    HASHPASSWORD varchar(60)
+    HASHPASSWORD varchar(60),
+    FOREIGN KEY (UT_ID) REFERENCES USERTYPE(UT_ID),
+    FOREIGN KEY (F_ID) REFERENCES FACULTY(F_ID),
+    FOREIGN KEY (M_ID) REFERENCES MAJOR(M_ID),
+    FOREIGN KEY (C_ID) REFERENCES CLASS(C_ID)
 );
 
-CREATE TABLE IF NOT EXISTS ACGROUP(
-	AC_ID tinyint unsigned PRIMARY KEY,
-    ROLENAME varchar(50) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS STUDENT_ACGROUP(
-	SA_ID int unsigned PRIMARY KEY,
-    ID char(10) NOT NULL,
-    AC_ID tinyint unsigned,
-    AC_DATE date not null,
-    AC_STATUS bool,
-    FOREIGN KEY (ID) REFERENCES STUDENT(ID),
-    FOREIGN KEY (AC_ID) REFERENCES ACGROUP(AC_ID)
-);
-
-CREATE TABLE IF NOT EXISTS JOINT_STDCM_FORM(
-	JSC_ID int unsigned auto_increment PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS STUDENT_COMMUNITY(
+	SC_ID int unsigned auto_increment PRIMARY KEY,
     ID char(10) not null,
     JOIN_YC_DATE date,
     JOIN_CP_DATE date,
@@ -56,33 +68,6 @@ CREATE TABLE IF NOT EXISTS YC_FEE(
     FOREIGN KEY (JYC_ID) REFERENCES JOIN_YC(JYC_ID)
 );
 
-CREATE TABLE IF NOT EXISTS FACULTY(
-	F_ID tinyint unsigned PRIMARY KEY auto_increment,
-    FNAME varchar(50) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS MAJOR(
-	M_ID tinyint unsigned PRIMARY KEY auto_increment,
-    MNAME varchar(100) NOT NULL,
-    F_ID tinyint unsigned NOT NULL,
-    FOREIGN KEY (F_ID) references FACULTY(F_ID)
-);
-
-CREATE TABLE IF NOT EXISTS CLASS(
-	C_ID mediumint unsigned auto_increment PRIMARY KEY,
-    C_NAME char(10) NOT NULL UNIQUE,
-    M_ID tinyint unsigned,
-    FOREIGN KEY (M_ID) REFERENCES MAJOR(M_ID)
-);
-
-CREATE TABLE IF NOT EXISTS STUDENT_CLASS(
-	SC_ID int unsigned auto_increment PRIMARY KEY,
-    ID char(10),
-    C_ID tinyint unsigned,
-    FOREIGN KEY (ID) REFERENCES STUDENT(ID),
-    FOREIGN KEY (C_ID) REFERENCES CLASS(C_ID)
-);
-
 CREATE TABLE IF NOT EXISTS ADMINISTRATOR(
     USERNAME varchar(100) NOT NULL PRIMARY KEY,
     HASHPASSWORD varchar(60) NOT NULL,
@@ -99,33 +84,35 @@ CREATE TABLE IF NOT EXISTS ACTIVITY_TYPE(
 
 CREATE TABLE IF NOT EXISTS ACTIVITY(
     A_ID int unsigned auto_increment PRIMARY KEY,
-    ID char(10) NOT NULL,
     ADMIN_ID varchar(100),
     AT_ID tinyint unsigned,
     A_NAME varchar(100) NOT NULL,
     STARTDATE date NOT NULL,
     ENDDATE date,
     FEE float,
-    STATE enum('Pending','Accepted','Rejected') NOT NULL,
     FOREIGN KEY (AT_ID) REFERENCES ACTIVITY_TYPE(AT_ID),
-    FOREIGN KEY (ID) REFERENCES STUDENT(ID),
     FOREIGN KEY (ADMIN_ID) REFERENCES ADMINISTRATOR(USERNAME)
 );
 
 CREATE TABLE IF NOT EXISTS STUDENT_ACTIVITY(
-    ST_AC_ID int unsigned auto_increment PRIMARY KEY,
-    A_ID varchar(100) NOT NULL,
+    ST_UT_ID int unsigned auto_increment PRIMARY KEY,
+    A_ID int unsigned NOT NULL,
     ID char(10) NOT NULL,
-    STATE enum('Registered', 'Checked-in', 'Not-going')
+    STATE enum('Registered', 'Checked-in', 'Not-going'),
+    FOREIGN KEY (ID) REFERENCES STUDENT(ID),
+    FOREIGN KEY (A_ID) REFERENCES ACTIVITY(A_ID)
 );
 
 CREATE TABLE IF NOT EXISTS NOTI_MESSAGE(
     NM_ID int unsigned auto_increment PRIMARY KEY,
     NM_NAME varchar(100) NOT NULL,
-    ID char(10) NOT NULL,
     CONTENT varchar(255),
     A_ID int unsigned,
-    ADMIN_ID varchar(100)
+    ADMIN_ID varchar(100) NOT NULL,
+    SENDER varchar(100),
+    FOREIGN KEY (A_ID) REFERENCES ACTIVITY(A_ID),
+    FOREIGN KEY (ADMIN_ID) REFERENCES ADMINISTRATOR(USERNAME)
+
 );
 
 CREATE TABLE IF NOT EXISTS STUDENT_NOTI(
@@ -142,3 +129,6 @@ CREATE TABLE IF NOT EXISTS PARAMETER(
     P_NAME varchar(100) NOT NULL,
     P_VALUE float NOT NULL
 );
+
+-- INSERT SEED DATA
+INSERT into ADMINISTRATOR(USERNAME, HASHPASSWORD, FULLNAME) values ("root", "root","default admin")

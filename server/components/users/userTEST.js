@@ -118,4 +118,19 @@ app.getComposeClassData = (data, mData) => {
   })
 }
 
-app.getComposeClassData(data, mdata);
+app.getClassData = (data) => {
+  let arr = {};
+  data.forEach(item => {
+    let lop = item.lop.replace("( )", "");
+    if (!arr[lop]) arr[lop] = lop;
+  });
+  fileUtil.create('', 'classes', arr, (err, data) => {
+    if (!err && data) {
+      console.log(data);
+    } else {
+      console.log(err);
+    }
+  })
+}
+
+app.getClassData(data);

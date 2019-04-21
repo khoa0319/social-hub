@@ -11,7 +11,7 @@ const path = require('path');
 
 // TODO write an append file helper
 const lib = {};
-lib.baseDir = path.join(__dirname, '../../data');
+lib.baseDir = path.join(__dirname, '../../data/');
 
 
 // WRITE DATA TO A FILE
