@@ -9,9 +9,13 @@ import {Route,Switch} from 'react-router-dom';
 import NotiD from './dashboard/NotiD'
 import NotificationDashB from "./dashboard/NotificationDashB";
 import SearchDashB from "./dashboard/SearchDashB";
+import NoMatch from "./NoMatch";
+import ActivityBtn from "./featurebutton/ActivityBtn";
 class Profile extends Component {
   render() {
+    console.log(this.props.match.path);
     return (
+      
       <div className="row">
       <div className="col-12">
       <img src="img/school.jpg"
@@ -24,7 +28,13 @@ class Profile extends Component {
           <BtnGroup/>
       </div>
       <div className="col-md-6">
-        <Route path="/profile" exact component={SearchDashB}/>
+      <ActivityBtn/>
+      <Switch> 
+      <Route path={`${this.props.match.path}`} exact component={ActivityD}/>
+      <Route path={`${this.props.match.path}/noti`} component={NotificationDashB}/>
+      <Route path={`${this.props.match.path}/search/:name`} exact component={SearchDashB}/> 
+      <Route component={NoMatch}/>
+      </Switch>   
       </div>
       <div className="col-md-3 d-none d-sm-block">
         <UpcomingAD/>

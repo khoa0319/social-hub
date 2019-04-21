@@ -5,7 +5,6 @@ class MainDashB extends Component {
   render() {
     return (
       <div>
-        <ActivityBtn/>
         <ActivityD />
         <ActivityD />
         <ActivityD />
