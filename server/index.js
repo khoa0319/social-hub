@@ -5,7 +5,7 @@ const config = require('./config/config');
 const seedData = require('./models/seedData');
 
 /* init data */
-seedData.init();
+//seedData.init();
 
 const app = express();
 app.use(express.urlencoded({extended: false}));

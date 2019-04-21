@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 const database = {
   user: 'root',
-  password: 'khoa0319',
+  password: 'notyourhung43',
   address: 'localhost',
   file: './models/socialhub.sql'
 }
