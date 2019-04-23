@@ -64,7 +64,7 @@ seedData.init = async () => {
   seedData.seedFaculty(fData);
   seedData.seedMajor(mData);
   seedData.seedClass(cData);
-  seedData.seedUserType();  
+  seedData.seedUserType();
 }
 
 try {
