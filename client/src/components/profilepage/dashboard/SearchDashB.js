@@ -9,11 +9,13 @@ class SearchDashB extends Component {
         return (
             <div className="card mt-2">
           <div className="card-header">
-            <h3>{textSearch ? textSearch :"Từ Khóa" }</h3>
+            <h3>{textSearch ? `#${textSearch}` :"Từ Khóa" }</h3>
             <SeachBtn/>
           </div>
+          <div className="card-body">
           <ActivityD/>
           <NotiD/>
+          </div>
         </div>
         );
     }

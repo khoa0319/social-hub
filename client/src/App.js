@@ -9,6 +9,8 @@ import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
+import Table from './components/adminpage/Table'
+
 class App extends Component {
   render() {
     return (
@@ -21,6 +23,8 @@ class App extends Component {
       <Route path="/profile"  component={Profile}/> 
       <Route component={NoMatch}/> 
       </Switch>
+      {/* <Route path="/profile" exact component={Profile}/>  
+      <Route path="/admin" exact component={Table}/> */}
       </div>
       </div>
       <Activity/>
