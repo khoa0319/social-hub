@@ -131,6 +131,15 @@ app.getClassData = (data) => {
       console.log(err);
     }
   })
-}
+};
 
-app.getClassData(data);
+app.get16ClassData = (data) => {
+ let arr = [];
+ data.forEach(item => {
+   if (item.maSV.startsWith('16')) arr.push(item);
+ })
+ fileUtil.create('','classOf16',arr, (err, data) => {
+   if (err) return console.log(err);
+   console.log("success");
+ })
+}

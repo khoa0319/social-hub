@@ -4,7 +4,7 @@ const config = require('../config/config');
 const { host, user, password, database } = config.dbConnection;
 
 const pool = mysql.createPool({
-	connectionLimit: 100, host, user, password, database
+	connectionLimit: 10, host, user, password, database
 });
 
 // Ping database to check for common exception errors.
@@ -25,7 +25,6 @@ pool.getConnection((err, connection) => {
 
 	return
 })
-
 // Promisify for Node.js async/await.
 pool.query = util.promisify(pool.query)
 

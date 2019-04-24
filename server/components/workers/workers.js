@@ -72,5 +72,4 @@ worker.init = () => {
   console.log("worker is running");
 }
 
-worker.init();
 module.exports = worker;

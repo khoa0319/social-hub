@@ -2,10 +2,10 @@
 const express = require('express');
 /* App modules */
 const config = require('./config/config');
-const seedData = require('./models/seedData');
+const worker = require('./components/workers/workers');
 
 /* init data */
-//seedData.init();
+
 
 const app = express();
 app.use(express.urlencoded({extended: false}));
@@ -15,4 +15,6 @@ const port = config.port || 5000;
 
 app.listen(port, () => {
   console.log(`Listening on port ${port} in ${config.envName}`);
-})
+});
+
+worker.init();

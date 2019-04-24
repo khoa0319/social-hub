@@ -66,19 +66,4 @@ _userData.handleRegister = (req, res) => {
   })
 };
 
-// let data = {
-//   "ID": "16DH110187",
-//   "FULLNAME": "Nguyễn Thành Trung",
-//   "GENDER": 1,
-//   "BIRTHDATE": "1998-01-09",
-//   "ADDRESS": "Quảng Ngãi",
-//   "ACADEMIC_YEAR": "2016-2020"
-// };
-
-// connection.query(`INSERT INTO STUDENT SET ?`,data, (err, result, field) => {
-//   if (err) throw err;
-//   console.log(result);
-//   connection.destroy();
-// });
-
 module.exports = _userData;
