@@ -6,8 +6,8 @@
   "scripts": {
     "start": "concurrently \"npm run server-darwin\" \"npm run client\" ",
     "production": "export NODE_ENV=production && node index.js",
-    "server-darwin": "export NODE_ENV=staging && node spawnDatabase.js && nodemon index.js",
-    "server-win32": "set NODE_ENV=staging && node spawnDatabase.js && nodemon index.js",
+    "server-darwin": "nodemon index.js",
+    "server-win32": "set PASSWORD=hung431998 && nodemon index.js",
     "client": "node start-client.js"
   },
   "author": "Khoa Huynh, Hung Dang, Duy Pham, Ha Nguyen, Phu Pham",
@@ -16,6 +16,7 @@
     "bcrypt": "^3.0.6",
     "cheerio": "^1.0.0-rc.3",
     "concurrently": "^4.1.0",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.16.0"

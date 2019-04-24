@@ -14,7 +14,8 @@ environments.staging = {
     'user': 'root',
     'password': 'khoa0319',
     'database': 'SocialHub'
-  }
+  },
+  'defaultPassword': 'Socialhub@123'
 };
 
 // Production environment
@@ -25,7 +26,8 @@ environments.production = {
     'host': 'localhost',
     'user': 'root',
     'password': 'khoa0319',
-    'database': 'SocialHub'
+    'database': 'SocialHub',
+    'defaultpassword': 'Socialhub@123'
   }
 }
 

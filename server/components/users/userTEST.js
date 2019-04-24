@@ -2,6 +2,7 @@ const data = require('../../data/data.json');
 const fileUtil = require('../../lib/util/WRXFile');
 const formatLib = require('../../lib/util/formatSTUDENTdata');
 const fData = require('../../data/faculties.json');
+const mdata = require('../../data/Majors.json');
 let app = {};
 
 app.getFaculty = (data) => {
@@ -90,6 +91,55 @@ app.getComposeData = (data,fdata) => {
   })
 }
 
-app.getComposeClassData = (data, fmData) => {
-  
+app.getComposeClassData = (data, mData) => {
+  let arr = [];
+  for (key in mData) {
+    arr.push(key);
+  }
+  let composeArr = [];
+  arr.forEach(item => {
+    let classMajor = {
+      nganh: item,
+      lop: []
+    }
+    data.forEach(std => {
+      if (std.nganh === item) {
+        if (~classMajor.lop.indexOf(std.lop) === 0) classMajor.lop.push(std.lop);
+      }
+    })
+    composeArr.push(classMajor);
+  })
+  fileUtil.create('','class_major', composeArr, (err, data) => {
+    if (!err && data) {
+      console.log(data);
+    } else {
+      console.log(err);
+    }
+  })
+}
+
+app.getClassData = (data) => {
+  let arr = {};
+  data.forEach(item => {
+    let lop = item.lop.replace("( )", "");
+    if (!arr[lop]) arr[lop] = lop;
+  });
+  fileUtil.create('', 'classes', arr, (err, data) => {
+    if (!err && data) {
+      console.log(data);
+    } else {
+      console.log(err);
+    }
+  })
+};
+
+app.get16ClassData = (data) => {
+ let arr = [];
+ data.forEach(item => {
+   if (item.maSV.startsWith('16')) arr.push(item);
+ })
+ fileUtil.create('','classOf16',arr, (err, data) => {
+   if (err) return console.log(err);
+   console.log("success");
+ })
 }
