@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
 
 /* un-auth actions */
 
-router.post('/register', _userData.handleRegister);
+//router.post('/register', _userData.handleRegister);
 
 router.post('/login', _userData.handleLogIn);
 

@@ -1,8 +1,8 @@
 const { spawn } = require('child_process');
 const database = {
-  user: 'root',
-  password: 'khoa0319',
-  address: 'localhost',
+  user: process.env.USER || '',
+  password: process.env.PASSWORD|| '',
+  address: process.env.HOST || '',
   file: './models/socialhub.sql'
 }
 
