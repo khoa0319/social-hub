@@ -3,15 +3,8 @@ const mysql = require('mysql');
 const config = require('../../config/config');
 const bcrypt = require("bcrypt");
 /* App modules */
-const request = require('../../lib/util/requestID.js');
-const helper = require('../../lib/util/formatSTUDENTdata');
 const pool = require('../../models/database');
-/* Setup connection */
-// const { host, user, password, database } = config.dbConnection;
-// const connection = mysql.createConnection({
-//   host, user, password, database
-// })
-
+const _register = require('../../lib/validation/register');
 // container for DAL
 const _userData = {};
 
@@ -31,38 +24,43 @@ _userData.handleLogIn = (req, res) => {
     })
     .catch(err => res.status(400).json({ err }));
 };
- 
-_userData.handleRegister = (req, res) => {
-  //6: else id not exists => cb(404)
-  const { ID } = req.body;
-  //1: find id in the db
-  connection.query(`SELECT s.ID from STUDENT s where ID = ?`, ID, (err, result, field) => {
-    if (err) return res.status(404).json({ err });
-    if (result[0]) {
-      const std = { ...result[0] };
-      //3: if id exist and active => cb(fail)    
-      if (std.active) return res.status(403).json({ err: "user already existed" })
 
-      //2: if id exist and not not-active => cb(active)
-      connection.query('UPDATE STUDENT set ACTIVE = 1 WHERE STUDENT.ID = ?', std.ID, (err, result, field) => {
-        if (err) return res.status(500).json({ err });
-        res.status(200).json(result[0]);
-      })
-    } else {
-      //4: if id not-exist in db => request daotao.huflit.edu.vn
-      //5: if id exist in daotao => crawl and parse and active
-      request(ID, (err, data) => {
-        if (err) return res.status(404).json({ err: "Error requesting or Server is down" });
-        if (err === "NOEXIST") return res.status(404).json({ err });
-        const newData = helper.getFormatData(data);
-        connection.query(`INSERT INTO STUDENT SET ?`, data, (err, result, field) => {
-          if (err) return res.status(500).json({ err });
-          connection.destroy();
-          return res.status(200).json(result[0]);
-        })
-      })
-    }
-  })
+/*
+  1: find id in the db
+  2: if id exist and not not-active => validate input and active
+  3: if id exist and active => return id activated
+  4: if id not-exist in db => send a request active to admin and return 404  
+ */
+_userData.handleRegister = (req, res) => {
+
+  let { ID, FullName, BirthDate, Faculty, Major } = req.body;
+
+  // validate input
+  const { errors, isValid } = _register.validateInput({ ID, FullName, BirthDate, Faculty, Major });
+
+  if (!isValid) return res.status(400).json(errors);
+
+  pool.query(`SELECT * from STUDENT s where ID = ?`, ID)
+    .then(result => {      
+
+      if (!result[0]) return res.status(404).json({Error: "Not Found"});
+
+      return pool.query(`
+      SELECT * from STUDENT s 
+      inner join FACULTY f on s.F_ID = f.F_ID
+      inner join MAJOR m on s.M_ID = m.M_ID
+      where ID = ?`, ID)
+    })
+    .then(result => {
+
+      if(!result[0]) return res.status(404).json({Error: "Not Found"});
+
+      const std = result[0];
+      res.status(200).json(result[0]);
+      //const { errors, isValid } = _register.validateInfo({ ID, FullName, BirthDate, Faculty, Major });
+      
+    })
+    .catch(error => res.status(404).json(error));
 };
 
 module.exports = _userData;
