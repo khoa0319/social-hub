@@ -8,18 +8,21 @@ const _userData = require('./userDAL');
 /*  auth actions */
 
 // get dashboard
-router.get('/:id', (req, res) => {
-  res.status(200).json({
-    'message': `hello ${req.params['id']}`
-  });
-});
 
-// edit account
+router.get('/:id', (req, res) => {
+  res.status(200).json({msg: `hello ${req.params['id']}`});
+})
+
+router.get('/:id/detail', _userData.handleDetail);
+
+
+
 // router.get('/account', _userData.handleAccount);
 
 // router.get('/logout', _userData.handleLogOut);
 
-// router.post('/update', _userData.handleUpdate);
+// update account
+router.post('/update', _userData.handleUpdate);
 
 // router.post('/join-yc', _userData.handleJoinYoungCommunist);
 
