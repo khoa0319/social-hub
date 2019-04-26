@@ -1,16 +1,12 @@
 import React, { Component } from "react";
 import DetailProfile from './DetailProfile'
-import ActivityD from "./dashboard/ActivityD";
 import MainDashB from "./dashboard/MainDashB";
 import UpcomingAD from "./dashboard/UpcomingAD";
 import BtnGroup from "./featurebutton/BtnGroup";
-import {BrowserRouter} from 'react-router-dom';
 import {Route,Switch} from 'react-router-dom';
-import NotiD from './dashboard/NotiD'
 import NotificationDashB from "./dashboard/NotificationDashB";
 import SearchDashB from "./dashboard/SearchDashB";
 import NoMatch from "./NoMatch";
-import ActivityBtn from "./featurebutton/ActivityBtn";
 import Information from "./dashboard/Information";
 class Profile extends Component {
   render() {
@@ -20,6 +16,7 @@ class Profile extends Component {
       <div className="row">
       <div className="col-12">
       <img src="img/school.jpg"
+      alt="none"
       className="img-fluid rounded mb-3 border"
       ></img>
       <hr></hr>
@@ -30,7 +27,7 @@ class Profile extends Component {
       </div>
       <div className="col-md-6">
       <Switch> 
-      <Route path={`${this.props.match.path}`} exact component={ActivityD}/>
+      <Route path={`${this.props.match.path}`} exact component={MainDashB}/>
       <Route path={`${this.props.match.path}/noti`} component={NotificationDashB}/>
       <Route path={`${this.props.match.path}/search/:name`} exact component={SearchDashB}/> 
       <Route path={`${this.props.match.path}/information`} exact component={Information}/> 

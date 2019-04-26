@@ -38,7 +38,7 @@ class NavbarSmall extends Component {
           className="btn btn-none text-center"
           id="triggerId"
         >
-          <img src="https://pbs.twimg.com/profile_images/831173492968140804/43M7c5j__400x400.jpg" className="rounded-circle"></img>
+          <img src="https://pbs.twimg.com/profile_images/831173492968140804/43M7c5j__400x400.jpg" className="rounded-circle" alt="nothing"></img>
         </button>
         </div>
         

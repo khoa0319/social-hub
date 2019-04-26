@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Checkbox, CheckboxGroup } from "react-checkbox-group";
 class Activity extends Component {
     render() {
         return (

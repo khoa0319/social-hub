@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/navbar/Navbar'
 import Loginpage from './components/loginpage/loginpage';
@@ -9,7 +8,6 @@ import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
-import Table from './components/adminpage/Table'
 
 class App extends Component {
   render() {

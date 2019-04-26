@@ -17,10 +17,10 @@ class SearchBtn extends Component {
             Liên quan
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="/">
               Mới nhất
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="/">
               Nổi bật
             </a>
           </div>

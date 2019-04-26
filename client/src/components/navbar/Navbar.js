@@ -9,7 +9,7 @@ class Navbar extends Component {
                
                 <div className="d-block d-sm-none">
         
-          <img src='img/logo.png' className="logo d-flex justify-content-center mx-auto d-block" />
+          <img src='img/logo.png' className="logo d-flex justify-content-center mx-auto d-block" alt="nothing" />
 
 
                 <NavbarSmall/>

@@ -17,13 +17,13 @@ class NotiBtn extends Component {
             All
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="/">
               Khoa
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="/">
               Đoàn
             </a>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="/">
               Lớp
             </a>
           </div>

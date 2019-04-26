@@ -18,6 +18,7 @@ class NavbarBig extends Component {
           <img
             src="img/logo.png"
             className="logo d-flex justify-content-center mx-auto d-block"
+            alt="nothing"
           />
         </div>
         <div className="col-3">
