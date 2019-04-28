@@ -1,4 +1,4 @@
-const pool = require('./database');
+const pool = require('./database'); 
 const formatHelper = require('../lib/util/formatSTUDENTdata');
 const classOf16Data = require('../data/classOf16.json');
 /* const fData = require('../data/faculties.json');

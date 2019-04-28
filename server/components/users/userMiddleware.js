@@ -15,7 +15,7 @@ _middleware.validateUpdateInput = (req, res, next) => {
   next();
 }
 _middleware.validateUpdatePasswordInput = (req, res, next) => {
-  const { errors, isValid } = validator.validateUpdateInput(req.body);
+  const { errors, isValid } = validator.validateResetPassword(req.body);
   if (!isValid) return res.status(400).json(errors);
   next();
 }
