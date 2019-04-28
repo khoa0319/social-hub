@@ -41,7 +41,8 @@ util.getFormatData = (student) => {
           UT_ID: 7,
           HASHPASSWORD: value[3],
           PHONE: null,
-          EMAIL: null
+          EMAIL: null,
+          ISACTIVE: false
         }
         resolve(formattedData);
       })
