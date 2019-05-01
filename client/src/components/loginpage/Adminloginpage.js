@@ -16,7 +16,7 @@ class Adminloginpage extends Component {
                          <h6><label>Mật Khẩu</label> </h6>
                          <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId" placeholder="Password"/>
                          <p>
-                         <div className="mt-2">>
+                         <div className="mt-2">
                          <button type="button" class="btn btn-myapp  col-12 col-md-12 col-lg-12">Đăng Nhập</button>
                          </div>
                         </p>

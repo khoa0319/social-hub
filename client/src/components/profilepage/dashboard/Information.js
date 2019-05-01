@@ -9,6 +9,19 @@ class Information extends Component {
             <div>
               <div className="form-group">
               <div className="form-row">
+              <div className="col-12">
+                <label for="txtTenHoatDong">
+                  <h6>Họ Tên Sinh Viên</h6>
+                </label>
+                <input
+                  name="txtTenHoatDong"
+                  className="form-control"
+                  id=""
+                  type="text"
+                  disabled
+                  placeholder="Phạm Duy "
+                />
+                </div>
               <div className="col-6">
                 <label for="txtTenHoatDong">
                   <h6>Mã Số Sinh Viên</h6>
@@ -22,9 +35,10 @@ class Information extends Component {
                   placeholder="MSSV"
                 />
                 </div>
+               
                 <div className="col-6">
                 <label for="txtTenHoatDong">
-                  <h6>Tên Sinh Viên</h6>
+                  <h6>Ngày Sinh</h6>
                 </label>
                 <input
                   name="txtTenHoatDong"
@@ -37,27 +51,37 @@ class Information extends Component {
                 </div>
                 <div className="col-6">
                 <label for="txtTenHoatDong">
-                  <h6>Tên Sinh Viên</h6>
+                  <h6>Điện Thoại</h6>
                 </label>
                 <input
                   name="txtTenHoatDong"
                   className="form-control"
                   id=""
                   type="text"
-                  disabled
                   placeholder="Phạm Duy "
                 />
                 </div>
                 <div className="col-6">
                 <label for="txtTenHoatDong">
-                  <h6>Tên Sinh Viên</h6>
+                  <h6>Email</h6>
                 </label>
                 <input
                   name="txtTenHoatDong"
                   className="form-control"
                   id=""
                   type="text"
-                  disabled
+                  placeholder="Phạm Duy "
+                />
+                </div>
+                <div className="col-12">
+                <label for="txtTenHoatDong">
+                  <h6>Địa Chỉ</h6>
+                </label>
+                <input
+                  name="txtTenHoatDong"
+                  className="form-control"
+                  id=""
+                  type="text"
                   placeholder="Phạm Duy "
                 />
                 </div>
@@ -121,20 +145,21 @@ class Information extends Component {
               </div>
               <div className="text-center">
               <input
+                className="btn btn-myapp mr-1"
+                name="btnHuy"
+                id="btnHuy"
+                type="button"
+                value="Đổi mật khẩu"
+              />
+              <input
                 className="btn btn-myapp3"
                 name="btnGui"
                 id="btnGui"
                 type="button"
-                value="Gửi"
+                value="Lưu lại thông tin"
               />
 
-              <input
-                className="btn btn-myapp ml-1"
-                name="btnHuy"
-                id="btnHuy"
-                type="button"
-                value="Huỷ"
-              />
+             
               </div>
             </div>
           </form>

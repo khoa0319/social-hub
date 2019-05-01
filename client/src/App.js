@@ -8,6 +8,9 @@ import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
+import Adminloginpage from './components/loginpage/Adminloginpage';
+import ForgotPassword from './components/loginpage/ForgotPassword';
+import AdminD from './components/adminpage/AdminD';
 
 class App extends Component {
   render() {
@@ -18,7 +21,10 @@ class App extends Component {
       <div className="container app-content mt-10">
       <Switch>
       <Route path="/" exact component={Loginpage}/>
-      <Route path="/profile"  component={Profile}/> 
+      <Route path="/profile" exact component={Profile}/>
+      <Route path="/adminlogin" exact component={Adminloginpage}/>
+      <Route path="/forgotpw" exact component={ForgotPassword}/>
+      <Route path="/admindashboard" exact component={AdminD}/>   
       <Route component={NoMatch}/> 
       </Switch>
       {/* <Route path="/profile" exact component={Profile}/>  

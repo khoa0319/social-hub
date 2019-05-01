@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NotiD from './NotiD'
-import NotiBtn from "../featurebutton/NotiBtn";
+import NotiBtn from "../../featurebutton/NotiBtn";
 
 class NotificationDashB extends Component {
     render() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ActivityD from './ActivityD'
 import NotiD from './NotiD'
-import SeachBtn from '../featurebutton/SearchBtn'
+import SeachBtn from '../../featurebutton/SearchBtn'
 
 class SearchDashB extends Component {
     render() {
