@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import DetailProfile from './DetailProfile'
 import MainDashB from "./dashboard/MainDashB";
 import UpcomingAD from "./dashboard/UpcomingAD";
-import BtnGroup from "./featurebutton/BtnGroup";
+import BtnGroup from "../featurebutton/BtnGroup";
 import {Route,Switch} from 'react-router-dom';
 import NotificationDashB from "./dashboard/NotificationDashB";
 import SearchDashB from "./dashboard/SearchDashB";
 import NoMatch from "./NoMatch";
 import Information from "./dashboard/Information";
+import ChangePassword from "./dashboard/ChangePassword";
 class Profile extends Component {
   render() {
     console.log(this.props.match.path);
@@ -30,7 +31,8 @@ class Profile extends Component {
       <Route path={`${this.props.match.path}`} exact component={MainDashB}/>
       <Route path={`${this.props.match.path}/noti`} component={NotificationDashB}/>
       <Route path={`${this.props.match.path}/search/:name`} exact component={SearchDashB}/> 
-      <Route path={`${this.props.match.path}/information`} exact component={Information}/> 
+      <Route path={`${this.props.match.path}/information`} exact component={Information}/>
+      <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>  
       <Route component={NoMatch}/>
       </Switch>   
       </div>
