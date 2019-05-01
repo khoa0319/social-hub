@@ -57,6 +57,12 @@ CREATE TABLE IF NOT EXISTS STUDENT_COMMUNITY(
 CREATE TABLE IF NOT EXISTS JOIN_YC(
 	JYC_ID int unsigned auto_increment PRIMARY KEY,
     ID char(10) NOT NULL,
+    RACE varchar(20),
+    Religion varchar(20),
+    CMND char(11) UNIQUE,
+    CMND_DATE date,
+    CMND_PLACE varchar(30),
+    APPROVAL_NUMBER int not null,
     SIGNED_DATE DATE NOT NULL,
     SIGNED_APPROVAL varchar(50) NOT NULL,
     STATE enum('Pending','Accepted','Rejected') NOT NULL,

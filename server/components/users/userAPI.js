@@ -21,7 +21,9 @@ router.post('/update',
   passport.authenticate('jwt', { session: false }),
   _userHandle.handleUpdate);
 
-// router.post('/join-yc', _userHandle.handleJoinYoungCommunist);
+router.post('/joinyc',
+  passport.authenticate('jwt', { session: false }), 
+  _userHandle.handleJoinYoungCommunist);
 
 router.post('/joinstdc',
   passport.authenticate('jwt', { session: false }),

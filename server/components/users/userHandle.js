@@ -7,6 +7,9 @@ const validator = require('./userValidate');
 // container for Handle
 const _user = {};
 
+_user.handleJoinYoungCommunist = (req, res) => {
+    
+}
 
 _user.handleJoinStudentCommunity = (req, res) => {
   const { joinYC, joinCP, title } = req.body;
