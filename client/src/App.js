@@ -26,9 +26,6 @@ class App extends Component {
           <Noti />
         </div>
       </div>
-
-
-
     );
   }
 }
