@@ -2,6 +2,16 @@ const _ = require('lodash');
 const validator = require('validator');
 
 const _validator = {};
+
+_validator.validateJoinYC = (data) => {
+  let errors = {};
+  
+  return {
+    errors,
+    isValid: _.isEmpty(errors)
+  }  
+}
+
 _validator.validateRegisterInput = (data) => {
   let errors = {};
 
