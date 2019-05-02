@@ -22,7 +22,7 @@ router.post('/update',
   _userHandle.handleUpdate);
 
 router.post('/joinyc',
-  passport.authenticate('jwt', { session: false }), 
+  passport.authenticate('jwt', { session: false }),
   _userHandle.handleJoinYoungCommunist);
 
 router.post('/joinstdc',

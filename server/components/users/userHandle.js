@@ -8,7 +8,7 @@ const validator = require('./userValidate');
 const _user = {};
 
 _user.handleJoinYoungCommunist = (req, res) => {
-    
+  const { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE, APPROVAL_NUMBER} = req.body;
 }
 
 _user.handleJoinStudentCommunity = (req, res) => {
