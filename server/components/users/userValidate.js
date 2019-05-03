@@ -5,7 +5,19 @@ const _validator = {};
 
 _validator.validateJoinYC = (data) => {
   let errors = {};
-  
+  let { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE } = data;
+
+  RACE = typeof(RACE) == 'string' && RACE.trim().length > 0 ? RACE.trim() : '';
+  RELIGION = typeof(RELIGION) == 'string' && RELIGION.trim().length > 0 ? RELIGION.trim() : '';
+  CMND = typeof(CMND) == 'string' && CMND.trim().length > 0 && CMND.trim().length < 18 ? CMND.trim() : '';
+  CMND_PLACE = typeof(CMND_PLACE) == 'string' && CMND_PLACE.trim().length > 0 ? CMND_PLACE.trim() : '';  
+
+  if (!validator.toDate(CMND_DATE)) errors.CMND_DATE = "CMND_Date is invalid";
+  if (validator.isEmpty(RACE)) errors.RACE = "Race is required";
+  if (validator.isEmpty(RELIGION)) errors.RELIGION = "Religion is required";
+  if (validator.isEmpty(CMND)) errors.CMND = "CMND is required";
+  if (validator.isEmpty(CMND_PLACE)) errors.CMND_PLACE = "CMND_Place is required";
+
   return {
     errors,
     isValid: _.isEmpty(errors)

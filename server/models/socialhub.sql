@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS JOIN_YC(
     CMND char(11) UNIQUE,
     CMND_DATE date,
     CMND_PLACE varchar(30),
-    APPROVAL_NUMBER int not null,
+    APPROVAL_NUMBER int,
     SIGNED_DATE DATE,
     SIGNED_PLACE varchar(50),
     SIGNED_APPROVAL varchar(50),

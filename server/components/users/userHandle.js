@@ -8,7 +8,21 @@ const validator = require('./userValidate');
 const _user = {};
 
 _user.handleJoinYoungCommunist = (req, res) => {
-  const { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE, APPROVAL_NUMBER} = req.body;
+  const ID = req.user.ID;
+  pool.query(`SELECT * FROM JOIN_YC where ID = ?`, ID)
+    .then(result => {
+      if (result[0]) return res.status(403).json({msg: "Form Exists"});
+      
+      const { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE } = req.body;
+      const STATE = "Pending";
+      const form = { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE, ID, STATE };
+      pool.query(`INSERT INTO JOIN_YC set ?`, form)
+        .then(r => {
+          return res.status(200).json({ msg: "Success" });
+        })
+        .catch(err => res.status(500).json(err))
+    })
+    .catch(err => res.status(500).json(err))
 }
 
 _user.handleJoinStudentCommunity = (req, res) => {

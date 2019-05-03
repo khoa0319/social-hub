@@ -13,8 +13,6 @@ router.get('/detail',
   passport.authenticate("jwt", { session: false }),
   _userHandle.handleDetail);
 
-// router.get('/account', _userHandle.handleAccount);
-
 // update account
 router.post('/update',
   _middlware.validateUpdateInput,
@@ -22,6 +20,7 @@ router.post('/update',
   _userHandle.handleUpdate);
 
 router.post('/joinyc',
+  _middlware.validateJoinYCInput,
   passport.authenticate('jwt', { session: false }),
   _userHandle.handleJoinYoungCommunist);
 
