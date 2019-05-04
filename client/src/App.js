@@ -2,39 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/navbar/Navbar'
 import Loginpage from './components/loginpage/loginpage';
-import {BrowserRouter} from 'react-router-dom';
-import {Route,Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
-import Adminloginpage from './components/loginpage/Adminloginpage';
-import ForgotPassword from './components/loginpage/ForgotPassword';
-import AdminD from './components/adminpage/AdminD';
-
+import ActivePage from './components/loginpage/ActivePage';
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+
       <div className="App">
-      <Navbar/>
-      <div className="container app-content mt-10">
-      <Switch>
-      <Route path="/" exact component={Loginpage}/>
-      <Route path="/profile" exact component={Profile}/>
-      <Route path="/adminlogin" exact component={Adminloginpage}/>
-      <Route path="/forgotpw" exact component={ForgotPassword}/>
-      <Route path="/admindashboard" exact component={AdminD}/>   
-      <Route component={NoMatch}/> 
-      </Switch>
-      {/* <Route path="/profile" exact component={Profile}/>  
-      <Route path="/admin" exact component={Table}/> */}
+        <Navbar />
+        <div className="container app-content mt-10">
+          <Router>
+            <Switch>
+              <Route path="/" exact component={Loginpage} />
+              <Route path="/profile" exact component={Profile} />
+              <Route path="/active" exact component={ActivePage} />
+              <Route path="/" component={NoMatch} />
+            </Switch>
+          </Router>
+          <Activity />
+          <Noti />
+        </div>
       </div>
-      </div>
-      <Activity/>
-      <Noti/>
-      </BrowserRouter>
-      
     );
   }
 }
