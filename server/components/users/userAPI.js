@@ -13,15 +13,16 @@ router.get('/detail',
   passport.authenticate("jwt", { session: false }),
   _userHandle.handleDetail);
 
-// router.get('/account', _userHandle.handleAccount);
-
 // update account
 router.post('/update',
   _middlware.validateUpdateInput,
   passport.authenticate('jwt', { session: false }),
   _userHandle.handleUpdate);
 
-// router.post('/join-yc', _userHandle.handleJoinYoungCommunist);
+router.post('/joinyc',
+  _middlware.validateJoinYCInput,
+  passport.authenticate('jwt', { session: false }),
+  _userHandle.handleJoinYoungCommunist);
 
 router.post('/joinstdc',
   passport.authenticate('jwt', { session: false }),
