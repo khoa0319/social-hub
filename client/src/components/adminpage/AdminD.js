@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AdminProfile from "./AdminProfile";
 import ActivityBtn from "../featurebutton/ActivityBtn";
 import ShowingList from '../featurebutton/ShowingList'
-import Table from './Table'
+import StudentsList from './StudentsList'
 class AdminD extends Component {
   render() {
     return (
@@ -21,7 +21,7 @@ class AdminD extends Component {
           </div>
           </div>
           <div className="col-12">
-              <Table/>
+              <StudentsList/>
           </div>
           </div>
     );
