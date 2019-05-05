@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS STUDENT(
     UT_ID tinyint unsigned NOT NULL,
     F_ID tinyint unsigned NOT NULL,
     M_ID tinyint unsigned NOT NULL,
-    C_ID smallint unsigned NOT NULL,
+    C_ID smallint unsigned NOT NULL,    
     FULLNAME varchar(100) NOT NULL,
     BIRTHDATE date NOT NULL,
     GENDER bool NOT NULL,

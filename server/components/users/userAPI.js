@@ -7,8 +7,6 @@ const _userHandle = require('./userHandle');
 const _middlware = require('./userMiddleware');
 /*  auth actions */
 
-// get dashboard
-
 router.get('/detail',
   passport.authenticate("jwt", { session: false }),
   _userHandle.handleDetail);
@@ -29,11 +27,11 @@ router.post('/joinstdc',
   _userHandle.handleJoinStudentCommunity);
 
 /* un-auth actions */
-router.get('/:id', (req, res) => {
-  res.status(200).json({ msg: `hello ${req.params['id']}` });
-})
+// router.get('/:id', (req, res) => {
+//   res.status(200).json({ msg: `hello ${req.params['id']}` });
+// })
 router.post('/activate', 
-  _middlware.validateRegisterInput, 
+  _middlware.validateRegisterInput,
   _userHandle.handleActivate);
 
 router.post('/login', _userHandle.handleLogIn);

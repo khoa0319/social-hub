@@ -11,7 +11,8 @@ const pool = mysql.createPool({
 	host: db.host,
 	user: db.user,
 	password: db.password,
-	database: db.database
+	database: db.database,
+	dateStrings: true
 });
 
 // Ping database to check for common exception errors.

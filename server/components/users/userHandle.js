@@ -109,10 +109,16 @@ _user.handleDetail = (req, res) => {
  */
 _user.handleLogIn = (req, res) => {
   const { ID, password } = req.body;
-  pool.query(`SELECT * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID where s.ID = ? and s.ISACTIVE = true `, ID)
+  pool.query(`SELECT * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID 
+    inner join FACULTY f on s.F_ID = f.F_ID
+    inner join MAJOR m on s.M_ID = m.M_ID
+    inner join CLASS c on s.C_ID = c.C_ID
+    where s.ID = ? and s.ISACTIVE = true `, ID)
     .then(result => {
+			console.log("TCL: _user.handleLogIn -> result[0]", result[0])
       if (!result[0]) return res.status(404).json({ error: "not found" });
       let user = result[0];
+      
       bcrypt.compare(password, user.HASHPASSWORD)
         .then((match) => {
           if (!match) return res.status(403).json({ error: "invalid id or password" });
@@ -120,6 +126,10 @@ _user.handleLogIn = (req, res) => {
             ID: ID,
             FullName: result[0].FULLNAME,
             Role: result[0].ROLENAME,
+            Faculty: result[0].FNAME,
+            Major: result[0].MNAME,
+            Class: result[0].CNAME,
+            Academic_year: result[0].ACADEMIC_YEAR
           };
           jwt.sign(payload, "socialhub", { expiresIn: '1h' }, (err, token) => {
             if (err) return res.status(500).json({ err });
@@ -139,13 +149,11 @@ _user.handleLogIn = (req, res) => {
   1: find id in the db
   2: if id exist and not not-active => validate input and active
   3: if id exist and active => return id activated
-  4: if id not-exist in db => send a request active to admin and return 404  
+  4: if id not-exist in db => send a request active to admin and return 404
  */
 _user.handleActivate = (req, res) => {
 
-  let { ID, FullName, BirthDate, Faculty, Major } = req.body;
-  BirthDate = new Date(BirthDate);
-
+  let { ID, FullName, BirthDate, Faculty, Major } = req.body;  
   pool.query(`SELECT * from STUDENT s where ID = ? and ISACTIVE = false`, ID)
     .then(result => {
 
@@ -163,11 +171,11 @@ _user.handleActivate = (req, res) => {
             Faculty: result[0].FNAME,
             Major: result[0].MNAME,
             BirthDate: result[0].BIRTHDATE
-          };
+          };          
           if (validator.validateInfo({ FullName, BirthDate, Faculty, Major }, std)) {
             pool.query(`UPDATE STUDENT set ISACTIVE = ? where ID = ?`, [true, ID])
               .then(result => {
-                res.status(200).json({ msg: 'Activation success' });
+                res.status(200).json({ msg: 'SUCCESS' });
               })
               .catch(error => res.status(404).json(error));
           } else {
