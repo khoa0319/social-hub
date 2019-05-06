@@ -8,6 +8,7 @@ import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
 import ActivePage from './components/loginpage/ActivePage';
+import Adminloginpage from './components/loginpage/Adminloginpage';
 class App extends Component {
   render() {
     return (
@@ -18,9 +19,10 @@ class App extends Component {
           <Router>
             <Switch>
               <Route path="/" exact component={Loginpage} />
+              <Route path="/adminlogin" exact component={Adminloginpage} />
               <Route path="/profile" exact component={Profile} />
               <Route path="/active" exact component={ActivePage} />
-              <Route path="/" component={NoMatch} />
+              <Route component={NoMatch} />
             </Switch>
           </Router>
           <Activity />

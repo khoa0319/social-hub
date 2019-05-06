@@ -7,11 +7,11 @@ class NavbarSmall extends Component {
       <div className="col-6 col-sm-4 input-group">
 
   <input type="text"
-    class="form-control" name="" id="" aria-describedby="helpId" placeholder=""/>
-     <div class="input-group-append">
+    className="form-control" name="" id="" aria-describedby="helpId" placeholder=""/>
+     <div className="input-group-append">
 
     <button className="btn btn-xs btn-myapp text-center" id="triggerId">
-           <i class="fas fa-search fa-xs"></i>
+           <i className="fas fa-search fa-xs"></i>
           </button>
 </div>
         </div>
@@ -30,7 +30,7 @@ class NavbarSmall extends Component {
           className="btn btn-none text-center"
           id="triggerId"
         >
-          <i class="fas fa-tasks"></i>
+          <i className="fas fa-tasks"></i>
           </button>
         </div>
         <div className="col-2 col-sm-4">

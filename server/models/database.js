@@ -3,7 +3,7 @@ const mysql = require('mysql')
 const db = {
 	host: process.env.HOST,
 	user: process.env.MYSQLUSER,
-	password: process.env.PASSWORD,
+	password: "Hung431998",
 	database: process.env.DATABASE
 };
 const pool = mysql.createPool({
@@ -13,7 +13,7 @@ const pool = mysql.createPool({
 	password: db.password,
 	database: db.database
 });
-
+console.log(db.password)
 // Ping database to check for common exception errors.
 pool.getConnection((err, connection) => {
 	if (err) {

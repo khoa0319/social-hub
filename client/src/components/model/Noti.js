@@ -6,7 +6,7 @@ class Noti extends Component {
       <div
         className="modal fade"
         id="NotiModel"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="NotiModel"
         aria-hidden="true"
@@ -29,7 +29,7 @@ class Noti extends Component {
               <form>
                 <div>
                   <div className="form-group">
-                    <label for="txtTenHoatDong">
+                    <label htmlFor="txtTenHoatDong">
                       <h6>Tên Hoạt Động</h6>
                     </label>
                     <input
@@ -41,7 +41,7 @@ class Noti extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label for="txtTenHoatDong">
+                    <label htmlFor="txtTenHoatDong">
                       <h6>Nội Dung</h6>
                     </label>
                     <textarea
@@ -54,7 +54,7 @@ class Noti extends Component {
                   <div className="card mb-1">
                     <div className="form-row m-1 card-body">
                       <div className=" col-4">
-                        <label for="txtTenHoatDong">
+                        <label htmlFor="txtTenHoatDong">
                           <h6>Khoa</h6>
                         </label>
                         <select id="inputState" className="form-control">
@@ -63,7 +63,7 @@ class Noti extends Component {
                         </select>
                       </div>
                       <div className=" col-4">
-                        <label for="txtTenHoatDong">
+                        <label htmlFor="txtTenHoatDong">
                           <h6>Ngành</h6>
                         </label>
                         <select id="inputState" className="form-control">
@@ -72,7 +72,7 @@ class Noti extends Component {
                         </select>
                       </div>
                       <div className=" col-4">
-                        <label for="txtTenHoatDong">
+                        <label htmlFor="txtTenHoatDong">
                           <h6>Lớp</h6>
                         </label>
                         <select id="inputState" className="form-control">
@@ -93,10 +93,9 @@ class Noti extends Component {
                     </button>
                     <div id="demo" className="collapse card mt-1">
                       <div className="card-header text-center">
-                      <form className="form-inline mx-auto">
+                      
                         <input type="text" className="form-control" id="MSSV" placeholder="MSSV muốn gửi TB"/>
                         <button type="submit" className="btn btn-primary ml-2">Thêm Vào Danh Sách</button>
-                     </form>
                       </div>
                       <div className="card-body">
                           

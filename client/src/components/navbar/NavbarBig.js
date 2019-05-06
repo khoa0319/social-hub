@@ -11,7 +11,7 @@ class NavbarBig extends Component {
         </div>
         <div className="col-2 col-sm-1 col-md-1">
           <button className="btn btn-none text-center" id="triggerId">
-          <i class="fas fa-tasks"></i>
+          <i className="fas fa-tasks"></i>
           </button>
         </div>
         <div className="col-7">
@@ -25,14 +25,14 @@ class NavbarBig extends Component {
         <div className="input-group">
           <input
             type="text"
-            class="form-control d-inline"
+            className="form-control d-inline"
             name=""
             id="BigInput"
             aria-describedby="helpId"
             placeholder=""
           />
            <button className="btn btn-myapp text-center d-inline" id="triggerId">
-           <i class="fas fa-search"></i>
+           <i className="fas fa-search"></i>
           </button>
           </div>
         </div>

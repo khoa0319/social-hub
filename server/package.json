@@ -7,7 +7,7 @@
     "start": "concurrently \"npm run server-darwin\" \"npm run client\" ",
     "production": "export NODE_ENV=production && node index.js",
     "server-darwin": "nodemon index.js",
-    "server-win32": "set PASSWORD=notyourhung43 && nodemon index.js",
+    "server-win32": "nodemon index.js",
     "client": "node start-client.js"
   },
   "author": "Khoa Huynh, Hung Dang, Duy Pham, Ha Nguyen, Phu Pham",
