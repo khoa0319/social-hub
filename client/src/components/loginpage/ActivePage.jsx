@@ -14,6 +14,21 @@ class ActivePage extends Component {
       "Ngôn ngữ và Văn hóa phương Đông",
       "Quan hệ quốc tế",
       "Ngoại ngữ"]
+    this.Majors = [
+      "Ngành",
+      "Quản trị dịch vụ du lịch và lữ hành",
+      "Công nghệ thông tin",
+      "Kế toán",
+      "Quản trị khách sạn",
+      "Luật kinh tế",
+      "Quản trị kinh doanh",
+      "Đông Phương học",
+      "Quan hệ quốc tế",
+      "Ngôn ngữ Anh",
+      "Ngôn ngữ Trung Quốc",
+      "Kinh doanh quốc tế",
+      "Tài chính - Ngân hàng"
+    ]  
     this.state = {
       ID: "",
       FullName: "",
@@ -44,7 +59,10 @@ class ActivePage extends Component {
 
   render() {
     const { redirect } = this.state;
-    let facultyElements = this.Faculties.map(item => {
+    const facultyElements = this.Faculties.map(item => {
+      return <option value={item}>{item}</option>
+    });
+    const majorsElements = this.Majors.map (item => {
       return <option value={item}>{item}</option>
     })
     if (redirect) return <Redirect to='/updateInfo' />;
@@ -67,13 +85,15 @@ class ActivePage extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Faculty">Khoa</label>
-              <select onChange={this.onChange} type="text" className="form-control" name="Faculty" id="Faculty">
+              <select onChange={this.onChange} className="form-control" name="Faculty" id="Faculty">
                 {facultyElements}
               </select>              
             </div>
             <div className="form-group">
-              <label htmlFor="Major">Ngành</label>
-              <input onChange={this.onChange} type="text" className="form-control" name="Major" id="Major" placeholder="Ngành" />
+              <label htmlFor="Major">Ngành</label>              
+              <select onChange={this.onChange} className="form-control" name="Major" id="Major">
+                {majorsElements}
+              </select>
             </div>
             <button type="submit" className="btn btn-primary mt-3">Submit</button>
           </form>
