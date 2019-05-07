@@ -30,6 +30,10 @@ router.post('/joinstdc',
 // router.get('/:id', (req, res) => {
 //   res.status(200).json({ msg: `hello ${req.params['id']}` });
 // })
+
+// first time update account
+router.post('/updateInfo', _userHandle.handleUpdateFirstTime)
+
 router.post('/activate', 
   _middlware.validateRegisterInput,
   _userHandle.handleActivate);

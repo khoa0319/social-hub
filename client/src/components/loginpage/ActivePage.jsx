@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { activate } from '../../actions/auth';
 class ActivePage extends Component {
   constructor(props) {
     super(props);
@@ -47,14 +48,8 @@ class ActivePage extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    axios.post('http://localhost:5000/api/users/activate', this.state)
-      .then(res => {
-        console.log("TCL: ActivePage -> res", res)
-        if (res.status === 200 && res.data.msg === 'SUCCESS') {
-          this.setState({ redirect: true })
-        }
-      })
-      .catch(error => console.log(error))
+    this.props.activate(this.state)
+    this.setState({redirect: true});
   }
 
   render() {
@@ -104,4 +99,4 @@ class ActivePage extends Component {
   }
 }
 
-export default ActivePage;
+export default  connect(null, { activate })(ActivePage);

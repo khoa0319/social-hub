@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 class UpdateInfo extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       password: "",
       password2: "",
       email: "",
       phone: "",
+      address: "",
+      redirect: false,
       errors: {}
     }
   }
@@ -33,16 +39,36 @@ class UpdateInfo extends Component {
   onSubmit = event => {
     event.preventDefault();
     const { errors, valid } = this.validateInput(this.state);
-    if (valid) {      
-      this.setState({ errors });
-    } else
-    {
+    if (valid) {
+      const { password, email, address, phone } = this.state
+      const id = this.props.id;
+      axios.post('http://localhost:5000/api/users/updateInfo', {
+        password, phone, email, address, id
+      })
+      .then(res => {
+        if (res.status === 200 && res.data.msg === 'SUCCESS') {
+          this.setState({
+            errors: errors,
+            redirect: true
+          })          
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    } else {
       this.setState({ errors });
     }
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps);
+    this.setState({ id: nextProps.id })
+  }
+
   render() {
-    const { errors } = this.state;
+    const { errors, redirect } = this.state;
+    if (redirect) return <Redirect to='/' />;
     return (
       <div className="card">
         <div className="card-body form-group">
@@ -93,7 +119,7 @@ class UpdateInfo extends Component {
                       type="email"
                       onChange={this.onChange}
                       required
-                    />                    
+                    />
                   </div>
 
                   <div className="col-12">
@@ -107,8 +133,23 @@ class UpdateInfo extends Component {
                       type="text"
                       onChange={this.onChange}
                       required
-                    />                    
+                    />
                   </div>
+
+                  <div className="col-12">
+                    <label htmlFor="address">
+                      <h6>Address</h6>
+                    </label>
+                    <input
+                      name="address"
+                      className="form-control"
+                      id=""
+                      type="text"
+                      onChange={this.onChange}
+                      required
+                    />
+                  </div>
+
                 </div>
               </div>
               <div className="text-center">
@@ -129,4 +170,11 @@ class UpdateInfo extends Component {
   }
 }
 
-export default UpdateInfo;
+const mapStateToProps = (state) => {
+  return {
+    errors: state.errors,
+    id: state.id
+  }
+}
+
+export default connect(mapStateToProps, null)(UpdateInfo);

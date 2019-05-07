@@ -11,8 +11,8 @@ _user.handleJoinYoungCommunist = (req, res) => {
   const ID = req.user.ID;
   pool.query(`SELECT * FROM JOIN_YC where ID = ?`, ID)
     .then(result => {
-      if (result[0]) return res.status(403).json({msg: "Form Exists"});
-      
+      if (result[0]) return res.status(403).json({ msg: "Form Exists" });
+
       const { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE } = req.body;
       const STATE = "Pending";
       const form = { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE, ID, STATE };
@@ -85,6 +85,25 @@ _user.handleUpdate = (req, res) => {
     .catch(err => res.status(500).json({ err }));
 }
 
+_user.handleUpdateFirstTime = (req, res) => {
+  const { address, phone, email, password, id } = req.body; 
+  const updateInfo = {
+    ADDRESS: address,
+    PHONE: phone,
+    EMAIL: email
+  }
+  bcrypt.hash(password, 10)
+    .then(hashedpassword => {
+      updateInfo.HASHPASSWORD = hashedpassword;
+      pool.query(`UPDATE STUDENT SET ? WHERE ID = ?`, [updateInfo, id])
+        .then(result => {
+          res.status(200).json({ msg: "SUCCESS" });
+        })
+        .catch(err => res.status(500).json({ err }));
+    })
+    .catch(err => res.status(500).json({ err }));
+}
+
 /* 
   required: validate-input, logged-in
 */
@@ -115,10 +134,10 @@ _user.handleLogIn = (req, res) => {
     inner join CLASS c on s.C_ID = c.C_ID
     where s.ID = ? and s.ISACTIVE = true `, ID)
     .then(result => {
-			console.log("TCL: _user.handleLogIn -> result[0]", result[0])
+      console.log("TCL: _user.handleLogIn -> result[0]", result[0])
       if (!result[0]) return res.status(404).json({ error: "not found" });
       let user = result[0];
-      
+
       bcrypt.compare(password, user.HASHPASSWORD)
         .then((match) => {
           if (!match) return res.status(403).json({ error: "invalid id or password" });
@@ -153,7 +172,7 @@ _user.handleLogIn = (req, res) => {
  */
 _user.handleActivate = (req, res) => {
 
-  let { ID, FullName, BirthDate, Faculty, Major } = req.body;  
+  let { ID, FullName, BirthDate, Faculty, Major } = req.body;
   pool.query(`SELECT * from STUDENT s where ID = ? and ISACTIVE = false`, ID)
     .then(result => {
 
@@ -171,11 +190,11 @@ _user.handleActivate = (req, res) => {
             Faculty: result[0].FNAME,
             Major: result[0].MNAME,
             BirthDate: result[0].BIRTHDATE
-          };          
+          };
           if (validator.validateInfo({ FullName, BirthDate, Faculty, Major }, std)) {
             pool.query(`UPDATE STUDENT set ISACTIVE = ? where ID = ?`, [true, ID])
               .then(result => {
-                res.status(200).json({ msg: 'SUCCESS' });
+                res.status(200).json({ msg: 'SUCCESS', id: ID });
               })
               .catch(error => res.status(404).json(error));
           } else {
