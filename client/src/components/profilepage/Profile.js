@@ -35,7 +35,7 @@ class Profile extends Component {
       <Route path={`${this.props.match.url}/search/:name`} exact render={({match, history}) => <SearchDashB match={match} />} /> 
       <Route path={`${this.props.match.path}/information`} exact component={Information}/>
       <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>  
-      <Route component={NoMatch}/>
+      <Route path="/" component={NoMatch}/>
       </Switch>   
       
       </div>
