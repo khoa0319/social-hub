@@ -7,7 +7,8 @@ class loginpage extends Component {
     super(props);
     this.state = {
       ID: "",
-      password: ""
+      password: "",
+      errors: {}
     }
   }
 

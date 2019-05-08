@@ -32,7 +32,7 @@ class Profile extends Component {
       <Route path={`${this.props.match.path}/noti`} component={NotificationDashB}/>
       <Route path={`${this.props.match.path}/search/:name`} exact component={SearchDashB}/> 
       <Route path={`${this.props.match.path}/information`} exact component={Information}/>
-      <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>  
+      <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>
       <Route component={NoMatch}/>
       </Switch>   
       </div>
