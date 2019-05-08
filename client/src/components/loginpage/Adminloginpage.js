@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {axios} from 'axios';
+import axios from 'axios';
 import {connect} from 'react-redux';
 import {adminlogin} from '../../action/adminauth/auth';
 import { Route, Redirect } from 'react-router'
@@ -21,12 +21,25 @@ onChange=(e)=>
     }
 onSubmit=(e)=>
 {
-  e.preventDefault()
-  this.props.adminlogin(this.state)
+  e.preventDefault();
+  axios
+.post('http://localhost:5000/api/admins/login',this.state)
+  .then(res=>{
+    if(res.data.msg==='Login Success'){
+      localStorage.setItem("token",res.data.token)
+      this.setState(
+        {
+          isLoginyet:true
+        }
+      )
+    }
+  })
+  .catch(console.log)
 }
     render() {
-      if(this.isLoginyet)
-      return <Redirect to = {{ pathname: "/" }} />;
+      const {isLoginyet,username}=this.state
+      if(isLoginyet)
+      return <Redirect to = {{ pathname: `/${username}/dashboard` }} />;
         return (
             <div className="row">
             <div className="col-md-12">
@@ -37,8 +50,7 @@ onSubmit=(e)=>
                      <div className="card-body">
                      <form onSubmit={this.onSubmit}>
                        <div className="form-group">
-                       <h6><label>Tên Đăng Nhập</label></h6>
-                       
+                      <h6><label>Tên Đăng Nhập</label></h6>
                          <input type="text" className="form-control" name="username" id="username" placeholder="Username" onChange={this.onChange}/>
                          <h6><label>Mật Khẩu</label> </h6>
                          <input type="text" className="form-control" name="password" id="password" placeholder="Password" onChange={this.onChange}/>
@@ -57,4 +69,4 @@ onSubmit=(e)=>
     }
 }
 
-export default connect(null,{adminlogin})(Adminloginpage);
+export default connect(null,null)(Adminloginpage);

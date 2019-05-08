@@ -5,15 +5,9 @@ var config = {
     responseType: 'blob'
   };
   
-export const adminlogin=(data,ownProps)=>
+export const StudenList=(data)=>
 {
     return(dispath)=>
     {
-        axios
-        .post('http://localhost:5000/api/admins/login',data)
-        .then(res=>{
-          return res.data.msg
-        })
-        .catch(console.log)
     }
 }

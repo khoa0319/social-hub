@@ -9,6 +9,7 @@ import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
 import ActivePage from './components/loginpage/ActivePage';
 import Adminloginpage from './components/loginpage/Adminloginpage';
+import AdminD from './components/adminpage/AdminD';
 class App extends Component {
   render() {
     return (
@@ -22,6 +23,7 @@ class App extends Component {
               <Route path="/adminlogin" exact component={Adminloginpage} />
               <Route path="/profile" exact component={Profile} />
               <Route path="/active" exact component={ActivePage} />
+              <Route path="/:admin/dashboard" exact component={AdminD}/>
               <Route component={NoMatch} />
             </Switch>
           </Router>

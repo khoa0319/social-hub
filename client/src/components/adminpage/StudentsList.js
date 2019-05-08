@@ -3,6 +3,15 @@ import Students from "./Students";
 
 class StudentList extends Component {
   render() {
+    console.log(this.props.students)
+    const studentsList=Array.from(this.props.students)
+    const studentELM = studentsList.map((item, index) => {
+      return <Students
+        key={index} // key không phải props =
+        item={item}
+        index={index}
+      />
+    })
     return (
       <div class="mt-5">
         <h1 className="text-center mb-5">Danh Sách Các Sinh Viên</h1>
@@ -25,7 +34,7 @@ class StudentList extends Component {
               </button>
             </div>
           </div>
-        </div>
+          </div>
         <table class="table table-hover">
           <thead>
             <tr>
@@ -39,7 +48,7 @@ class StudentList extends Component {
             </tr>
           </thead>
           <tbody>
-            <Students/>
+            {studentELM}
           </tbody>
         </table>
       </div>

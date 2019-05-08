@@ -57,7 +57,7 @@ _admin.handleRegister=(req,res)=>{
                     PHONE: phone,
                   };
                   pool.query(`INSERT INTO ADMINISTRATOR SET ?`,admin)
-                  .then(r => {
+                  .then(res => {
                     res.status(200).json({ msg: "success" })
                   })
                   .catch(err => res.status(500).json(err))
@@ -66,5 +66,12 @@ _admin.handleRegister=(req,res)=>{
 
     })
     .catch(err => res.status(500).json(err))
+}
+_admin.handleStudentList=(req,res)=>{
+    pool.query("SELECT * FROM STUDENT")
+    .then(result=>{ if (!result[0]) return res.status(404).json({ error: "not found" });
+
+    res.status(200).json(result);})
+    .catch(err=>res.status(500).json(err))
 }
 module.exports = _admin;
