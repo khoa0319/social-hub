@@ -9,6 +9,7 @@ import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
 import ActivePage from './components/loginpage/ActivePage';
 import UpdateInfo from './components/loginpage/UpdateInfo';
+import Adminloginpage from './components/loginpage/Adminloginpage'
 class App extends Component {
   render() {
     return (

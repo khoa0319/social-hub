@@ -24,12 +24,34 @@ class Profile extends Component {
       </div>
       <div className="col-md-3  d-none d-sm-block">
           <DetailProfile/>
-          <BtnGroup/>
+          <div>
+            <div>
+            <button
+          className="btn btn-myapp2 btn-block px-auto"
+          data-toggle="modal"
+          data-target="#cSHD"
+        >
+          Chuyển Sinh Hoạt Đoàn
+        </button>
+                </div>
+                <div className="mt-2">     
+                <div>
+        <button
+          className="btn btn-myapp btn-block px-auto"
+          data-toggle="modal"
+          data-target="#dkHSV"
+        >
+          Đăng Ký Tham Gia Hội Sinh Viên
+        </button>
+       
+      </div>
+                </div>
+                </div>
       </div>
       <div className="col-md-6">
       <Switch> 
       <Route path={`${this.props.match.path}`} exact component={MainDashB}/>
-      <Route path={`${this.props.match.path}/noti`} component={NotificationDashB}/>
+      <Route path={`${this.props.match.path}/noti`} exact component={NotificationDashB}/>
       <Route path={`${this.props.match.path}/search/:name`} exact component={SearchDashB}/> 
       <Route path={`${this.props.match.path}/information`} exact component={Information}/>
       <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>
