@@ -11,9 +11,11 @@ import Information from "./dashboard/Information";
 import ChangePassword from "./dashboard/ChangePassword";
 class Profile extends Component {
   render() {
-    console.log(this.props.match.path);
+    console.log(this.props)
+    const {match} = this.props;
+    console.log(match.url);
     return (
-      
+
       <div className="row">
       <div className="col-12">
       <img src="img/school.jpg"
@@ -28,13 +30,14 @@ class Profile extends Component {
       </div>
       <div className="col-md-6">
       <Switch> 
-      <Route path={`${this.props.match.path}`} exact component={MainDashB}/>
-      <Route path={`${this.props.match.path}/noti`} component={NotificationDashB}/>
-      <Route path={`${this.props.match.path}/search/:name`} exact component={SearchDashB}/> 
+      <Route path={``} exact component={MainDashB}/>
+      <Route path={`${this.props.match.url}/noti`} exact component={NotificationDashB}/>
+      <Route path={`${this.props.match.url}/search/:name`} exact render={({match, history}) => <SearchDashB match={match} />} /> 
       <Route path={`${this.props.match.path}/information`} exact component={Information}/>
       <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>  
       <Route component={NoMatch}/>
       </Switch>   
+      
       </div>
       <div className="col-md-3 d-none d-sm-block">
         <UpcomingAD/>

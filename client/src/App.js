@@ -17,16 +17,15 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className="container app-content mt-10">
-          <Router>
             <Switch>
               <Route path="/" exact component={Loginpage} />
               <Route path="/adminlogin" exact component={Adminloginpage} />
-              <Route path="/profile" exact component={Profile} />
+              <Route path="/:user/profile" exact render={({match, history}) => <Profile match={match} />} />
               <Route path="/active" exact component={ActivePage} />
               <Route path="/:admin/dashboard" exact component={AdminD}/>
-              <Route component={NoMatch} />
+              <Route exact component={NoMatch} />
             </Switch>
-          </Router>
+
           <Activity />
           <Noti />
         </div>
