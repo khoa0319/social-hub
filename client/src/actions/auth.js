@@ -1,6 +1,7 @@
 /* 3rd party modules */
 import axios from 'axios';
 import _ from 'lodash';
+import jwtDecode from 'jwt-decode';
 /* App modules */
 import * as types from './types';
 
@@ -35,7 +36,22 @@ export const activate = (data) => {
 
 export const login = (data) => {
   return (dispatch) => {
-           
+    axios.post(`http://localhost:5000/api/users/login`, data)
+      .then(res => {
+        // change state for no errors
+        dispatch(getError({}));
+        const token = res.data.token;
+        localStorage.setItem('token', token);
+
+        const decoded = jwtDecode(token);
+
+        console.log(decoded);
+        dispatch(setCurrentUser(decoded));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(getError(_.get(err, 'response.data')))
+      })
   }
 }
 
