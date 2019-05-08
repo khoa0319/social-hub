@@ -9,7 +9,7 @@ let mysqlImport = spawn('mysql', [
   '-u' + database.user,
   '-p' + database.password,
   '-h' + database.address]);
-mysqlImport.stdin.write('source ' + database.file);
+mysqlImport.stdin.write('source' + database.file);
 mysqlImport.stdin.end();
 
 mysqlImport.stdout

@@ -12,7 +12,7 @@ environments.staging = {
   'dbConnection': {
     'host': 'localhost',
     'user': 'root',
-    'password': 'khoa0319',
+    'password': 'Hung431998',
     'database': 'SocialHub'
   },
   'defaultPassword': 'Socialhub@123'
@@ -25,7 +25,7 @@ environments.production = {
   'dbConnection': {
     'host': 'localhost',
     'user': 'root',
-    'password': 'khoa0319',
+    'password': 'Hung431998',
     'database': 'SocialHub',
     'defaultpassword': 'Socialhub@123'
   }

@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 class Students extends Component {
   render() {
+    const student=this.props.item
     return (
       <tr>
-        <td>1</td>
-        <td>16dh110224</td>
-        <td>John</td>
+        <td>{this.props.index+1}</td>
+        <td>{student.ID}</td>
+        <td>{student.FULLNAME}</td>
         <td>Doe</td>
         <td>john@example.com</td>
         <td>Công Nghệ Thông Tin</td>
