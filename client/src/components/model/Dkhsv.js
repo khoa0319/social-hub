@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Dkhsv extends Component {
+class Dkhsinhvien extends Component {
     render() {
         return (
             <div
@@ -133,4 +133,4 @@ class Dkhsv extends Component {
     }
 }
 
-export default Dkhsv;
+export default Dkhsinhvien;

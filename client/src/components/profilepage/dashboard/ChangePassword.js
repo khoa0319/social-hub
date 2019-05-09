@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom'
 class ChangePassword extends Component {
     render() {
         return (
@@ -51,16 +51,16 @@ class ChangePassword extends Component {
                     className="btn btn-myapp mr-1"
                     name="btnHuy"
                     id="btnHuy"
-                    type="button"
+  
                     value="Đổi mật khẩu"
                   />
-                  <input
-                    className="btn btn-myapp3"
-                    name="btnGui"
-                    id="btnGui"
-                    type="button"
-                    value="Lưu lại thông tin"
-                  />
+                  <Link
+                className="btn btn-myapp3 text-white mr-1"
+                name="btnHuy"
+                id="btnHuy"
+                to="./information"
+                replace
+              >Trang Thông Tin</Link>
     
                  
                   </div>

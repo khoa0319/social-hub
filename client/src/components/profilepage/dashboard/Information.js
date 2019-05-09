@@ -1,7 +1,13 @@
 import React, { Component } from "react";
-
+import {Link} from 'react-router-dom'
 class Information extends Component {
+  // changePassword=()=>
+  // {
+  //   this.props.history.push('/noti')
+  // }
   render() {
+    // const path=this.props.history.go()
+    // console.log(path)
     return (
       <div className="card">
         <div className="card-body">
@@ -10,7 +16,7 @@ class Information extends Component {
               <div className="form-group">
               <div className="form-row">
               <div className="col-12">
-                <label for="txtTenHoatDong">
+                <label htmlFor="txtTenHoatDong">
                   <h6>Họ Tên Sinh Viên</h6>
                 </label>
                 <input
@@ -19,11 +25,11 @@ class Information extends Component {
                   id=""
                   type="text"
                   disabled
-                  placeholder="Phạm Duy "
+                  placeholder="Phạm Duy"
                 />
                 </div>
               <div className="col-6">
-                <label for="txtTenHoatDong">
+                <label htmlFor="txtTenHoatDong">
                   <h6>Mã Số Sinh Viên</h6>
                 </label>
                 <input
@@ -37,7 +43,7 @@ class Information extends Component {
                 </div>
                
                 <div className="col-6">
-                <label for="txtTenHoatDong">
+                <label htmlFor="txtTenHoatDong">
                   <h6>Ngày Sinh</h6>
                 </label>
                 <input
@@ -50,7 +56,7 @@ class Information extends Component {
                 />
                 </div>
                 <div className="col-6">
-                <label for="txtTenHoatDong">
+                <label htmlFor="txtTenHoatDong">
                   <h6>Điện Thoại</h6>
                 </label>
                 <input
@@ -62,7 +68,7 @@ class Information extends Component {
                 />
                 </div>
                 <div className="col-6">
-                <label for="txtTenHoatDong">
+                <label htmlFor="txtTenHoatDong">
                   <h6>Email</h6>
                 </label>
                 <input
@@ -74,7 +80,7 @@ class Information extends Component {
                 />
                 </div>
                 <div className="col-12">
-                <label for="txtTenHoatDong">
+                <label htmlFor="txtTenHoatDong">
                   <h6>Địa Chỉ</h6>
                 </label>
                 <input
@@ -90,7 +96,7 @@ class Information extends Component {
               <div className="card mb-1">
                 <div className="form-row m-1 card-body">
                   <div className="col-6">
-                    <label for="txtTenHoatDong">
+                    <label htmlFor="txtTenHoatDong">
                       <h6>Khoa</h6>
                     </label>
                     <input
@@ -103,7 +109,7 @@ class Information extends Component {
                     />
                   </div>
                   <div className=" col-6">
-                    <label for="txtTenHoatDong">
+                    <label htmlFor="txtTenHoatDong">
                       <h6>Ngành</h6>
                     </label>
                     <input
@@ -116,7 +122,7 @@ class Information extends Component {
                     />{" "}
                   </div>
                   <div className=" col-6">
-                    <label for="txtTenHoatDong">
+                    <label htmlFor="txtTenHoatDong">
                       <h6>Lớp</h6>
                     </label>
                     <input
@@ -129,7 +135,7 @@ class Information extends Component {
                     />
                   </div>
                   <div className=" col-6">
-                    <label for="txtTenHoatDong">
+                    <label htmlFor="txtTenHoatDong">
                       <h6>Khóa</h6>
                     </label>
                     <input
@@ -144,13 +150,14 @@ class Information extends Component {
                 </div>
               </div>
               <div className="text-center">
-              <input
+              <Link
                 className="btn btn-myapp mr-1"
                 name="btnHuy"
                 id="btnHuy"
                 type="button"
-                value="Đổi mật khẩu"
-              />
+                to="./changepassword"
+                replace
+              >Đổi Mật Khẩu</Link>
               <input
                 className="btn btn-myapp3"
                 name="btnGui"

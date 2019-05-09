@@ -3,17 +3,22 @@ import DetailProfile from './DetailProfile'
 import MainDashB from "./dashboard/MainDashB";
 import UpcomingAD from "./dashboard/UpcomingAD";
 import BtnGroup from "../featurebutton/BtnGroup";
-import {Route,Switch} from 'react-router-dom';
+import {Route,Switch,withRouter} from 'react-router-dom';
 import NotificationDashB from "./dashboard/NotificationDashB";
 import SearchDashB from "./dashboard/SearchDashB";
 import NoMatch from "./NoMatch";
 import Information from "./dashboard/Information";
 import ChangePassword from "./dashboard/ChangePassword";
+import Activity from "../model/Activity";
+import Cshdoan from "../model/Cshd";
+import Dkhsinhvien from "../model/Dkhsv";
+import ActivityJoinList from "./dashboard/ActivitysJoinList";
+import ActivityJoin from "./dashboard/ActivityJoin";
+import ActivityDetail from "../model/ActivityDetail";
 class Profile extends Component {
   render() {
     console.log(this.props)
-    const {match} = this.props;
-    console.log(match.url);
+    const {match,history} = this.props;
     return (
 
       <div className="row">
@@ -26,28 +31,46 @@ class Profile extends Component {
       </div>
       <div className="col-md-3  d-none d-sm-block">
           <DetailProfile/>
-          <BtnGroup/>
+          <div>
+          <button
+          className="btn btn-myapp2 btn-block px-auto"
+          data-toggle="modal"
+          data-target="#cSHD"
+        >
+          Chuyển Sinh Hoạt Đoàn
+        </button>
+          </div>
+          <div className="mt-1">
+          <button
+          className="btn btn-myapp btn-block px-auto"
+          data-toggle="modal"
+          data-target="#dkHSV"
+        >
+          Đăng Ký Tham Gia Hội Sinh Viên
+        </button>
+          </div>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-8">
       <Switch> 
-      <Route path={``} exact component={MainDashB}/>
-      <Route path={`${this.props.match.url}/noti`} exact component={NotificationDashB}/>
-      <Route path={`${this.props.match.url}/search/:name`} exact render={({match, history}) => <SearchDashB match={match} />} /> 
-      <Route path={`${this.props.match.path}/information`} exact component={Information}/>
+      
+      <Route path={`${this.props.match.path}/noti`} exact component={NotificationDashB}/>
+      <Route path={`${this.props.match.url}/search/:name`} exact render={({match, history}) => <SearchDashB match={match}  />} /> 
+      <Route path={`${this.props.match.path}/information`} exact render={({match, history}) => <Information match={match} history={history}/>}/>
       <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>  
-      <Route path="/" component={NoMatch}/>
+      <Route path={`${this.props.match.path}/activity`} exact component={ActivityJoinList}/>  
+      <Route path={`${this.props.match.path}/youractivity`} exact component={ActivityJoinList}/>  
+      <Route path={``} component={MainDashB}/>
       </Switch>   
       
       </div>
-      <div className="col-md-3 d-none d-sm-block">
-        <UpcomingAD/>
-        <UpcomingAD/>
-        <UpcomingAD/>
-      </div>
+      
+      <Cshdoan/>
+      <Dkhsinhvien/>
+      <ActivityDetail/>
       </div>
         
     );
   }
 }
 
-export default Profile;
+export default withRouter(Profile);

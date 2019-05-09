@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/navbar/Navbar'
 import Loginpage from './components/loginpage/loginpage';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch,withRouter } from 'react-router-dom';
 import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
@@ -21,12 +21,12 @@ class App extends Component {
             <Switch>
               <Route path="/" exact component={Loginpage} />
               <Route path="/adminlogin" exact component={Adminloginpage} />
-              <Route path="/:user/profile" render={({match, history}) => <Profile match={match} />} />
-              {/* <Route path="/:user/profile/:sub" render={({match, history}) => <Profile match={match} />} /> */}
+              <Route path="/:user/profile" component={Profile} />} />
+                {/* <Route path="/:user/profile/:sub" render={({match, history}) => <Profile match={match} />} /> */}
 
               <Route path="/active" exact component={ActivePage} />
               <Route path="/:admin/dashboard" exact component={AdminD}/>
-      {/* <Route path={`/user2/profile/noti`} exact component={NotificationDashB}/> */}
+               {/* <Route path={`/user2/profile/noti`} exact component={NotificationDashB}/> */}
 
               <Route path="/" component={NoMatch} />
             </Switch>
@@ -39,4 +39,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

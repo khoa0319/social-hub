@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 class DetailProfile extends Component {
     render() {
         return (
@@ -16,7 +17,7 @@ class DetailProfile extends Component {
               </div>
               <div className="card-footer text-center ">
               <div>
-                <button className="btn btn-secondary">Chỉnh Sửa Thông Tin</button>
+                <Link className="btn btn-secondary" to="./">Chỉnh Sửa Thông Tin</Link>
                 </div>
                 <div>
                 <button className="btn btn-myapp3 txt-white mt-2">Hoạt Động Của Bạn</button>
