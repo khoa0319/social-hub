@@ -30,7 +30,7 @@ class Profile extends Component {
       <hr></hr>
       </div>
       <div className="col-md-3  d-none d-sm-block">
-          <DetailProfile/>
+          <DetailProfile match={match}/>
           <div>
           <button
           className="btn btn-myapp2 btn-block px-auto"
@@ -53,12 +53,12 @@ class Profile extends Component {
       <div className="col-md-8">
       <Switch> 
       
-      <Route path={`${this.props.match.path}/noti`} exact component={NotificationDashB}/>
+      <Route path={`${this.props.match.url}/noti`} exact component={NotificationDashB}/>
       <Route path={`${this.props.match.url}/search/:name`} exact render={({match, history}) => <SearchDashB match={match}  />} /> 
-      <Route path={`${this.props.match.path}/information`} exact render={({match, history}) => <Information match={match} history={history}/>}/>
-      <Route path={`${this.props.match.path}/changepassword`} exact component={ChangePassword}/>  
-      <Route path={`${this.props.match.path}/activity`} exact component={ActivityJoinList}/>  
-      <Route path={`${this.props.match.path}/youractivity`} exact component={ActivityJoinList}/>  
+      <Route path={`${this.props.match.url}/information`} exact render={({match, history}) => <Information match={match} history={history}/>}/>
+      <Route path={`${this.props.match.url}/changepassword`} exact component={ChangePassword}/>  
+      <Route path={`${this.props.match.url}/activity`} exact component={ActivityJoinList}/>  
+      <Route path={`${this.props.match.url}/youractivity`} exact component={ActivityJoinList}/>  
       <Route path={``} component={MainDashB}/>
       </Switch>   
       

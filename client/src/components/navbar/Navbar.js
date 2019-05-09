@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavbarSmall from "./NavbarSmall";
 import NavbarBig from "./NavbarBig";
+import {Link} from 'react-router-dom';
 class Navbar extends Component {
   render() {
     return (
@@ -8,26 +9,26 @@ class Navbar extends Component {
         <nav className="navbar navbar-expand navbar-light fixed-top">
         
         <div className="container"> 
-        <a class="navbar-brand mr-auto  "><img
+        <a className="navbar-brand mr-auto  "><img
                 src="img/logo.png"
                 className="logo"
                 alt="nothing"
               /></a>
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-      <button className="btn btn-none text-center" id="triggerId">
+        <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li className="nav-item">
+      <Link className="btn btn-none text-center" id="triggerId" to="./noti">
                 <i className="far fa-bell" />
-              </button></li>
-      <li class="nav-item">
-      <button className="btn btn-none text-center" id="triggerId">
+              </Link></li>
+      <li className="nav-item">
+      <Link className="btn btn-none text-center" id="triggerId" to="./">
                 <i className="fas fa-tasks" />
-              </button>
+              </Link>
       </li>
-      <li class="nav-item">
-      <button className="btn btn-none text-center" id="triggerId">
-      <i class="fas fa-user"></i>
+      <li className="nav-item">
+      <Link className="btn btn-none text-center" id="triggerId" to="./information">
+      <i className="fas fa-user mr-1"></i>
       username
-                         </button>
+                         </Link>
       </li>
     </ul>
    
