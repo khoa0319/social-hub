@@ -35,6 +35,7 @@ body
 .logo
 {
   width: 40px;
+
 }
 /* #BigInput
 {
@@ -81,3 +82,19 @@ table {
 h1 {
   text-align: left;
 }
+.text-overflow
+{
+  height: 200px;
+ /* BOTH of the following are required for text-overflow */
+  overflow-y: scroll;
+}
+button i
+{
+  width: 50px;
+  font-size: 20px;
+} 
+button img
+{
+  width: 20px;
+  font-size: 20px;
+} 

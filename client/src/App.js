@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/navbar/Navbar'
 import Loginpage from './components/loginpage/loginpage';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch,withRouter } from 'react-router-dom';
 import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
 import NoMatch from './components/profilepage/NoMatch';
 import ActivePage from './components/loginpage/ActivePage';
-import UpdateInfo from './components/loginpage/UpdateInfo';
-import Adminloginpage from './components/loginpage/Adminloginpage'
+import Adminloginpage from './components/loginpage/Adminloginpage';
+import AdminD from './components/adminpage/AdminD';
+import UpdateInfo from './components/loginpage/UpdateInfo'
+import NotificationDashB from "./components/profilepage/dashboard/NotificationDashB";
 class App extends Component {
   render() {
     return (
@@ -17,16 +19,19 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <div className="container app-content mt-10">
-          <Router>
             <Switch>
               <Route path="/" exact component={Loginpage} />
               <Route path="/adminlogin" exact component={Adminloginpage} />
-              <Route path="/profile" exact component={Profile} />
               <Route path="/activate" exact component={ActivePage} />
               <Route path="/updateInfo" exact component={UpdateInfo} />
+              <Route path="/:user/profile" component={Profile} />} />
+                {/* <Route path="/:user/profile/:sub" render={({match, history}) => <Profile match={match} />} /> */}
+              <Route path="/active" exact component={ActivePage} />
+              <Route path="/:admin/dashboard" exact component={AdminD}/>
+               {/* <Route path={`/user2/profile/noti`} exact component={NotificationDashB}/> */}
               <Route path="/" component={NoMatch} />
             </Switch>
-          </Router>
+
           <Activity />
           <Noti />
         </div>
@@ -35,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

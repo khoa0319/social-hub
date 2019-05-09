@@ -58,7 +58,7 @@ class Noti extends Component {
                           <h6>Khoa</h6>
                         </label>
                         <select id="inputState" className="form-control">
-                          <option selected>All</option>
+                          <option>All</option>
                           <option>...</option>
                         </select>
                       </div>
@@ -67,7 +67,7 @@ class Noti extends Component {
                           <h6>Ngành</h6>
                         </label>
                         <select id="inputState" className="form-control">
-                          <option selected>All</option>
+                          <option>All</option>
                           <option>...</option>
                         </select>
                       </div>
@@ -76,7 +76,7 @@ class Noti extends Component {
                           <h6>Lớp</h6>
                         </label>
                         <select id="inputState" className="form-control">
-                          <option selected>All</option>
+                          <option>All</option>
                           <option>...</option>
                         </select>
                       </div>

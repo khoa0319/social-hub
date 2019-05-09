@@ -10,7 +10,8 @@ class ActivityD extends Component {
           <img src="https://wallstreetenglish.edu.vn/images/english-test/toeic/more-test-banner-vi.jpg" className="img-fluid" alt="englishtest" />
           </div>
           <div className="card-body d-flex justify-content-end">
-            <button className="btn btn-myapp m-1">Xem Chi Tiết</button>
+            <button className="btn btn-myapp m-1" data-toggle="modal"
+            data-target="#activityDetail">Xem Chi Tiết</button>
             <button className="btn btn-myapp2 m-1">Tham Gia</button>
           </div>
         </div>
