@@ -24,7 +24,7 @@ class App extends Component {
               <Route path="/adminlogin" exact component={Adminloginpage} />
               <Route path="/activate" exact component={ActivePage} />
               <Route path="/updateInfo" exact component={UpdateInfo} />
-              <Route path="/:user/profile" component={Profile} />} />
+              <Route path="/:user/" component={Profile} />} />
                 {/* <Route path="/:user/profile/:sub" render={({match, history}) => <Profile match={match} />} /> */}
               <Route path="/active" exact component={ActivePage} />
               <Route path="/:admin/dashboard" exact component={AdminD}/>

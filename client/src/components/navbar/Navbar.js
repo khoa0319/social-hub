@@ -27,7 +27,7 @@ class Navbar extends Component {
         <nav className="navbar navbar-expand navbar-light fixed-top">
 
           <div className="container">
-            <Link className="navbar-brand mr-auto  " to="/">
+            <Link className="navbar-brand mr-auto  " to="./">
               <img
                 src="img/logo.png"
                 className="logo"
@@ -41,7 +41,7 @@ class Navbar extends Component {
                   <i className="far fa-bell" />
                 </Link></li>
               <li className="nav-item">
-                <Link className="btn btn-none text-center" id="triggerId" to="./profile">
+                <Link className="btn btn-none text-center" id="triggerId" to="./">
                   <i className="fas fa-tasks" />
                 </Link>
               </li>
