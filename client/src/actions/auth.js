@@ -4,7 +4,7 @@ import _ from 'lodash';
 import jwtDecode from 'jwt-decode';
 /* App modules */
 import * as types from './types';
-
+import fingerprint from '../utils/fingerprint';
 
 export const activate = (data) => {
   return (dispatch) => {
@@ -36,13 +36,16 @@ export const activate = (data) => {
 
 export const login = (data) => {
   return (dispatch) => {
-    axios.post(`http://localhost:5000/api/users/login`, data)
+    fingerprint(fp => {
+      axios.post(`http://localhost:5000/api/users/login`, {...data, fp})
       .then(res => {
         // change state for no errors
         dispatch(getError({}));
+
         const token = res.data.token;
         localStorage.setItem('token', token);
-
+        localStorage.setItem('fingerprint', fp);
+        
         const decoded = jwtDecode(token);
 
         console.log(decoded);
@@ -52,6 +55,7 @@ export const login = (data) => {
         console.log(err);
         dispatch(getError(_.get(err, 'response.data')))
       })
+    })    
   }
 }
 

@@ -19,3 +19,7 @@ SELECT * FROM STUDENT s inner join MAJOR m on s.M_ID = m.M_ID;
 
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'khoa0319';
 flush privileges;
+USE SOCIALHUB;
+
+select * from student where id = "16DH110152"
+-- update info không cần mã sinh viên vẫn success

@@ -1,29 +1,28 @@
 /* 3rd party modules */
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 /* app modules */
 const _userHandle = require('./userHandle');
 const _middlware = require('./userMiddleware');
 /*  auth actions */
 
 router.get('/detail',
-  passport.authenticate("jwt", { session: false }),
+  _middlware.authenticating,
   _userHandle.handleDetail);
 
 // update account
 router.post('/update',
   _middlware.validateUpdateInput,
-  passport.authenticate('jwt', { session: false }),
+  _middlware.authenticating,
   _userHandle.handleUpdate);
 
 router.post('/joinyc',
   _middlware.validateJoinYCInput,
-  passport.authenticate('jwt', { session: false }),
+  _middlware.authenticating,
   _userHandle.handleJoinYoungCommunist);
 
 router.post('/joinstdc',
-  passport.authenticate('jwt', { session: false }),
+  _middlware.authenticating,
   _userHandle.handleJoinStudentCommunity);
 
 /* un-auth actions */
@@ -42,7 +41,7 @@ router.post('/login', _userHandle.handleLogIn);
 
 router.post('/resetpwd',
   _middlware.validateUpdatePasswordInput,
-  passport.authenticate('jwt', { session: false }),
+  _middlware.authenticating,
   _userHandle.handleResetPassword);
 
 module.exports = router;
