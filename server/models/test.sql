@@ -21,5 +21,5 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'khoa0319
 flush privileges;
 USE SOCIALHUB;
 
-select * from student where id = "16DH110152"
+select * from student where id = "16DH110050"
 -- update info không cần mã sinh viên vẫn success

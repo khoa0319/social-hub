@@ -2,13 +2,25 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
+import jwtDecode from 'jwt-decode';
+import { setCurrentUser } from '../../actions/auth';
+import { Redirect } from 'react-router-dom';
 class loginpage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ID: "",
-      password: "",
+      password: "",      
       errors: {}
+    }
+  }
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded = jwtDecode(token);
+      this.props.setCurrentUser(decoded);
+      
     }
   }
 
@@ -27,6 +39,7 @@ class loginpage extends Component {
   }
 
   render() {
+    if(this.props.auth.isAuthenticated) return <Redirect to={`/${this.props.auth.profile.ID}/profile`} />
     return (
       <div className="row">
         <div className="col-md-8">
@@ -34,6 +47,7 @@ class loginpage extends Component {
             <div className="card-header bg-main text-light align-middle">
               <h4> Đăng Nhập</h4>
               <p>Sinh viên đăng nhập vào bằng mã số sinh viên đã được cấp</p>
+              <small>{this.props.errors ? `${this.props.errors.error}` : ``}</small>
             </div>
             <div className="card-body">
               <form onSubmit={this.onSubmit}>
@@ -120,4 +134,11 @@ class loginpage extends Component {
   }
 }
 
-export default connect(null, { login })(loginpage);
+const mapStateToProps = (state) => {
+  return {
+    errors: state.errors,
+    auth: state.auth
+  }
+}
+
+export default connect(mapStateToProps, { login, setCurrentUser })(loginpage);

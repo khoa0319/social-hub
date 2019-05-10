@@ -31,17 +31,18 @@ router.post('/joinstdc',
 // })
 
 // first time update account
-router.post('/updateInfo', _userHandle.handleUpdateFirstTime)
+router.post('/updateInfo', 
+  _userHandle.handleUpdateFirstTime)
 
 router.post('/activate', 
   _middlware.validateRegisterInput,
   _userHandle.handleActivate);
 
-router.post('/login', _userHandle.handleLogIn);
+router.post('/login', 
+  _userHandle.handleLogIn);
 
 router.post('/resetpwd',
   _middlware.validateUpdatePasswordInput,
-  _middlware.authenticating,
   _userHandle.handleResetPassword);
 
 module.exports = router;
