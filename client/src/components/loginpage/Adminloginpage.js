@@ -5,7 +5,7 @@ import {adminlogin} from '../../action/adminauth/auth';
 import { Route, Redirect } from 'react-router'
 class Adminloginpage extends Component {
   constructor(props){
-    super(props)
+    super(props)  
     this.state={
         username:'root1',
         password:'root1',

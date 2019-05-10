@@ -15,13 +15,32 @@ class ActivityBtn extends Component {
           </button>
           </div>
           <div className="col-6"><button
-            class="btn btn-block btn-lg btn-myapp3 txt-white ml-2"
+            class="btn btn-block btn-lg btn-myapp3 txt-white"
             type="button"
             data-toggle="modal"
             data-target="#NotiModel"
           >
             Tạo Thông Báo
-          </button></div>
+          </button>
+          </div>
+          <div className="col-6 mt-2"><button
+            class="btn btn-block btn-lg btn-myapp3 txt-white"
+            type="button"
+            data-toggle="modal"
+            data-target="#NotiModel"
+          >
+            Đổi mật khẩu
+          </button>
+          </div>
+          <div className="col-6 mt-2"><button
+            class="btn btn-block btn-lg btn-myapp3 txt-white"
+            type="button"
+            data-toggle="modal"
+            data-target="#NotiModel"
+          >
+            Tạo Tài Khoản Admin Mới
+          </button>
+          </div>
           
         </div>
     );

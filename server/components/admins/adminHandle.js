@@ -68,7 +68,7 @@ _admin.handleRegister=(req,res)=>{
     .catch(err => res.status(500).json(err))
 }
 _admin.handleStudentList=(req,res)=>{
-    pool.query("SELECT * FROM STUDENT")
+    pool.query("SELECT STUDENT.ID FROM STUDENT LIMIT ?",40)
     .then(result=>{ if (!result[0]) return res.status(404).json({ error: "not found" });
 
     res.status(200).json(result);})

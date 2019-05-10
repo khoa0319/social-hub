@@ -9,7 +9,7 @@ class Navbar extends Component {
         <nav className="navbar navbar-expand navbar-light fixed-top">
         
         <div className="container"> 
-        <a className="navbar-brand mr-auto  "><img
+        <a className="navbar-brand mr-auto" href="/"><img
                 src="img/logo.png"
                 className="logo"
                 alt="nothing"
