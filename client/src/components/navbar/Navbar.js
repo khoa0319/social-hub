@@ -15,8 +15,13 @@ class Navbar extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token')
     if (token) {
-      const decoded = jwtDecode(token);
-      this.props.setCurrentUser(decoded);
+      try {
+        const decoded = jwtDecode(token)
+      this.props.setCurrentUser(decoded);  
+      } catch (error) {
+        console.log(error);
+      }
+      
     }
   }
 

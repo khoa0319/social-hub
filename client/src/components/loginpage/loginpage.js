@@ -18,6 +18,7 @@ class loginpage extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token');
     if (token) {
+      console.log(token);
       const decoded = jwtDecode(token);
       this.props.setCurrentUser(decoded);
       

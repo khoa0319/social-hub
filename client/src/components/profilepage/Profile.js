@@ -58,9 +58,10 @@ class Profile extends Component {
       <Route path={`${this.props.match.url}/noti`} exact component={NotificationDashB}/>
       <Route path={`${this.props.match.url}/search/:name`} exact render={({match, history}) => <SearchDashB match={match}  />} /> 
       <Route path={`${this.props.match.url}/information`} exact render={({match, history}) => <Information match={match} history={history}/>}/>
-      <Route path={`${this.props.match.url}/changepassword`} exact component={ChangePassword}/>  
-      <Route path={`${this.props.match.url}/youractivity`} exact component={ActivityJoinList}/>  
+      <Route path={`${this.props.match.url}/changepassword`} exact component={ChangePassword}/>
+      <Route path={`${this.props.match.url}/youractivity`} exact component={ActivityJoinList}/>
       <Route path={`/`} component={MainDashB}/>
+      
       </Switch>   
       
       </div>

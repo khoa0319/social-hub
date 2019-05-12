@@ -11,7 +11,7 @@ export const activate = (data) => {
     axios.post('http://localhost:5000/api/users/activate', data)
       .then(res => {        
         if (res.status === 200 && res.data.msg === 'SUCCESS') {
-          dispatch(getID(res.data.id))                              
+          dispatch(getID(res.data.id))
         }
       })
       .catch(err => {
