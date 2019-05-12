@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './components/navbar/Navbar'
 import Loginpage from './components/loginpage/loginpage';
-import { BrowserRouter as Router, Route, Switch,withRouter } from 'react-router-dom';
+import { Route, Switch,withRouter } from 'react-router-dom';
 import Profile from './components/profilepage/Profile';
 import Activity from './components/model/Activity';
 import Noti from './components/model/Noti';
@@ -11,7 +11,6 @@ import ActivePage from './components/loginpage/ActivePage';
 import Adminloginpage from './components/loginpage/Adminloginpage';
 import AdminD from './components/adminpage/AdminD';
 import UpdateInfo from './components/loginpage/UpdateInfo'
-import NotificationDashB from "./components/profilepage/dashboard/NotificationDashB";
 class App extends Component {
   render() {
     return (

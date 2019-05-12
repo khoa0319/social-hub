@@ -4,6 +4,7 @@ const router = express.Router();
 /* app modules */
 const _userHandle = require('./userHandle');
 const _middlware = require('./userMiddleware');
+
 /*  auth actions */
 
 router.get('/detail',
@@ -26,9 +27,6 @@ router.post('/joinstdc',
   _userHandle.handleJoinStudentCommunity);
 
 /* un-auth actions */
-// router.get('/:id', (req, res) => {
-//   res.status(200).json({ msg: `hello ${req.params['id']}` });
-// })
 
 // first time update account
 router.post('/updateInfo', 

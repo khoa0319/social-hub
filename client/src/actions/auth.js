@@ -53,8 +53,7 @@ export const login = (data) => {
         console.log(decoded);
         dispatch(setCurrentUser(decoded));
       })
-      .catch(err => {
-        console.log(err);
+      .catch(err => {        
         dispatch(getError(_.get(err, 'response.data')))
       })
     })    

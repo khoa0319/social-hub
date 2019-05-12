@@ -5,7 +5,9 @@ const errorReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case types.GET_ERRORS:
-      return action.error
+      // check for the error in case of no internet, no server,...
+      if (action.error) return action.error
+      return null
 
     default:
       break;

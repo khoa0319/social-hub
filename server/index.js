@@ -23,6 +23,7 @@ app.use(express.json());
 // ROUTES
 app.use('/api/users', require('./components/users/userAPI'));
 app.use('/api/admins', require('./components/admins/adminAPI'));
+app.use('/api/activities', require('./components/activities/activityAPI'));
 const port = process.env.PORT || 5000;
 const environment = process.env.NODE_ENV
 app.listen(port, () => {

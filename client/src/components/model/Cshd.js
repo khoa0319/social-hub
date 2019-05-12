@@ -6,7 +6,7 @@ class Cshdoan extends Component {
             <div
             className="modal fade"
             id="cSHD"
-            tabindex="-1"
+            tabIndex="-1"
             role="dialog"
             aria-labelledby="modelTitleId"
             aria-hidden="true"
@@ -35,7 +35,7 @@ class Cshdoan extends Component {
                           id="inlineCheckbox1"
                           value="option1"
                         />
-                        <label className="form-check-label" for="inlineCheckbox1">
+                        <label className="form-check-label" htmlFor="inlineCheckbox1">
                           Đồng ý cung cấp thông tin cơ bản cho việc Chuyển Sinh
                           Hoạt Đoàn
                         </label>
@@ -50,9 +50,10 @@ class Cshdoan extends Component {
                           id="inlineCheckbox2"
                           value="radio1"
                           name="exampleRadios"
+                          onChange={(event) => {event.target.name = event.target.value}}
                           checked
                         />
-                        <label className="form-check-label" for="inlineCheckbox2">
+                        <label className="form-check-label" htmlFor="inlineCheckbox2">
                           Đăng Ký Vào Đoàn Trường
                         </label>
                       </div>
@@ -64,7 +65,7 @@ class Cshdoan extends Component {
                           value="radio2"
                           name="exampleRadios"
                         />
-                        <label className="form-check-label" for="inlineCheckbox3">
+                        <label className="form-check-label" htmlFor="inlineCheckbox3">
                           Đăng Ký Vào Đoàn Khoa
                         </label>
                       </div>
@@ -111,7 +112,7 @@ class Cshdoan extends Component {
                           id="inlineCheckbox8"
                           value="option5"
                         />
-                        <label className="form-check-label" for="inlineCheckbox8">
+                        <label className="form-check-label" htmlFor="inlineCheckbox8">
                           Bạn đã đọc kỹ điều lệ tham gia hoạt động đoàn và đồng ý
                         </label>
                       </div>
