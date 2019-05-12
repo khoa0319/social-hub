@@ -84,7 +84,7 @@ class loginpage extends Component {
                   <div className="mt-2 col-12 col-md-6" >
                     <button
                       type="button"
-                      class="btn btn-default btn-block"
+                      className="btn btn-default btn-block"
                     >
                       Quên Mật Khẩu ?
                     </button>
@@ -93,7 +93,7 @@ class loginpage extends Component {
                     {" "}
                     <button
                       type="button"
-                      class="btn btn-primary btn-block"
+                      className="btn btn-primary btn-block"
                     >
                       Đăng Nhập qua Facebook
                     </button>

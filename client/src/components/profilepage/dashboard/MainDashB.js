@@ -33,7 +33,7 @@ class MainDashB extends Component {
               </div>
       </div>
         <div className="card-body d-flex justify-content-end">
-          <row>
+          <div className="row">
             <div className="col-12">
               <ActivityD />
             </div>
@@ -43,7 +43,7 @@ class MainDashB extends Component {
             <div className="col-12">
               <ActivityD />
             </div>
-          </row>
+          </div>
         </div>
         </div>
     );
