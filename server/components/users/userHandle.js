@@ -150,7 +150,7 @@ _user.handleLogIn = (req, res) => {
             Class: result[0].CNAME,
             Academic_year: result[0].ACADEMIC_YEAR
           };
-          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1h' }, (err, token) => {
+          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '24h' }, (err, token) => {
             if (err) return res.status(500).json({ err });
             res.status(200).json({
               msg: 'SUCCESS',

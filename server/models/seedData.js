@@ -91,7 +91,7 @@ seedData.init = () => {
   seedData.seedClass(cData);
   seedData.seedUserType();
   seedData.seedActivityType(); */
-  seedData.seedStudent(classOf16Data);
+  //seedData.seedStudent(classOf16Data);
 }
 seedData.init();
 module.exports = seedData;
