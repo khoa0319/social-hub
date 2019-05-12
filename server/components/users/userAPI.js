@@ -1,48 +1,46 @@
 /* 3rd party modules */
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 /* app modules */
 const _userHandle = require('./userHandle');
 const _middlware = require('./userMiddleware');
+
 /*  auth actions */
 
 router.get('/detail',
-  passport.authenticate("jwt", { session: false }),
+  _middlware.authenticating,
   _userHandle.handleDetail);
 
 // update account
 router.post('/update',
   _middlware.validateUpdateInput,
-  passport.authenticate('jwt', { session: false }),
+  _middlware.authenticating,
   _userHandle.handleUpdate);
 
 router.post('/joinyc',
   _middlware.validateJoinYCInput,
-  passport.authenticate('jwt', { session: false }),
+  _middlware.authenticating,
   _userHandle.handleJoinYoungCommunist);
 
 router.post('/joinstdc',
-  passport.authenticate('jwt', { session: false }),
+  _middlware.authenticating,
   _userHandle.handleJoinStudentCommunity);
 
 /* un-auth actions */
-// router.get('/:id', (req, res) => {
-//   res.status(200).json({ msg: `hello ${req.params['id']}` });
-// })
 
 // first time update account
-router.post('/updateInfo', _userHandle.handleUpdateFirstTime)
+router.post('/updateInfo', 
+  _userHandle.handleUpdateFirstTime)
 
 router.post('/activate', 
   _middlware.validateRegisterInput,
   _userHandle.handleActivate);
 
-router.post('/login', _userHandle.handleLogIn);
+router.post('/login', 
+  _userHandle.handleLogIn);
 
 router.post('/resetpwd',
   _middlware.validateUpdatePasswordInput,
-  passport.authenticate('jwt', { session: false }),
   _userHandle.handleResetPassword);
 
 module.exports = router;

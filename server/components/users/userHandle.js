@@ -127,15 +127,15 @@ _user.handleDetail = (req, res) => {
   require: validate-input, account is activated
  */
 _user.handleLogIn = (req, res) => {
-  const { ID, password } = req.body;
+  const { ID, password, fingerprint } = req.body;
   pool.query(`SELECT * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID 
     inner join FACULTY f on s.F_ID = f.F_ID
     inner join MAJOR m on s.M_ID = m.M_ID
     inner join CLASS c on s.C_ID = c.C_ID
     where s.ID = ? and s.ISACTIVE = true `, ID)
     .then(result => {
-      console.log("TCL: _user.handleLogIn -> result[0]", result[0])
-      if (!result[0]) return res.status(404).json({ error: "not found" });
+      
+      if (!result[0]) return res.status(404).json({ error: "ID not found or Not Activated" });
       let user = result[0];
 
       bcrypt.compare(password, user.HASHPASSWORD)
@@ -150,11 +150,11 @@ _user.handleLogIn = (req, res) => {
             Class: result[0].CNAME,
             Academic_year: result[0].ACADEMIC_YEAR
           };
-          jwt.sign(payload, "socialhub", { expiresIn: '1h' }, (err, token) => {
+          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '24h' }, (err, token) => {
             if (err) return res.status(500).json({ err });
             res.status(200).json({
-              msg: 'Login Success',
-              token: 'bearer ' + token
+              msg: 'SUCCESS',
+              token
             });
           })
         })

@@ -4,8 +4,8 @@ import _ from 'lodash';
 import jwtDecode from 'jwt-decode';
 /* App modules */
 import * as types from './types';
-
-
+import fingerprint from '../utils/fingerprint';
+import setHeaders from '../utils/setHeaders';
 export const activate = (data) => {
   return (dispatch) => {
     axios.post('http://localhost:5000/api/users/activate', data)
@@ -36,22 +36,27 @@ export const activate = (data) => {
 
 export const login = (data) => {
   return (dispatch) => {
-    axios.post(`http://localhost:5000/api/users/login`, data)
+    fingerprint(fp => {
+      axios.post(`http://localhost:5000/api/users/login`, {...data, fp})
       .then(res => {
         // change state for no errors
-        dispatch(getError({}));
+        dispatch(getError(null));
+
         const token = res.data.token;
         localStorage.setItem('token', token);
-
+        localStorage.setItem('fingerprint', fp);
+        
+        setHeaders(token, fp);
+        
         const decoded = jwtDecode(token);
 
         console.log(decoded);
         dispatch(setCurrentUser(decoded));
       })
-      .catch(err => {
-        console.log(err);
+      .catch(err => {        
         dispatch(getError(_.get(err, 'response.data')))
       })
+    })    
   }
 }
 
@@ -62,10 +67,10 @@ export const getID = (id) => {
   }
 }
 
-export const getError = (err) => {
+export const getError = (error) => {
   return {
     type: types.GET_ERRORS,
-    err
+    error
   }
 }
 

@@ -3,7 +3,7 @@ const mysql = require('mysql')
 const db = {
 	host: process.env.HOST,
 	user: process.env.MYSQLUSER,
-	password: "Hung431998",
+	password: process.env.PASSWORD,
 	database: process.env.DATABASE
 };
 
@@ -15,7 +15,7 @@ const pool = mysql.createPool({
 	database: db.database,
 	dateStrings: true
 });
-console.log(db.password)
+
 // Ping database to check for common exception errors.
 pool.getConnection((err, connection) => {
 	if (err) {
@@ -32,7 +32,7 @@ pool.getConnection((err, connection) => {
 			console.error(`${err.sqlMessage}`)
 		}
 	}
-
+	
 	if (connection) connection.release()
 
 	return

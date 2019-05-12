@@ -27,6 +27,7 @@ class AdminD extends Component {
   componentDidMount(){
     if(localStorage.getItem("token")){
     this.props.getStudentList();
+    console.log(this.props.students)
     }
   }
   render() {

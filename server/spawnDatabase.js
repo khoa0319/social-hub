@@ -5,6 +5,7 @@ const database = {
   address: process.env.HOST || '',
   file: './models/socialhub.sql'
 }
+
 let mysqlImport = spawn('mysql', [
   '-u' + database.user,
   '-p' + database.password,
