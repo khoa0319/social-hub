@@ -18,6 +18,7 @@ class loginpage extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token');
     if (token) {
+      console.log(token);
       const decoded = jwtDecode(token);
       this.props.setCurrentUser(decoded);
       
@@ -84,7 +85,7 @@ class loginpage extends Component {
                   <div className="mt-2 col-12 col-md-6" >
                     <button
                       type="button"
-                      class="btn btn-default btn-block"
+                      className="btn btn-default btn-block"
                     >
                       Quên Mật Khẩu ?
                     </button>
@@ -93,7 +94,7 @@ class loginpage extends Component {
                     {" "}
                     <button
                       type="button"
-                      class="btn btn-primary btn-block"
+                      className="btn btn-primary btn-block"
                     >
                       Đăng Nhập qua Facebook
                     </button>
