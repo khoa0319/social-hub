@@ -60,6 +60,19 @@ export const login = (data) => {
   }
 }
 
+// log the user out
+export const logout = () => {
+  return dispatch => {
+    try {
+      localStorage.removeItem('token')
+      localStorage.removeItem('fingerprint')
+      dispatch(setCurrentUser({}))
+    } catch (error) {
+      dispatch(getError(error))
+    }
+  }
+}
+
 export const getID = (id) => {
   return {
     type: types.GET_ID,

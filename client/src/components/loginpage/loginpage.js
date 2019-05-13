@@ -40,7 +40,7 @@ class loginpage extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuthenticated) return <Redirect to={`/${this.props.auth.profile.ID}/profile`} />
+    if(this.props.auth.isAuthenticated) return <Redirect to={`/students/${this.props.auth.profile.ID}/`} />
     return (
       <div className="row">
         <div className="col-md-8">
@@ -76,7 +76,6 @@ class loginpage extends Component {
                     className="form-control"
                     name="password"
                     id="password"
-                    placeholder="Password"
                     onChange={this.onChange}
                   />
                 </div>
