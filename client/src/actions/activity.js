@@ -9,8 +9,7 @@ export const fetchActivities = (data) => {
     setTimeout(() => {
       axios.get(`http://localhost:5000/api/activities/?skip=${data.skip}&limit=${data.limit}`)
       .then(res => {
-        if (res.data) {
-          console.log(res.data);
+        if (res.data) {          
           dispatch(getActivities(res.data.result));
         }
       })

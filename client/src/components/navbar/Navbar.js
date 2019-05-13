@@ -59,7 +59,7 @@ class Navbar extends Component {
                 </li>
                 <li className="nav-item">
                   <button className="btn btn-none text-center" onClick={this.props.logout}>
-                    <i class="fas fa-sign-out-alt"></i>
+                    <i className="fas fa-sign-out-alt"></i>
                     logout
                   </button>
                 </li>

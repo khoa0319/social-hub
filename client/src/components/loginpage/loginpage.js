@@ -10,18 +10,20 @@ class loginpage extends Component {
     super(props);
     this.state = {
       ID: "",
-      password: "",      
+      password: "",
       errors: {}
     }
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      console.log(token);
-      const decoded = jwtDecode(token);
-      this.props.setCurrentUser(decoded);
-      
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decoded = jwtDecode(token);
+        this.props.setCurrentUser(decoded);        
+      }
+    } catch (error) {
+
     }
   }
 
@@ -40,14 +42,14 @@ class loginpage extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuthenticated) return <Redirect to={`/students/${this.props.auth.profile.ID}/`} />
+    if (this.props.auth.isAuthenticated) return <Redirect to={`/students/${this.props.auth.profile.ID}/`} />
     return (
       <div className="row">
         <div className="col-md-8">
           <div className="card mb-4 f-elm text-center ">
             <div className="card-header bg-main text-light align-middle">
               <h4> Đăng Nhập</h4>
-              <p>Sinh viên đăng nhập vào bằng mã số sinh viên đã được cấp</p>
+              <p>đăng nhập bằng mã số sinh viên trường</p>
               <small>{this.props.errors ? `${this.props.errors.error}` : ``}</small>
             </div>
             <div className="card-body">

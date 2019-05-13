@@ -12,6 +12,7 @@ import ActivityJoinList from "./dashboard/ActivitysJoinList";
 import ActivityDetail from "../model/ActivityDetail";
 import { connect } from 'react-redux';
 import { fetchActivities } from '../../actions/activity';
+import axios from 'axios';
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +21,16 @@ class Profile extends Component {
     }
   }
 
+  componentDidMount() {
+    axios.get(`http://localhost:5000/api/activities/all`)
+      .then(result => {
+        console.log(result.data);
+      })
+      .catch(error => console.log(error))
+  }
+
   render() {
-    if(!this.props.auth.isAuthenticated) return <Redirect to='/' />
+    if (!this.props.auth.isAuthenticated) return <Redirect to='/' />
     const { match } = this.props;
     return (
       <div className="row">

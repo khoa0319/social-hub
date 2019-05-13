@@ -37,20 +37,21 @@ export const activate = (data) => {
 export const login = (data) => {
   return (dispatch) => {
     fingerprint(fp => {
-      axios.post(`http://localhost:5000/api/users/login`, {...data, fp})
+      console.log({...data, fp});     
+      axios.post(`http://localhost:5000/api/users/login`, {...data, fingerprint:fp})
       .then(res => {
         // change state for no errors
         dispatch(getError(null));
-
+        
         const token = res.data.token;
+        console.log(token);
         localStorage.setItem('token', token);
         localStorage.setItem('fingerprint', fp);
         
         setHeaders(token, fp);
         
         const decoded = jwtDecode(token);
-
-        console.log(decoded);
+        
         dispatch(setCurrentUser(decoded));
       })
       .catch(err => {        
@@ -67,6 +68,7 @@ export const logout = () => {
       localStorage.removeItem('token')
       localStorage.removeItem('fingerprint')
       dispatch(setCurrentUser({}))
+      setHeaders(null, null)
     } catch (error) {
       dispatch(getError(error))
     }

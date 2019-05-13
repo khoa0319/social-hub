@@ -20,8 +20,9 @@ const _activities = require('./activityHandle')
   */
 
 // @TODO: authorize	
-router.get('/all', 
-	_middleware.authenticating)
+router.get('/all',
+	_middleware.authenticating,
+	_activities.handleGetAllActivities)
 
 /* get new activities */
 router.get('/', 

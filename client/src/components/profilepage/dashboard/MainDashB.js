@@ -10,15 +10,16 @@ class MainDashB extends Component {
       items: this.props.activities,
       hasMore: true,
       skip: 10,
-      limit: 10
+      limit: 10,
+      activitiesCount: 20
     }
   }
 
-  componentDidMount() {
+  componentDidMount() {     
     this.props.fetchActivities({ skip: 0, limit: 10 });
   }
 
-  fetchMoreData = () => {
+  fetchMoreData = () => {    
     if (this.props.activities.length >= 100) {
       return this.setState({ hasMore: false });      
     }

@@ -4,6 +4,15 @@ const pool = require('../../models/database');
 // container for handle
 const _activities = {}
 
+_activities.handleGetAllActivities = (req, res) => {
+  pool.query(`select COUNT(*) as activities from ACTIVITY`)
+    .then(result => {
+      console.log(result);
+      res.status(200).json({result});
+    })
+    .catch(error => res.status(500).json(error))
+}
+
 // @TODO: validate querystring
 _activities.handleGetActivities = (req, res) => {
   const { skip, limit } = req.query
