@@ -148,9 +148,9 @@ _user.handleLogIn = (req, res) => {
             Faculty: result[0].FNAME,
             Major: result[0].MNAME,
             Class: result[0].CNAME,
-            Academic_year: result[0].ACADEMIC_YEAR
-          };
-          console.log(fingerprint);
+            Academic_year: result[0].ACADEMIC_YEAR,
+            BirthDate: result[0].BIRTHDATE
+          };          
           jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '2h' }, (err, token) => {
             if (err) return res.status(500).json({ err });
             res.status(200).json({token});

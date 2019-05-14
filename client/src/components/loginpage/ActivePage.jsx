@@ -54,11 +54,11 @@ class ActivePage extends Component {
 
   render() {
     const { redirect } = this.state;
-    const facultyElements = this.Faculties.map(item => {
-      return <option value={item}>{item}</option>
+    const facultyElements = this.Faculties.map((item, index) => {
+      return <option value={item} key={index}>{item}</option>
     });
-    const majorsElements = this.Majors.map (item => {
-      return <option value={item}>{item}</option>
+    const majorsElements = this.Majors.map ((item, index) => {
+      return <option value={item} key={index}>{item}</option>
     })
     if (redirect) return <Redirect to='/updateInfo' />;
     return (      

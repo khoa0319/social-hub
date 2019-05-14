@@ -3,8 +3,7 @@ import ActivityD from "./ActivityD";
 import { connect } from 'react-redux';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchActivities } from '../../../actions/activity';
-// import setHeaders from '../../../utils/setHeaders';
-// import axios from 'axios';
+import axios from 'axios';
 class MainDashB extends Component {
   constructor(props) {
     super(props);
@@ -13,20 +12,16 @@ class MainDashB extends Component {
       hasMore: true,
       skip: 10,
       limit: 10,
+      activitiesCount: 30
     }
   }
 
   componentDidMount() {
-    // const token = localStorage.getItem('token');
-    // const fingerprint = localStorage.getItem('fingerprint')
-    // if (token && fingerprint) {
-    //   setHeaders(token, fingerprint);
-    //   axios.get(`http://localhost:5000/api/activities/all`)
-    //     .then(result => {
-    //       this.setState({ activitiesCount: result.data.activities })
-    //     })
-    //     .catch(error => console.log(error))
-    // }
+    axios.get(`http://localhost:5000/api/activities/all`)
+        .then(result => {
+          this.setState({ activitiesCount: result.data.activities })
+        })
+        .catch(error => console.log(error))
     this.props.fetchActivities({ skip: 0, limit: 10 });
   }
 

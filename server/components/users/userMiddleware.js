@@ -10,9 +10,6 @@ _middleware.authenticating = (req, res, next) => {
   const token = req.header('Authorization') || ''
   const fingerprint = req.header('fingerprint') || ''
 
-  console.log(token);
-  console.log('socialhub'+fingerprint);
-
   if (!token) return res.status(400).json({error: "Token not provided"})
   try {
     const decoded = jwt.verify(token, 'socialhub' + fingerprint)

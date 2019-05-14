@@ -69,39 +69,7 @@ class Cshdoan extends Component {
                           Đăng Ký Vào Đoàn Khoa
                         </label>
                       </div>
-                    </div>
-                    {/* <div className="card mt-2">
-                    <div className="card-header">Thông Tin Nghị Quyết</div>
-                      <div className="form-group row m-1">
-                        <label for="inputEmail3" className="col-sm-12 col-form-label text-left">
-                          Email
-                        </label>
-                        <div className="col-sm-12">
-                          <input
-                            type="email"
-                            className="form-control"
-                            id="inputEmail3"
-                            placeholder="Email"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row m-1">
-                        <label
-                          for="inputPassword3"
-                          className="col-sm-12 col-form-label text-left"
-                        >
-                          Password
-                        </label>
-                        <div className="col-sm-12">
-                          <input
-                            type="password"
-                            className="form-control"
-                            id="inputPassword3"
-                            placeholder="Password"
-                          />
-                        </div>
-                      </div>
-                    </div> */}
+                    </div>                    
                     
                   </form>
                 </div>

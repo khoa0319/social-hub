@@ -17,7 +17,7 @@ class Navbar extends Component {
       const token = localStorage.getItem('token')
       if (token) {
         const decoded = jwtDecode(token)
-        this.props.setCurrentUser(decoded);  
+        this.props.setCurrentUser(decoded);
       }      
     } catch (error) {
       localStorage.removeItem('token');
