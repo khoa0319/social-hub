@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { postUpdateInfo, getUpdateInfo } from '../../../actions/auth';
 class Information extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +12,12 @@ class Information extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getUpdateInfo();
+    const { address, phone, email } = this.props.update;
+    this.setState({address, phone, email})
+  }
+
   onChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -19,25 +26,25 @@ class Information extends Component {
 
   onSubmit = event => {
     event.preventDefault();
+    this.props.postUpdateInfo(this.state);
   }
 
   render() {
-    const { ID, FullName, Faculty, Major, Class, Academic_year, BirthDate } = this.props.auth.profile;
+    const { ID, FullName, Faculty, Major, Class, Academic_year, BirthDate } = this.props.auth.profile;    
     return (
       <div className="card">
         <div className="card-body">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div>
               <div className="form-group">
                 <div className="form-row">
                   <div className="col-12">
-                    <label htmlFor="txtTenHoatDong">
+                    <label htmlFor="hoten">
                       <h6>Họ tên sinh viên</h6>
                     </label>
                     <input
-                      name="txtTenHoatDong"
+                      name="hoten"
                       className="form-control"
-                      id=""
                       type="text"
                       disabled
                       value={FullName}
@@ -50,7 +57,6 @@ class Information extends Component {
                     <input
                       name="txtTenHoatDong"
                       className="form-control"
-                      id=""
                       type="text"
                       disabled
                       value={ID}
@@ -64,7 +70,6 @@ class Information extends Component {
                     <input
                       name="txtTenHoatDong"
                       className="form-control"
-                      id=""
                       type="text"
                       disabled
                       value={BirthDate}
@@ -77,8 +82,9 @@ class Information extends Component {
                     <input
                       name="phone"
                       className="form-control"
-                      id=""
                       type="text"
+                      value={this.state.phone}
+                      onChange={this.onChange}
                     />
                   </div>
                   <div className="col-6">
@@ -88,8 +94,9 @@ class Information extends Component {
                     <input
                       name="email"
                       className="form-control"
-                      id=""
                       type="text"
+                      value={this.state.email}
+                      onChange={this.onChange}
                     />
                   </div>
                   <div className="col-12">
@@ -99,8 +106,9 @@ class Information extends Component {
                     <input
                       name="address"
                       className="form-control"
-                      id=""
                       type="text"
+                      value={this.state.address}
+                      onChange={this.onChange}
                     />
                   </div>
                 </div>
@@ -131,7 +139,7 @@ class Information extends Component {
                       type="text"
                       value={Major}
                       disabled
-                    />{" "}
+                    />
                   </div>
                   <div className=" col-6">
                     <label htmlFor="txtTenHoatDong">
@@ -164,8 +172,7 @@ class Information extends Component {
               <div className="text-center">
                 <Link
                   className="btn btn-myapp mr-1"
-                  name="btnHuy"
-                  id="btnHuy"
+                  name="btnHuy"                  
                   type="button"
                   to="./changepassword"
                   replace
@@ -173,11 +180,9 @@ class Information extends Component {
                 <input
                   className="btn btn-myapp3"
                   name="btnGui"
-                  id="btnGui"
-                  type="button"
+                  type="submit"
                   value="Lưu lại thông tin"
                 />
-
 
               </div>
             </div>
@@ -190,8 +195,9 @@ class Information extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    update: state.update
   }
 }
 
-export default connect(mapStateToProps, {})(Information);
+export default connect(mapStateToProps, { postUpdateInfo, getUpdateInfo })(Information);

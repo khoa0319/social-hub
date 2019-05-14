@@ -15,7 +15,6 @@ _middleware.authenticating = (req, res, next) => {
     const decoded = jwt.verify(token, 'socialhub' + fingerprint)
     if (decoded) {
       req.user = decoded
-      console.log(decoded);
       next()
     }
   } catch (error) {

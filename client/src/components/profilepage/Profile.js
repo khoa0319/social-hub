@@ -13,6 +13,7 @@ import ActivityDetail from "../model/ActivityDetail";
 import { connect } from 'react-redux';
 import { fetchActivities } from '../../actions/activity';
 import setHeaders from '../../utils/setHeaders';
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ class Profile extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token');
     const fingerprint = localStorage.getItem('fingerprint')
-    if (token && fingerprint) setHeaders(token, fingerprint)
+    if (token && fingerprint) setHeaders(token, fingerprint)    
   }
 
   render() {

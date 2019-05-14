@@ -20,31 +20,17 @@ export const activate = (data) => {
   }
 }
 
-// export const updateInfo = (data) => {
-//   return (dispatch) => {
-//     axios.post('http://localhost:5000/api/users/updateInfo', data)
-//       .then(res => {
-//         if (res.status === 200 && res.data.msg === 'SUCCESS') {
-//           dispatch(getID(res.data.id))          
-//         }
-//       })
-//       .catch(err => {
-//         dispatch(getError(_.get(err, 'response.data')))
-//       })
-//   }
-// }
 
 export const login = (data) => {
   return (dispatch) => {
-    fingerprint(fp => {
-      console.log({...data, fp});     
+    fingerprint(fp => {    
       axios.post(`http://localhost:5000/api/users/login`, {...data, fingerprint:fp})
       .then(res => {
         // change state for no errors
         dispatch(getError(null));
         
         const token = res.data.token;
-        console.log(token);
+        
         localStorage.setItem('token', token);
         localStorage.setItem('fingerprint', fp);
         
@@ -75,6 +61,29 @@ export const logout = () => {
   }
 }
 
+export const postUpdateInfo = (data) => {
+  return dispatch => {
+    axios.post(`http://localhost:5000/api/users/update`, data)
+      .then(result => {
+        dispatch(setUpdateInfo(result.data))
+      })
+      .catch(error => {
+        dispatch(getError(error))
+      })
+  }
+}
+
+export const getUpdateInfo = () => {
+  return dispatch => {
+    axios.get(`http://localhost:5000/api/users/update`)
+      .then(result => {
+        dispatch(setUpdateInfo(result.data))
+      })
+      .catch(error => {
+        dispatch(getError(error))
+      })
+  }
+}
 
 export const getID = (id) => {
   return {
@@ -87,6 +96,13 @@ export const getError = (error) => {
   return {
     type: types.GET_ERRORS,
     error
+  }
+}
+
+export const setUpdateInfo = (data) => {
+  return {
+    type: types.SET_UPDATE_INFO,
+    data
   }
 }
 

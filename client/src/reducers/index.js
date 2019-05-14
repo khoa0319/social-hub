@@ -5,13 +5,15 @@ import id from './idReducer';
 import studentList from './studentList';
 import activities from './activityReducer';
 import activity from './activityDetailReducer';
+import update from './updateReducer';
 const root = combineReducers({
   errors,
   auth,
   id,
   studentList,
   activities,
-  activity
+  activity,
+  update
 })
 
 export default root;

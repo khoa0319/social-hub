@@ -77,10 +77,28 @@ _user.handleUpdate = (req, res) => {
       pool.query(`SELECT ADDRESS, PHONE, EMAIL from STUDENT WHERE ID = ?`, req.user.ID)
         .then(result => {
           if (!result[0]) return res.status(404).json({ err: 'NOT FOUND' });
-          res.status(200).json(result[0]);
+          const info = {
+            address: result[0].ADDRESS,
+            phone: result[0].PHONE,
+            email: result[0].EMAIL
+          }
+          return res.status(200).json(info);
         })
         .catch(err => res.status(500).json({ err }));
 
+    })
+    .catch(err => res.status(500).json({ err }));
+}
+
+_user.handleGetUpdate = (req, res) => {
+  pool.query(`SELECT ADDRESS, PHONE, EMAIL FROM STUDENT WHERE ID = ?`, req.user.ID)
+    .then(result => {         
+      const info = {
+        address: result[0].ADDRESS,
+        phone: result[0].PHONE,
+        email: result[0].EMAIL
+      }
+      return res.status(200).json(info);
     })
     .catch(err => res.status(500).json({ err }));
 }
@@ -149,7 +167,7 @@ _user.handleLogIn = (req, res) => {
             Major: result[0].MNAME,
             Class: result[0].CNAME,
             Academic_year: result[0].ACADEMIC_YEAR,
-            BirthDate: result[0].BIRTHDATE
+            BirthDate: result[0].BIRTHDATE            
           };          
           jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '2h' }, (err, token) => {
             if (err) return res.status(500).json({ err });

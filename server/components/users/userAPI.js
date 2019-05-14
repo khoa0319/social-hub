@@ -11,6 +11,9 @@ router.get('/detail',
   _middlware.authenticating,
   _userHandle.handleDetail);
 
+router.get('/update',
+  _middlware.authenticating,
+  _userHandle.handleGetUpdate)
 // update account
 router.post('/update',
   _middlware.validateUpdateInput,
