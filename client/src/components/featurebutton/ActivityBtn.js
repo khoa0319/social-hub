@@ -6,7 +6,7 @@ class ActivityBtn extends Component {
       <div className="row">
 <div className="col-6">
           <button
-            class="btn btn-block btn-lg btn-myapp3 txt-white"
+            className="btn btn-block btn-lg btn-myapp3 txt-white"
             type="button"
             data-toggle="modal"
           data-target="#ActivityModel"
@@ -15,7 +15,7 @@ class ActivityBtn extends Component {
           </button>
           </div>
           <div className="col-6"><button
-            class="btn btn-block btn-lg btn-myapp3 txt-white"
+            className="btn btn-block btn-lg btn-myapp3 txt-white"
             type="button"
             data-toggle="modal"
             data-target="#NotiModel"
@@ -24,7 +24,7 @@ class ActivityBtn extends Component {
           </button>
           </div>
           <div className="col-6 mt-2"><button
-            class="btn btn-block btn-lg btn-myapp3 txt-white"
+            className="btn btn-block btn-lg btn-myapp3 txt-white"
             type="button"
             data-toggle="modal"
             data-target="#NotiModel"
@@ -33,7 +33,7 @@ class ActivityBtn extends Component {
           </button>
           </div>
           <div className="col-6 mt-2"><button
-            class="btn btn-block btn-lg btn-myapp3 txt-white"
+            className="btn btn-block btn-lg btn-myapp3 txt-white"
             type="button"
             data-toggle="modal"
             data-target="#NotiModel"

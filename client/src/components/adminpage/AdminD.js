@@ -8,12 +8,11 @@ import ActivityJoinList from '../profilepage/dashboard/ActivitysJoinList';
 import { connect } from 'react-redux';
 import Activity from "./Activity";
 class AdminD extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      students: []
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //   };
+  
   // componentWillMount() {
   //   console.log("abcd")
   //   if (localStorage.getItem("token")) {
@@ -24,12 +23,12 @@ class AdminD extends Component {
   //   }
   // }
 
-  componentDidMount(){
-    if(localStorage.getItem("token")){
-    this.props.getStudentList();
-    console.log(this.props.students)
-    }
-  }
+  // componentDidMount(){
+  //   if(localStorage.getItem("token")){
+  //   this.props.getStudentList();
+  //   console.log(this.props.students)
+  //   }
+  // }
   render() {
     
     return (
@@ -48,16 +47,15 @@ class AdminD extends Component {
           </div>
         </div>
         <div className="col-12">
-          <StudentsList students={this.props.students}/>
-          <Activity/>
+          <StudentsList/>
         </div>
       </div>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    students: state.studentList
-  }
-}
-export default connect(mapStateToProps,{getStudentList})(AdminD);
+// const mapStateToProps = (state) => {
+//   return {
+//     students: state.studentList
+//   }
+// }
+export default AdminD;

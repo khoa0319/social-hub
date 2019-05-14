@@ -1,4 +1,4 @@
-import { StudenList } from "../action/adminauth/auth";
+
 
 const initialState={}
 const studentReducer = (state = initialState, action) => {

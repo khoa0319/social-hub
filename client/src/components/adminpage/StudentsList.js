@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import Students from "./Students";
-
+import {getStudentList} from "../../action/adminauth/index";
+import { connect } from 'react-redux';
 class StudentList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      students:this.props.students
+    };
+  }
+  componentDidMount(){
+    if(localStorage.getItem("token")){
+    this.props.getStudentList();
+    console.log(this.props.students)
+    }
+  }
   render() {
     console.log(this.props.students)
     const studentsList=Array.from(this.props.students)
@@ -13,29 +26,29 @@ class StudentList extends Component {
       />
     })
     return (
-      <div class="mt-5">
+      <div className="mt-5">
         <h1 className="text-center mb-5">Danh Sách Các Sinh Viên</h1>
         <div className="row mb-3">
           <div className="col-6 col-sm-4 input-group">
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               name=""
               id=""
               aria-describedby="helpId"
               placeholder=""
             />
-            <div class="input-group-append">
+            <div className="input-group-append">
               <button
                 className="btn btn-xs btn-myapp text-center"
                 id="triggerId"
               >
-                <i class="fas fa-search fa-xs" />
+                <i className="fas fa-search fa-xs" />
               </button>
             </div>
           </div>
           </div>
-        <table class="table table-hover">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th>Stt</th>
@@ -55,5 +68,9 @@ class StudentList extends Component {
     );
   }
 }
-
-export default StudentList;
+const mapStateToProps = (state) => {
+  return {
+    students: state.studentList
+  }
+}
+export default connect(mapStateToProps,{getStudentList})(StudentList);

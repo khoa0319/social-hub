@@ -68,10 +68,19 @@ _admin.handleRegister=(req,res)=>{
     .catch(err => res.status(500).json(err))
 }
 _admin.handleStudentList=(req,res)=>{
-    pool.query("SELECT STUDENT.ID FROM STUDENT LIMIT ?",40)
+    const {skip,limit}=req.query
+    console.log('start query')
+    pool.query(`SELECT a.ID,a.FULLNAME,b.FNAME,c.MNAME,d.CNAME
+    FROM STUDENT a 
+    inner join FACULTY b on a.F_ID=b.F_ID 
+    inner join MAJOR c on a.M_ID=c.M_ID
+    inner join CLASS d on a.C_ID=d.C_ID ORDER BY a.ID `)
     .then(result=>{ if (!result[0]) return res.status(404).json({ error: "not found" });
-
     res.status(200).json(result);})
     .catch(err=>res.status(500).json(err))
 }
+
+
+
+
 module.exports = _admin;

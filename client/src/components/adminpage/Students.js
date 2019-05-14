@@ -8,20 +8,16 @@ class Students extends Component {
         <td>{this.props.index+1}</td>
         <td>{student.ID}</td>
         <td>{student.FULLNAME}</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>Công Nghệ Thông Tin</td>
+        <td>{student.CNAME}</td>
+        <td>{student.FNAME}</td>
+        <td>{student.MNAME}</td>
         <td>
           <button type="button" class="btn btn-md btn-info">
             Chi tiết
           </button>{" "}
           &nbsp;
-          <button type="button" class="btn btn-md btn-warning">
-            Sửa
-          </button>{" "}
-          &nbsp;
           <button type="button" class="btn btn-md btn-danger">
-            Xóa
+            Khôi Phục
           </button>
         </td>
       </tr>

@@ -60,7 +60,7 @@ class Profile extends Component {
       <Route path={`${this.props.match.url}/information`} exact render={({match, history}) => <Information match={match} history={history}/>}/>
       <Route path={`${this.props.match.url}/changepassword`} exact component={ChangePassword}/>
       <Route path={`${this.props.match.url}/youractivity`} exact component={ActivityJoinList}/>
-      <Route path={`/`} component={MainDashB}/>
+      <Route path={``} component={MainDashB}/>
       
       </Switch>   
       

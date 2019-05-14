@@ -40,7 +40,7 @@ class loginpage extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuthenticated) return <Redirect to={`/${this.props.auth.profile.ID}/profile`} />
+    if(this.props.auth.isAuthenticated) return <Redirect to={`user/${this.props.auth.profile.ID}`} />
     return (
       <div className="row">
         <div className="col-md-8">
