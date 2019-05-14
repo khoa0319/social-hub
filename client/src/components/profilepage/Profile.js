@@ -12,21 +12,19 @@ import ActivityJoinList from "./dashboard/ActivitysJoinList";
 import ActivityDetail from "../model/ActivityDetail";
 import { connect } from 'react-redux';
 import { fetchActivities } from '../../actions/activity';
-import axios from 'axios';
+import setHeaders from '../../utils/setHeaders';
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      
     }
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/api/activities/all`)
-      .then(result => {
-        console.log(result.data);
-      })
-      .catch(error => console.log(error))
+    const token = localStorage.getItem('token');
+    const fingerprint = localStorage.getItem('fingerprint')
+    if (token && fingerprint) setHeaders(token, fingerprint)
   }
 
   render() {

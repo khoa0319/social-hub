@@ -2,19 +2,22 @@
 import axios from 'axios';
 /* App modules */
 import * as types from './types'
-
+import { getError } from './auth';
 
 export const fetchActivities = (data) => {
   return dispatch => {    
     setTimeout(() => {
       axios.get(`http://localhost:5000/api/activities/?skip=${data.skip}&limit=${data.limit}`)
-      .then(res => {
-        if (res.data) {          
-          dispatch(getActivities(res.data.result));
-        }
-      })
-      .catch(console.log)
-    }, 2000);
+        .then(res => {
+          if (res.data) {
+            dispatch(getActivities(res.data.result));
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          dispatch(getError(error));
+        })
+    }, 1000);
   }
 }
 

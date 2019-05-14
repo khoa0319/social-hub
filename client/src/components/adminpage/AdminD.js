@@ -4,7 +4,7 @@ import ActivityBtn from "../featurebutton/ActivityBtn";
 import ShowingList from "../featurebutton/ShowingList";
 import StudentsList from "./StudentsList";
 import {getStudentList} from "../../action/adminauth/index";
-import ActivityJoinList from '../profilepage/dashboard/ActivitysJoinList';
+
 import { connect } from 'react-redux';
 import Activity from "./Activity";
 class AdminD extends Component {

@@ -25,7 +25,8 @@ router.get('/all',
 	_activities.handleGetAllActivities)
 
 /* get new activities */
-router.get('/', 
+router.get('/',
+	_middleware.authenticating,
 	_activities.handleGetActivities)
 
 /* get detail activity */
@@ -33,6 +34,7 @@ router.get('/:id')
 
 /* Pariticipate Activity */
 router.post('/joinactivity',
+	_middleware.authenticating,
 	_activities.handleJoinActivity)
 
 module.exports = router;
