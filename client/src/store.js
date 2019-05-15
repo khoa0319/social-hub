@@ -5,6 +5,7 @@ import root from './reducers/index'
 const initialState = {};
 const middleware = [thunk];
 
+
 const store = createStore(
 	root,
 	initialState,

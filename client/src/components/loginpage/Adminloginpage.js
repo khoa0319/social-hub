@@ -39,7 +39,7 @@ onSubmit=(e)=>
     render() {
       const {isLoginyet,username}=this.state
       if(isLoginyet)
-      return <Redirect to = {{ pathname: `/${username}/dashboard` }} />;
+      return <Redirect to = {{ pathname: `admin/${username}` }} />;
         return (
             <div className="row">
             <div className="col-md-12">

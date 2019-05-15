@@ -43,4 +43,4 @@ _middleware.validateUpdatePasswordInput = (req, res, next) => {
   if (!isValid) return res.status(400).json(errors);
   next();
 }
-module.exports = _middleware;
+module.exports = _middleware;2

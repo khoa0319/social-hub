@@ -79,7 +79,6 @@ class Profile extends Component {
         <Dkhsinhvien />
         <ActivityDetail />
       </div>
-
     );
   }
 }
