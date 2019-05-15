@@ -5,6 +5,7 @@ import { login } from '../../actions/auth';
 import jwtDecode from 'jwt-decode';
 import { setCurrentUser } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
+import Facebook from "../facebook/Facebook";
 class loginpage extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ class loginpage extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount() {    
     try {
       const token = localStorage.getItem('token');
       if (token) {
@@ -92,13 +93,7 @@ class loginpage extends Component {
                     </button>
                   </div>
                   <div className="mt-2 col-12 col-md-6">
-                    {" "}
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-block"
-                    >
-                      Đăng Nhập qua Facebook
-                    </button>
+                  <Facebook />
                   </div>
                   <div className="mt-2 col-12 col-md-6">
                     {" "}

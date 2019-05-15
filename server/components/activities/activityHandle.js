@@ -7,7 +7,6 @@ const _activities = {}
 _activities.handleGetAllActivities = (req, res) => {
   pool.query(`select COUNT(*) as activities from ACTIVITY`)
     .then(result => {
-      console.log(result[0]);
       res.status(200).json(result[0]);
     })
     .catch(error => res.status(500).json(error))
