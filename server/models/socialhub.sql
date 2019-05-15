@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS STUDENT(
 CREATE TABLE IF NOT EXISTS STUDENT_COMMUNITY(
 	SC_ID int unsigned auto_increment PRIMARY KEY,
     ID char(10) not null,
+    SUBMIT DATETIME not null,
     JOIN_YC_DATE date,
     JOIN_CP_DATE date,
     TITLE varchar(50),

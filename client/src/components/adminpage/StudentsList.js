@@ -1,30 +1,28 @@
 import React, { Component } from "react";
 import Students from "./Students";
-import {getStudentList} from "../../action/adminauth/index";
-import { connect } from 'react-redux';
+import { getStudentList } from "../../action/adminauth/index";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { connect } from "react-redux";
 class StudentList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      students:this.props.students
+      items: this.props.students,
+      hasMore: true,
+      skip: 20,
+      limit: 20
     };
   }
-  componentDidMount(){
-    if(localStorage.getItem("token")){
-    this.props.getStudentList();
-    console.log(this.props.students)
-    }
+  componentDidMount() {
+    this.props.getStudentList({ skip: 0, limit: 20 });
   }
+  fetchMoreData = () => {
+    console.log("getITem")
+    this.props.getStudentList({ skip: this.state.skip, limit: 20 });
+    this.setState({ skip: this.state.skip + 20, items: this.props.students });
+  };
   render() {
-    console.log(this.props.students)
-    const studentsList=Array.from(this.props.students)
-    const studentELM = studentsList.map((item, index) => {
-      return <Students
-        key={index} // key không phải props =
-        item={item}
-        index={index}
-      />
-    })
+    console.log(this.props.students);
     return (
       <div className="mt-5">
         <h1 className="text-center mb-5">Danh Sách Các Sinh Viên</h1>
@@ -47,7 +45,19 @@ class StudentList extends Component {
               </button>
             </div>
           </div>
-          </div>
+        </div>
+           <InfiniteScroll
+              dataLength={this.props.students.length}
+              next={this.fetchMoreData}
+              hasMore={this.state.hasMore}
+              loader={<h4 style={{ textAlign: "center" }}>Loading...</h4>}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+
         <table className="table table-hover">
           <thead>
             <tr>
@@ -61,16 +71,30 @@ class StudentList extends Component {
             </tr>
           </thead>
           <tbody>
-            {studentELM}
-          </tbody>
+              {this.props.students.map((item, index) => {
+      return (
+        <Students
+          key={index}
+          item={item}
+          index={index}
+        />
+      )})}
+
+            
+            </tbody>
         </table>
+           
+            </InfiniteScroll>
       </div>
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     students: state.studentList
-  }
-}
-export default connect(mapStateToProps,{getStudentList})(StudentList);
+  };
+};
+export default connect(
+  mapStateToProps,
+  { getStudentList }
+)(StudentList);
