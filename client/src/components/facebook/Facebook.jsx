@@ -13,7 +13,7 @@ class Facebook extends Component {
   }
 
   componentClicked = () => {
-    console.log('clicked');
+    
   }
   responseFacebook = (response) =>{
     console.log(response);
