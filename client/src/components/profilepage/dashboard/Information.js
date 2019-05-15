@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postUpdateInfo, getUpdateInfo } from '../../../actions/auth';
+import FacebookLogin from 'react-facebook-login';
+import axios from 'axios';
+import setHeaders from '../../../utils/setHeaders';
 class Information extends Component {
   constructor(props) {
     super(props);
@@ -10,13 +13,38 @@ class Information extends Component {
       phone: "",
       email: ""
     };
+
   }
 
   componentDidMount() {
     this.props.getUpdateInfo();
     const { address, phone, email } = this.props.update;
-    this.setState({address, phone, email})
+    this.setState({ address, phone, email })
   }
+  componentClicked = () => {
+    
+  }
+
+  responseFacebook = (response) => {
+    if (response.id) {
+      const data = {
+        facebookID: response.id
+      }
+      const token = localStorage.getItem('token');
+      const fingerprint = localStorage.getItem('fingerprint');
+      if (token && fingerprint) {
+        setHeaders(token, fingerprint);
+        axios.post(`http://localhost:5000/api/users/updatefb`, data)
+          .then(result => {
+            console.log(result.data);
+          })
+          .catch(error => {
+            console.log(error.data);
+          })
+      }
+    }
+  }
+
 
   onChange = event => {
     this.setState({
@@ -30,7 +58,7 @@ class Information extends Component {
   }
 
   render() {
-    const { ID, FullName, Faculty, Major, Class, Academic_year, BirthDate } = this.props.auth.profile;    
+    const { ID, FullName, Faculty, Major, Class, Academic_year, BirthDate } = this.props.auth.profile;
     return (
       <div className="card">
         <div className="card-body">
@@ -83,7 +111,7 @@ class Information extends Component {
                       name="phone"
                       className="form-control"
                       type="text"
-                      value={this.state.phone}
+                      defaultValue={this.props.update.phone}
                       onChange={this.onChange}
                     />
                   </div>
@@ -94,8 +122,8 @@ class Information extends Component {
                     <input
                       name="email"
                       className="form-control"
-                      type="text"
-                      value={this.state.email}
+                      type="email"
+                      defaultValue={this.props.update.email}
                       onChange={this.onChange}
                     />
                   </div>
@@ -107,7 +135,7 @@ class Information extends Component {
                       name="address"
                       className="form-control"
                       type="text"
-                      value={this.state.address}
+                      defaultValue={this.props.update.address}
                       onChange={this.onChange}
                     />
                   </div>
@@ -172,18 +200,26 @@ class Information extends Component {
               <div className="text-center">
                 <Link
                   className="btn btn-myapp mr-1"
-                  name="btnHuy"                  
+                  name="btnHuy"
                   type="button"
                   to="./changepassword"
                   replace
                 >Đổi Mật Khẩu</Link>
+
                 <input
                   className="btn btn-myapp3"
                   name="btnGui"
                   type="submit"
                   value="Lưu lại thông tin"
                 />
-
+                <FacebookLogin
+                  appId="839052703122702"
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  onClick={this.componentClicked}
+                  callback={this.responseFacebook}
+                  cssClass="btn btn-primary ml-1"
+                  icon="fa-facebook"/>
               </div>
             </div>
           </form>

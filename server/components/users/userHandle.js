@@ -125,17 +125,12 @@ _user.handleUpdateFirstTime = (req, res) => {
 /* 
   required: validate-input, logged-in
 */
-_user.handleDetail = (req, res) => {
-  const id = req.user.ID;
-  pool.query(`select * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID
-    inner join FACULTY f on s.F_ID = f.F_ID
-    inner join MAJOR m on s.M_ID = m.M_ID
-    inner join CLASS c on s.C_ID = c.C_ID
-    WHERE s.ID = ?`, id)
-    .then(result => {
-      if (!result[0]) return res.status(404).json({ error: "not found" });
+_user.handleUpdateFB = (req, res) => {
 
-      res.status(200).json(result[0]);
+  const { facebookID } = req.body;  
+  pool.query(`Update STUDENT set FACEBOOKID = ? WHERE ID = ?`, [facebookID, req.user.ID])
+    .then(result => {
+      res.status(200).json({q: "success"});
     })
     .catch(err => res.status(500).json({ err }));
 }
@@ -169,7 +164,7 @@ _user.handleLogIn = (req, res) => {
             Academic_year: result[0].ACADEMIC_YEAR,
             BirthDate: result[0].BIRTHDATE            
           };          
-          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '2h' }, (err, token) => {
+          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '10h' }, (err, token) => {
             if (err) return res.status(500).json({ err });
             res.status(200).json({token});
           })

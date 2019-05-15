@@ -15,8 +15,7 @@ class Facebook extends Component {
   componentClicked = () => {
     
   }
-  responseFacebook = (response) =>{
-    console.log(response);
+  responseFacebook = (response) =>{    
     this.setState({
       isLoggedIn: true,
       userID: response.userID,
@@ -26,8 +25,7 @@ class Facebook extends Component {
   }
 
   render() {    
-    return (
-      <div>
+    return (      
         <FacebookLogin
         appId="839052703122702"
         autoLoad={true}
@@ -35,7 +33,7 @@ class Facebook extends Component {
         onClick={this.componentClicked}
         callback={this.responseFacebook}
         icon="fa-facebook" />
-      </div>
+      
     );
   }
 }

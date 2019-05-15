@@ -7,9 +7,10 @@ const _middlware = require('./userMiddleware');
 
 /*  auth actions */
 
-router.get('/detail',
+// update fb
+router.post('/updatefb',
   _middlware.authenticating,
-  _userHandle.handleDetail);
+  _userHandle.handleUpdateFB);
 
 router.get('/update',
   _middlware.authenticating,

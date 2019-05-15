@@ -25,7 +25,7 @@ class Profile extends Component {
   componentDidMount() {
     const token = localStorage.getItem('token');
     const fingerprint = localStorage.getItem('fingerprint')
-    if (token && fingerprint) setHeaders(token, fingerprint)    
+    if (token && fingerprint) setHeaders(token, fingerprint)
   }
 
   render() {
