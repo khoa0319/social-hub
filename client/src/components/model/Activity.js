@@ -24,7 +24,6 @@ class Activity extends Component {
         .post('http://localhost:5000/api/activities/createNewActivity',this.state)
           .then(res=>{
             if(res.data.msg==="Create New Activity Success"){
-                console.warn(res.data.msg)
           }})
           .catch(console.log)
         }
@@ -68,7 +67,7 @@ class Activity extends Component {
             <h6>Ngày Diễn Ra Hoạt Động</h6>
                 </label>
                 <input name="dtNgayDienRa" className="form-control" id="dtNgayDienRa" type="date" placeholder="Nhập ngày diễn ra"/>
-            </div> */}
+            </div> */}  
             <div className=" col-6">
             <label htmlFor="txtThoiGianBatDau">
                     <h6>Thời Gian Bắt Đầu Hoạt Động</h6>

@@ -7,8 +7,6 @@ class Adminloginpage extends Component {
   constructor(props){
     super(props)  
     this.state={
-        username:'root1',
-        password:'root1',
         isLoginyet:false,
     }
     
@@ -26,7 +24,7 @@ onSubmit=(e)=>
 .post('http://localhost:5000/api/admins/login',this.state)
   .then(res=>{
     if(res.data.msg==='Login Success'){
-      localStorage.setItem("token",res.data.token)
+      localStorage.setItem("admintoken",res.data.token)
       this.setState(
         {
           isLoginyet:true
