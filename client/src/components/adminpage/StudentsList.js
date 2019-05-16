@@ -94,7 +94,7 @@ const mapStateToProps = state => {
     students: state.studentList
   };
 };
-export default connect(
+ export default connect(
   mapStateToProps,
   { getStudentList }
 )(StudentList);

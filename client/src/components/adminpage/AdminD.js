@@ -4,14 +4,13 @@ import ActivityBtn from "../featurebutton/ActivityBtn";
 import ShowingList from "../featurebutton/ShowingList";
 import StudentsList from "./StudentsList";
 import {getStudentList} from "../../action/adminauth/index";
-
-import { connect } from 'react-redux';
 import Activity from "./Activity";
 import ActivityModel from '../model/ActivityDetail'
 import StudentDetail from "../model/StudentDetail";
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 class AdminD extends Component {
   render() {
-    
+    console.log(this.props.match.url)
     return (
       <div>
         <div className="col-12">
@@ -28,7 +27,12 @@ class AdminD extends Component {
           </div>
         </div>
         <div className="col-12">
-          <StudentsList/>
+        <Switch>
+
+            <Route path={`${this.props.match.url}/activity`} exact component={Activity} />
+            <Route path={`/`} component={StudentsList} />
+
+          </Switch>
         </div>
         <ActivityModel/>
         <StudentDetail/>

@@ -1,6 +1,31 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchActivitiesAdmin } from '../../actions/activity';
+import axios from 'axios';
+import ActivityItem from './ActivityItem'
 class Activity extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: this.props.activities,
+      hasMore: true,
+      skip: 10,
+      limit: 10,
+    }
+  }
+  componentDidMount() {
+    this.props.fetchActivitiesAdmin({ skip: 0, limit: 10 });
+  }
+
+  fetchMoreData = () => {
+    if (this.props.activities.length >= this.state.activitiesCount) {
+      return this.setState({ hasMore: false });
+    }
+    this.props.fetchActivitiesAdmin({ skip: this.state.skip, limit: 10 })
+    this.setState({ skip: this.state.skip + 10, items: this.props.activities })
+
+  }
     render() {
         return (
             <div class="card">
@@ -27,44 +52,42 @@ class Activity extends Component {
             </div>
           </div>
           </div>
+          <InfiniteScroll
+              dataLength={this.props.activities.length}
+              next={this.fetchMoreData}
+              hasMore={this.state.hasMore}
+              loader={<h4>Loading...</h4>}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
         <table class="table table-hover ml-auto mr-auto">
           <thead>
             <tr>
               <th>Stt</th>
               <th>Tên Hoạt Động</th>
               <th>Bắt Đầu/Kết Thúc</th>
-              <th>Số Lượng Sinh Viên</th>
               <th>Chỉnh sửa</th>
               <th>Điểm Danh Sinh Viên</th>
               
             </tr>
           </thead>
           <tbody>
-          <tr>
-        <td>1</td>
-        <td>Quẩy cùng các bạn ngày 20/11</td>
-        <td>20/11/2019-21/11/2019</td>
-        <td>0/50</td>
-        <td>
-          <button data-toggle="modal"
-            data-target="#activityDetail" type="button" class="btn btn-sm btn-info">
-            Chi Tiết
-          </button>{" "}
-          &nbsp;
-          <button type="button" class="btn btn-sm btn-danger">
-            X
-          </button>
-        </td>
-        <td><button data-toggle="modal"
-            data-target="#activityDetail" type="button" class="btn btn-block btn-info">
-            Danh Sách
-          </button>{""}</td>
-      </tr>
+          {this.props.activities.map((item, index) => {
+                return <ActivityItem activity={item} key={index} index={index} />
+              })}
           </tbody>
         </table>
+        </InfiniteScroll>
       </div>
         );
     }
 }
-
-export default Activity;
+const mapStateToProps = state => {
+  return {
+    activities: state.activities
+  };
+};
+export default connect(mapStateToProps, { fetchActivitiesAdmin })(Activity) ;
