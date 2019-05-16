@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {adminlogin} from '../../action/adminauth/auth';
-import { Route, Redirect } from 'react-router'
+
+import { Redirect } from 'react-router'
 class Adminloginpage extends Component {
   constructor(props){
     super(props)  
@@ -39,7 +39,7 @@ onSubmit=(e)=>
     render() {
       const {isLoginyet,username}=this.state
       if(isLoginyet)
-      return <Redirect to = {{ pathname: `/${username}/dashboard` }} />;
+      return <Redirect to = {{ pathname: `admin/${username}` }} />;
         return (
             <div className="row">
             <div className="col-md-12">

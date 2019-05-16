@@ -14,17 +14,20 @@ const _activities = require('./activityHandle')
 
 	Admin: CRUD activities, notis, users in activities
  */
-
+router.post('/createNewActivity',_activities.newActivity)
+//router.get('/activitycheckin',)
  /*
 	get all participated activities of the users
   */
 
 // @TODO: authorize	
-router.get('/all', 
-	_middleware.authenticating)
+router.get('/all',
+	_middleware.authenticating,
+	_activities.handleGetAllActivities)
 
 /* get new activities */
-router.get('/', 
+router.get('/',
+	_middleware.authenticating,
 	_activities.handleGetActivities)
 
 /* get detail activity */
@@ -32,6 +35,7 @@ router.get('/:id')
 
 /* Pariticipate Activity */
 router.post('/joinactivity',
+	_middleware.authenticating,
 	_activities.handleJoinActivity)
 
 module.exports = router;

@@ -5,8 +5,7 @@ const activityReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case types.GET_ACTIVITIES:
-      const newActivities = state.concat(action.activities)
-      console.log("new array", newActivities);
+      const newActivities = state.concat(action.activities)      
       return newActivities
 
     default:

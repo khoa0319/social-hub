@@ -18,7 +18,7 @@ function _setTimeout(fn, delay) {
   return setTimeout.apply(undefined, arguments);
 }
 worker.backupStudentLoop = () => {
-  _setTimeout(worker._backupStudent, 1000 * 60 * 60 * 24 * 365);  
+  _setTimeout(worker._backupStudent, 1000 * 60 * 60 * 24 * 365);
 }
 
 worker._backupStudent = () => {

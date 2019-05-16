@@ -1,27 +1,35 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../../actions/auth';
+import { login, loginFB } from '../../actions/auth';
 import jwtDecode from 'jwt-decode';
 import { setCurrentUser } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 class loginpage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ID: "",
-      password: "",      
+      password: "",
       errors: {}
     }
   }
 
-  componentDidMount() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      console.log(token);
-      const decoded = jwtDecode(token);
-      this.props.setCurrentUser(decoded);
-      
+  responseFacebook = (response) => {
+
+    this.props.loginFB({facebookID: response.id});
+  }
+
+  componentDidMount() {    
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decoded = jwtDecode(token);
+        this.props.setCurrentUser(decoded);
+      }
+    } catch (error) {
+
     }
   }
 
@@ -40,14 +48,14 @@ class loginpage extends Component {
   }
 
   render() {
-    if(this.props.auth.isAuthenticated) return <Redirect to={`/${this.props.auth.profile.ID}/profile`} />
+    if (this.props.auth.isAuthenticated) return <Redirect to={`/students/${this.props.auth.profile.ID}/`} />
     return (
       <div className="row">
         <div className="col-md-8">
           <div className="card mb-4 f-elm text-center ">
             <div className="card-header bg-main text-light align-middle">
               <h4> Đăng Nhập</h4>
-              <p>Sinh viên đăng nhập vào bằng mã số sinh viên đã được cấp</p>
+              <p>đăng nhập bằng mã số sinh viên trường</p>
               <small>{this.props.errors ? `${this.props.errors.error}` : ``}</small>
             </div>
             <div className="card-body">
@@ -76,7 +84,6 @@ class loginpage extends Component {
                     className="form-control"
                     name="password"
                     id="password"
-                    placeholder="Password"
                     onChange={this.onChange}
                   />
                 </div>
@@ -91,16 +98,15 @@ class loginpage extends Component {
                     </button>
                   </div>
                   <div className="mt-2 col-12 col-md-6">
-                    {" "}
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-block"
-                    >
-                      Đăng Nhập qua Facebook
-                    </button>
+                  <FacebookLogin 
+                  appId="839052703122702"
+                  autoLoad={false}
+                  fields="name,email,picture"                  
+                  callback={this.responseFacebook}
+                  cssClass="btn btn-primary ml-1"
+                  icon="fa-facebook"/>                  
                   </div>
-                  <div className="mt-2 col-12 col-md-6">
-                    {" "}
+                  <div className="mt-2 col-12 col-md-6">                    
                     <Link className="btn btn-myapp btn-block" to="/activate">Kích hoạt tài khoản</Link>
                   </div>
                   <div className="mt-2 col-12 col-md-6">
@@ -142,4 +148,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { login, setCurrentUser })(loginpage);
+export default connect(mapStateToProps, { login, loginFB, setCurrentUser })(loginpage);

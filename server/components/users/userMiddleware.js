@@ -7,9 +7,6 @@ const _middleware = {}
 
 _middleware.authenticating = (req, res, next) => {
 
-  console.log('token: ',req.header('Authorization'));
-  console.log('fingerprint: ', req.header('fingerprint'));
-
   const token = req.header('Authorization') || ''
   const fingerprint = req.header('fingerprint') || ''
 
@@ -18,7 +15,6 @@ _middleware.authenticating = (req, res, next) => {
     const decoded = jwt.verify(token, 'socialhub' + fingerprint)
     if (decoded) {
       req.user = decoded
-      console.log(decoded);
       next()
     }
   } catch (error) {
@@ -47,4 +43,4 @@ _middleware.validateUpdatePasswordInput = (req, res, next) => {
   if (!isValid) return res.status(400).json(errors);
   next();
 }
-module.exports = _middleware;
+module.exports = _middleware;2

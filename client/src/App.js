@@ -23,10 +23,10 @@ class App extends Component {
               <Route path="/adminlogin" exact component={Adminloginpage} />
               <Route path="/activate" exact component={ActivePage} />
               <Route path="/updateInfo" exact component={UpdateInfo} />
-              <Route path="/:user/" exact component={Profile} />} />
+              <Route path="/students/:user/" component={Profile} />} />
                 {/* <Route path="/:user/profile/:sub" render={({match, history}) => <Profile match={match} />} /> */}
               <Route path="/active" exact component={ActivePage} />
-              <Route path="/:admin/dashboard" exact component={AdminD}/>
+              <Route path="/admin/:admin/" component={AdminD}/>
                {/* <Route path={`/user2/profile/noti`} exact component={NotificationDashB}/> */}
               <Route path="/" component={NoMatch} />
             </Switch>

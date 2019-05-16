@@ -4,32 +4,12 @@ import ActivityBtn from "../featurebutton/ActivityBtn";
 import ShowingList from "../featurebutton/ShowingList";
 import StudentsList from "./StudentsList";
 import {getStudentList} from "../../action/adminauth/index";
-import ActivityJoinList from '../profilepage/dashboard/ActivitysJoinList';
+
 import { connect } from 'react-redux';
 import Activity from "./Activity";
+import ActivityModel from '../model/ActivityDetail'
+import StudentDetail from "../model/StudentDetail";
 class AdminD extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      students: []
-    };
-  }
-  // componentWillMount() {
-  //   console.log("abcd")
-  //   if (localStorage.getItem("token")) {
-  //     Axios.get('http://localhost:5000/api/admins/studentlist')
-  //     .then(res=>{
-  //       console.log(res.data)
-  //     })
-  //   }
-  // }
-
-  componentDidMount(){
-    if(localStorage.getItem("token")){
-    this.props.getStudentList();
-    console.log(this.props.students)
-    }
-  }
   render() {
     
     return (
@@ -48,16 +28,12 @@ class AdminD extends Component {
           </div>
         </div>
         <div className="col-12">
-          <StudentsList students={this.props.students}/>
-          <Activity/>
+          <StudentsList/>
         </div>
+        <ActivityModel/>
+        <StudentDetail/>
       </div>
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    students: state.studentList
-  }
-}
-export default connect(mapStateToProps,{getStudentList})(AdminD);
+export default AdminD;
