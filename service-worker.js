@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/khoa0319/social-hub/precache-manifest.b546d10930ff7d67d8142f5eff5e1451.js"
+  "/social-hub/precache-manifest.4fefd8185c5a434caaa1f8f3bda6ca76.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/khoa0319/social-hub/index.html", {
+workbox.routing.registerNavigationRoute("/social-hub/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
