@@ -1,0 +1,100 @@
+body
+{
+  background-image: url('/img/Background.jpg');
+  background-size: 70%;
+  background-position-x: center;
+  background-repeat: no-repeat; 
+}
+
+#profilePic
+{
+  margin-top: 7px;
+  width: 30px;
+}
+.nav-stuff>*
+{
+  width: 100px;
+}
+.nav-stuff
+{
+  margin: auto;
+}
+.nav-stuff button img
+{
+  width: 22px;
+  height: 22px;
+}
+/* .nav-stuff button
+{
+  height: 40px;
+} */
+.nav-stuff button i
+{
+  padding-top: 5px;
+}
+.logo
+{
+  width: 40px;
+
+}
+/* #BigInput
+{
+  width: 200px;
+} */
+
+.nav-stuff
+{
+  margin-top: 10px;
+}
+.navbar
+{
+  background-color: #96c1de;
+}
+.btn-myapp
+{
+  background-color: #f7e7b6;
+}
+.btn-myapp2
+{
+  background-color: #bce4df;
+}
+.btn-myapp3
+{
+  background-color: #f45630;
+}
+.app-content
+{
+  margin-top: 100px;
+}
+.bg-main
+{
+  background-color: #96c1de;
+}
+.txt-white
+{
+  color: white;
+}
+
+table {
+  width: 100%;
+}
+
+h1 {
+  text-align: left;
+}
+.text-overflow
+{
+  height: 200px;
+ /* BOTH of the following are required for text-overflow */
+  overflow-y: scroll;
+}
+button i
+{
+  width: 50px;
+  font-size: 20px;
+} 
+button img
+{
+  width: 20px;
+  font-size: 20px;
+} 

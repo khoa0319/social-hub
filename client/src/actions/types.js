@@ -1,0 +1,6 @@
+export const GET_ERRORS = "GET_ERRORS"
+export const SET_CURRENT_USER = "SET_CURRENT_USER"
+export const GET_ID = "GET_ID"
+export const GET_ACTIVITIES = "GET_ACTIVITIES"
+export const SET_ACTIVITYDETAIL = "SET_ACTIVITYDETAIL"
+export const SET_UPDATE_INFO = "SET_UPDATE_INFO"
