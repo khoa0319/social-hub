@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../../actions/auth';
+import { login, loginFB } from '../../actions/auth';
 import jwtDecode from 'jwt-decode';
 import { setCurrentUser } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
-import Facebook from "../facebook/Facebook";
+import FacebookLogin from 'react-facebook-login';
 class loginpage extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +14,11 @@ class loginpage extends Component {
       password: "",
       errors: {}
     }
+  }
+
+  responseFacebook = (response) => {
+
+    this.props.loginFB({facebookID: response.id});
   }
 
   componentDidMount() {    
@@ -93,10 +98,15 @@ class loginpage extends Component {
                     </button>
                   </div>
                   <div className="mt-2 col-12 col-md-6">
-                  <Facebook />
+                  <FacebookLogin 
+                  appId="839052703122702"
+                  autoLoad={false}
+                  fields="name,email,picture"                  
+                  callback={this.responseFacebook}
+                  cssClass="btn btn-primary ml-1"
+                  icon="fa-facebook"/>                  
                   </div>
-                  <div className="mt-2 col-12 col-md-6">
-                    {" "}
+                  <div className="mt-2 col-12 col-md-6">                    
                     <Link className="btn btn-myapp btn-block" to="/activate">Kích hoạt tài khoản</Link>
                   </div>
                   <div className="mt-2 col-12 col-md-6">
@@ -138,4 +148,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { login, setCurrentUser })(loginpage);
+export default connect(mapStateToProps, { login, loginFB, setCurrentUser })(loginpage);
