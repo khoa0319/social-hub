@@ -214,7 +214,7 @@ class Information extends Component {
                 />
                 <FacebookLogin
                   appId="839052703122702"
-                  autoLoad={true}
+                  autoLoad={false}
                   fields="name,email,picture"
                   onClick={this.componentClicked}
                   callback={this.responseFacebook}

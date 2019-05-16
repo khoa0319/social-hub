@@ -47,6 +47,33 @@ export const login = (data) => {
   }
 }
 
+// login with facebook
+export const loginFB = (data) => {
+  return dispatch => {
+    fingerprint(fp => {    
+      axios.post(`http://localhost:5000/api/users/loginfb`, {...data, fingerprint: fp})
+      .then(res => {
+        // change state for no errors
+        dispatch(getError(null));
+        
+        const token = res.data.token;
+        console.log(token);
+        localStorage.setItem('token', token);
+        localStorage.setItem('fingerprint', fp);
+        
+        setHeaders(token, fp);
+        
+        const decoded = jwtDecode(token);
+        
+        dispatch(setCurrentUser(decoded));
+      })
+      .catch(err => {        
+        dispatch(getError(_.get(err, 'response.data')))
+      })
+    })    
+  }
+}
+
 // log the user out
 export const logout = () => {
   return dispatch => {

@@ -7,6 +7,10 @@ const _middlware = require('./userMiddleware');
 
 /*  auth actions */
 
+// login fb
+router.post('/loginfb',
+  _userHandle.handleLogInFB)
+  
 // update fb
 router.post('/updatefb',
   _middlware.authenticating,

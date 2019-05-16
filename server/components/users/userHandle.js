@@ -92,7 +92,7 @@ _user.handleUpdate = (req, res) => {
 
 _user.handleGetUpdate = (req, res) => {
   pool.query(`SELECT ADDRESS, PHONE, EMAIL FROM STUDENT WHERE ID = ?`, req.user.ID)
-    .then(result => {         
+    .then(result => {
       const info = {
         address: result[0].ADDRESS,
         phone: result[0].PHONE,
@@ -104,7 +104,7 @@ _user.handleGetUpdate = (req, res) => {
 }
 
 _user.handleUpdateFirstTime = (req, res) => {
-  const { address, phone, email, password, id } = req.body; 
+  const { address, phone, email, password, id } = req.body;
   const updateInfo = {
     ADDRESS: address,
     PHONE: phone,
@@ -127,12 +127,42 @@ _user.handleUpdateFirstTime = (req, res) => {
 */
 _user.handleUpdateFB = (req, res) => {
 
-  const { facebookID } = req.body;  
+  const { facebookID } = req.body;
   pool.query(`Update STUDENT set FACEBOOKID = ? WHERE ID = ?`, [facebookID, req.user.ID])
     .then(result => {
-      res.status(200).json({q: "success"});
+      res.status(200).json({ q: "success" });
     })
     .catch(err => res.status(500).json({ err }));
+}
+
+_user.handleLogInFB = (req,res) => {
+  const { facebookID, fingerprint } = req.body;  
+  pool.query(`SELECT * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID 
+    inner join FACULTY f on s.F_ID = f.F_ID
+    inner join MAJOR m on s.M_ID = m.M_ID
+    inner join CLASS c on s.C_ID = c.C_ID
+    where s.FACEBOOKID = ? and s.ISACTIVE = true `, facebookID)
+    .then(result => {      
+      if (!result[0]) return res.status(404).json({ error: "facebookID not found or Not Activated" });
+      let user = result[0];
+      const payload = {
+        ID: user.ID,
+        FullName: user.FULLNAME,
+        Role: user.ROLENAME,
+        Faculty: user.FNAME,
+        Major: user.MNAME,
+        Class: user.CNAME,
+        Academic_year: user.ACADEMIC_YEAR,
+        BirthDate: user.BIRTHDATE
+      };
+      jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '10h' }, (err, token) => {        
+        if (err) return res.status(500).json({ err });
+        res.status(200).json({ token });
+      })
+    })
+    .catch(err => {      
+      return res.status(500).json(err);
+    });
 }
 
 /*
@@ -147,8 +177,9 @@ _user.handleLogIn = (req, res) => {
     inner join CLASS c on s.C_ID = c.C_ID
     where s.ID = ? and s.ISACTIVE = true `, ID)
     .then(result => {
-      
+
       if (!result[0]) return res.status(404).json({ error: "ID not found or Not Activated" });
+
       let user = result[0];
 
       bcrypt.compare(password, user.HASHPASSWORD)
@@ -156,17 +187,17 @@ _user.handleLogIn = (req, res) => {
           if (!match) return res.status(403).json({ error: "invalid id or password" });
           const payload = {
             ID: ID,
-            FullName: result[0].FULLNAME,
-            Role: result[0].ROLENAME,
-            Faculty: result[0].FNAME,
-            Major: result[0].MNAME,
-            Class: result[0].CNAME,
-            Academic_year: result[0].ACADEMIC_YEAR,
-            BirthDate: result[0].BIRTHDATE            
-          };          
+            FullName: user.FULLNAME,
+            Role: user.ROLENAME,
+            Faculty: user.FNAME,
+            Major: user.MNAME,
+            Class: user.CNAME,
+            Academic_year: user.ACADEMIC_YEAR,
+            BirthDate: user.BIRTHDATE
+          };
           jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '10h' }, (err, token) => {
             if (err) return res.status(500).json({ err });
-            res.status(200).json({token});
+            res.status(200).json({ token });
           })
         })
         .catch(err => res.status(500).json({ err }));
