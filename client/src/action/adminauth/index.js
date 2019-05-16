@@ -18,3 +18,9 @@ export const getStudentDetail = (student) => {
     student
   }
 }
+export const isAddNewActivity = (value) => {
+  return {
+    type: "Is_Add_New_Activity",
+    value
+  }
+}

@@ -7,7 +7,6 @@ const activityReducer = (state = initialState, action) => {
     case types.GET_ACTIVITIES:
       const newActivities = state.concat(action.activities)      
       return newActivities
-
     default:
       break;
   }

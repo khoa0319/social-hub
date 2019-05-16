@@ -20,6 +20,22 @@ export const fetchActivities = (data) => {
     }, 1000);
   }
 }
+export const fetchActivitiesAdmin = (data) => {
+  return dispatch => {    
+    setTimeout(() => {
+      axios.get(`http://localhost:5000/api/activities/adminactivity/?skip=${data.skip}&limit=${data.limit}`)
+        .then(res => {
+          if (res.data) {
+            dispatch(getActivities(res.data.result));
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          dispatch(getError(error));
+        })
+    }, 1000);
+  }
+}
 
 export const viewActivityDetail = (data) => {
   return dispatch => {
