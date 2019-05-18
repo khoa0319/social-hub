@@ -204,7 +204,7 @@ _user.handleLogIn = (req, res) => {
         .then((match) => {
           if (!match) return res.status(403).json({ error: "invalid id or password" });
           const payload = {
-            ID: ID,
+            ID: user.ID,
             FullName: user.FULLNAME,
             Role: user.ROLENAME,
             Faculty: user.FNAME,
