@@ -7,18 +7,25 @@ const validator = require('./userValidate');
 // container for Handle
 const _user = {};
 
-_user.handleJoinYoungCommunist = (req, res) => {
-  const ID = req.user.ID;
-  pool.query(`SELECT * FROM JOIN_YC where ID = ?`, ID)
+_user.handleGetJoinYoungCommunist = (req, res) => {
+  pool.query(`SELECT * from JOIN_YC WHERE ID = ?`, req.user.ID)
     .then(result => {
-      if (result[0]) return res.status(403).json({ msg: "Form Exists" });
+      if (!result[0]) return res.status(404).json({ Error: "NOT FOUND" });
+      return res.status(200).json(result[0])
+    })
+    .catch(err => res.status(500).json(err))
+}
 
-      const { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE } = req.body;
-      const STATE = "Pending";
-      const form = { RACE, RELIGION, CMND, CMND_DATE, CMND_PLACE, ID, STATE };
-      pool.query(`INSERT INTO JOIN_YC set ?`, form)
-        .then(r => {
-          return res.status(200).json({ msg: "Success" });
+// @TODO: validate req.body
+_user.handleJoinYoungCommunist = (req, res) => {
+  const STATE = "Pending";
+  const form = { ID: req.user.ID, STATE };
+  pool.query(`INSERT INTO JOIN_YC set ?`, form)
+    .then(r => {
+      pool.query(`SELECT * from JOIN_YC WHERE ID = ?`, req.user.ID)
+        .then(result => {
+          if (!result[0]) return res.status(404).json({ Error: "NOT FOUND" });
+          return res.status(200).json(result[0]);
         })
         .catch(err => res.status(500).json(err))
     })
@@ -34,7 +41,7 @@ _user.handleGetStudentCommunity = (req, res) => {
     .catch(err => res.status(500).json(err))
 }
 
-// @TODO verify req.body
+// @TODO validate req.body
 _user.handleJoinStudentCommunity = (req, res) => {
   const { joinYC, joinCP, title } = req.body;
   const form = {
@@ -146,14 +153,14 @@ _user.handleUpdateFB = (req, res) => {
     .catch(err => res.status(500).json({ err }));
 }
 
-_user.handleLogInFB = (req,res) => {
-  const { facebookID, fingerprint } = req.body;  
+_user.handleLogInFB = (req, res) => {
+  const { facebookID, fingerprint } = req.body;
   pool.query(`SELECT * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID 
     inner join FACULTY f on s.F_ID = f.F_ID
     inner join MAJOR m on s.M_ID = m.M_ID
     inner join CLASS c on s.C_ID = c.C_ID
     where s.FACEBOOKID = ? and s.ISACTIVE = true `, facebookID)
-    .then(result => {      
+    .then(result => {
       if (!result[0]) return res.status(404).json({ error: "facebookID not found or Not Activated" });
       let user = result[0];
       const payload = {
@@ -166,12 +173,12 @@ _user.handleLogInFB = (req,res) => {
         Academic_year: user.ACADEMIC_YEAR,
         BirthDate: user.BIRTHDATE
       };
-      jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1m' }, (err, token) => {        
+      jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1m' }, (err, token) => {
         if (err) return res.status(500).json({ err });
         res.status(200).json({ token });
       })
     })
-    .catch(err => {      
+    .catch(err => {
       return res.status(500).json(err);
     });
 }
@@ -228,7 +235,6 @@ _user.handleActivate = (req, res) => {
   let { ID, FullName, BirthDate, Faculty, Major } = req.body;
   pool.query(`SELECT * from STUDENT s where ID = ? and ISACTIVE = false`, ID)
     .then(result => {
-
       if (!result[0]) return res.status(404).json({ Error: "ID Not Found Or Already Active" });
 
       pool.query(`
