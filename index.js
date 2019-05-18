@@ -1,6 +1,6 @@
 /* App Initialize */
 require('dotenv').config();
-require('./spawnDatabase');
+// require('./spawnDatabase');
 
 /* 3rd party modules */
 const express = require('express');
