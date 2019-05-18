@@ -30,6 +30,11 @@ router.post('/joinyc',
   _middlware.authenticating,
   _userHandle.handleJoinYoungCommunist);
 
+
+router.get('/getJoinstdc',
+  _middlware.authenticating,
+  _userHandle.handleGetStudentCommunity);
+// tham gia hoi sinh vien  
 router.post('/joinstdc',
   _middlware.authenticating,
   _userHandle.handleJoinStudentCommunity);

@@ -25,12 +25,23 @@ _user.handleJoinYoungCommunist = (req, res) => {
     .catch(err => res.status(500).json(err))
 }
 
+_user.handleGetStudentCommunity = (req, res) => {
+  pool.query(`SELECT * from STUDENT_COMMUNITY WHERE ID = ?`, req.user.ID)
+    .then(result => {
+      if (!result[0]) return res.status(404).json({ Error: "NOT FOUND" });
+      return res.status(200).json(result[0])
+    })
+    .catch(err => res.status(500).json(err))
+}
+
+// @TODO verify req.body
 _user.handleJoinStudentCommunity = (req, res) => {
   const { joinYC, joinCP, title } = req.body;
   const form = {
     ID: req.user.ID,
     JOIN_YC_DATE: joinYC,
     join_CP_DATE: joinCP,
+    SUBMIT: new Date(),
     TITLE: title,
     STATE: 'Pending'
   }
@@ -155,7 +166,7 @@ _user.handleLogInFB = (req,res) => {
         Academic_year: user.ACADEMIC_YEAR,
         BirthDate: user.BIRTHDATE
       };
-      jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '10h' }, (err, token) => {        
+      jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1m' }, (err, token) => {        
         if (err) return res.status(500).json({ err });
         res.status(200).json({ token });
       })
