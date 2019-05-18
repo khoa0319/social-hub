@@ -4,7 +4,7 @@
   "description": "RESTful API for socialhub",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run server-darwin\" \"npm run client\" ",
+    "start": "node index.js",
     "production": "export NODE_ENV=production && node index.js",
     "server-darwin": "nodemon index.js",
     "server-win32": "nodemon index.js",
