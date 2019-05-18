@@ -25,7 +25,7 @@ app.use('/api/users', require('./components/users/userAPI'));
 app.use('/api/admins', require('./components/admins/adminAPI'));
 app.use('/api/activities', require('./components/activities/activityAPI'));
 const port = process.env.PORT || 5000;
-const environment = process.env.NODE_ENV
+const environment = process.env.NODE_ENV || 'production'
 app.listen(port, () => {
   console.log(`Listening on port ${port} in ${environment}`);
 });
