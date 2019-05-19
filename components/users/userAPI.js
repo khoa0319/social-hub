@@ -19,17 +19,26 @@ router.post('/updatefb',
 router.get('/update',
   _middlware.authenticating,
   _userHandle.handleGetUpdate)
+
 // update account
 router.post('/update',
   _middlware.validateUpdateInput,
   _middlware.authenticating,
   _userHandle.handleUpdate);
 
+router.get('/getJoinyc',
+  _middlware.authenticating,
+  _userHandle.handleGetJoinYoungCommunist);
+
 router.post('/joinyc',
-  _middlware.validateJoinYCInput,
   _middlware.authenticating,
   _userHandle.handleJoinYoungCommunist);
 
+
+router.get('/getJoinstdc',
+  _middlware.authenticating,
+  _userHandle.handleGetStudentCommunity);
+// tham gia hoi sinh vien  
 router.post('/joinstdc',
   _middlware.authenticating,
   _userHandle.handleJoinStudentCommunity);

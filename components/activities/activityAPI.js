@@ -21,12 +21,20 @@ router.get('/adminactivity',
 	_activities.editActivity)
 
 //router.get('/activitycheckin',)
- /*
-	get all participated activities of the users
-  */
+/*
+ get all participated activities of the users
+ */
 
-// @TODO: authorize	
-router.get('/all',
+router.get('/joint',
+	_middleware.authenticating,
+	_activities.handleGetJointActivities)
+
+router.get('/joint/count',
+	_middleware.authenticating,
+	_activities.handleGetAllJointActivities)
+
+
+router.get('/count',
 	_middleware.authenticating,
 	_activities.handleGetAllActivities)
 
