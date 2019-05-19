@@ -8,5 +8,9 @@ router.post('/register',_adminMiddleware.validateRegister,_adminHandle.handleReg
 router.get('/studentlist',_adminHandle.handleStudentList)
 router.post('/resetStudent',_adminHandle.handleResetStudent)
 router.get('/activitystudent',_adminHandle.handleStudentActivity)
-router.get('/checkinstudent',_adminHandle.handleRegisterStudentActivity)
+router.post('/checkinstudent',_adminHandle.handleRegisterStudentActivity)
+router.get('/studentcommunity',_adminHandle.handleStudentJoinCommunity)
+router.post('/acceptstudent',_adminHandle.handleRegisterStudentCommunity)
+router.post('/rejectstudent',_adminHandle.handleRegisterStudentCommunity)
+
 module.exports = router;
