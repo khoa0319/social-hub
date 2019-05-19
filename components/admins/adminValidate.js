@@ -2,7 +2,7 @@ const _ = require('lodash');
 const validator = require('validator');
 const _validator = {};
 
-_validator.validateRegisterInput = (data) => {
+_validator.validateLoginInput = (data) => {
     let errors = {};
  
     let {username, password,password2, fullname, email,phone} = data;
@@ -29,6 +29,25 @@ _validator.validateRegisterInput = (data) => {
     if (validator.isEmpty(password2)) errors.password2 = "Retype Password is required";
     
   
+    return {
+      errors,
+      isValid: _.isEmpty(errors)
+    }
+  }
+  
+  _validator.validateRegisterInput = (data) => {
+    let errors = {};
+ 
+    let {username, password} = data;
+    console.log(data)
+    console.log(username)
+    username = typeof (username) == 'string' ? username : '';
+    password = typeof (password) == 'string' ? password : '';
+   
+    if (!validator.isLength(username,{min: 10, max: 20})) errors.username = "Username is invalid";
+    if (!validator.isLength(password, {min: 8, max: 40})) errors.password = "Password is invalid";
+    if (validator.isEmpty(username)) errors.username = "User Name is required";
+    if (validator.isEmpty(password)) errors.password = "Password is required";
     return {
       errors,
       isValid: _.isEmpty(errors)

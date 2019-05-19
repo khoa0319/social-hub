@@ -83,5 +83,28 @@ _activities.newActivity = (req, res) => {
     })
     .catch(err => res.status(500).json(err));
 };
-
+_activities.editActivity = (req, res) => {
+  const {
+    A_ID,
+    AT_ID,
+    A_NAME,
+    CONTENT,
+    STARTDATE,
+    ENDDATE,
+    FEE
+  } = req.body;
+  pool
+    .query(`SELECT * FROM ACTIVITY where A_ID=?`, A_ID)
+    .then(match => {
+      if (!match[0]) return res.status(403).json({ error: "Không có activity tương ứng" });
+      pool.query(`UPDATE ACTIVITY set AT_ID = ?,A_NAME=?,CONTENT=?,STARTDATE=?,ENDDATE=?,FEE=? where A_ID = ?`,[AT_ID,A_NAME,CONTENT,STARTDATE,ENDDATE,FEE,A_ID])
+      .then(result => {
+        res.status(200).json({ result,msg:"Create New Activity Success" });
+      });
+    })
+    .catch(err => res.status(500).json(err));
+};
+_activities.checkInActivity=(req,res)=>{
+  
+}
 module.exports = _activities;

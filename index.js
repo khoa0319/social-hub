@@ -27,6 +27,7 @@ app.use('/api/activities', require('./components/activities/activityAPI'));
 const port = process.env.PORT || 5000;
 const environment = process.env.NODE_ENV
 app.listen(port, () => {
+
   console.log(`Listening on port ${port} in ${environment}`);
 });
 

@@ -15,6 +15,11 @@ const _activities = require('./activityHandle')
 	Admin: CRUD activities, notis, users in activities
  */
 router.post('/createNewActivity',_activities.newActivity)
+router.get('/adminactivity',
+	_activities.handleGetActivities)
+	router.post('/editActivity',
+	_activities.editActivity)
+
 //router.get('/activitycheckin',)
  /*
 	get all participated activities of the users

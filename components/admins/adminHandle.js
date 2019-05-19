@@ -30,7 +30,7 @@ _admin.handleLogin = (req, res) => {
                 if (err) return res.status(500).json({ err });
                 res.status(200).json({
                   msg: 'Login Success',
-                  token: 'bearer ' + token
+                  admintoken: 'bearer ' + token
             });})
 
         })
@@ -96,6 +96,34 @@ _admin.handleResetStudent=(req,res)=>{
                 ;})
            })
         .catch(err => res.status(500).json(err))
+    .catch(err=>res.status(500).json(err))
+}
+_admin.handleStudentActivity=(req,res)=>{
+    const {skip,limit,A_ID}=req.query
+    if (!skip || !limit || !A_ID) return res.status(400).json({error: 'invalid query '})
+    pool.query(`SELECT f.ID,a.FULLNAME,b.FNAME,c.MNAME,d.CNAME,a.EMAIL,a.ADDRESS,a.EMAIL,a.ACADEMIC_YEAR,a.BIRTHDATE f.ST_UT_ID
+    FROM STUDENT_ACTIVITY f 
+    inner join STUDENT a on f.ID=a.ID
+    inner join ACTIVITY e on f.A_ID=e.A_ID
+    inner join FACULTY b on a.F_ID=b.F_ID 
+    inner join MAJOR c on a.M_ID=c.M_ID
+    inner join CLASS d on a.C_ID=d.C_ID
+    Where f.A_ID=? AND f.STATE=?
+    LIMIT ?,?`,[A_ID,parseInt(skip),parseInt(limit)])
+    .then(result=>{ if (!result[0]) return res.status(404).json({ error: "not found" });
+    console.log(result)
+    res.status(200).json(result);})
+    .catch(err=>res.status(500).json(err))
+}
+_admin.handleRegisterStudentActivity=(req,res)=>{
+    const {ST_UT_ID}=req.body
+    if (!skip || !limit || !A_ID) return res.status(400).json({error: 'invalid query '})
+    pool.query(`SELECT *
+    FROM STUDENT_ACTIVITY f 
+    Where f.A_ID=? AND f.STATE=?`,[A_ID])
+    .then(result=>{ if (!result[0]) return res.status(404).json({ error: "Học sinh đã được điểm đanh" });
+
+    res.status(200).json(result);})
     .catch(err=>res.status(500).json(err))
 }
 module.exports = _admin;
