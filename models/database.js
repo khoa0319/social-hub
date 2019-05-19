@@ -9,10 +9,10 @@ const db = {
 
 const pool = mysql.createPool({
 	connectionLimit: 10, 
-	host: 'remotemysql.com',
-	user: 'FMGFqkTQzv',
-	password: 'mGGyMWBHrV',
-	database: 'FMGFqkTQzv',
+	host: db.host,
+	user: db.user,
+	password: db.password,
+	database: db.database,
 	dateStrings: true
 });
 
