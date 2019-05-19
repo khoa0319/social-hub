@@ -4,7 +4,7 @@ const router = express.Router();
 
 /* App modules */
 const _middleware = require('../users/userMiddleware')
-
+const _notis = require('../notis/notiHandle')
 /*
 	Activity API
 	User: GET activities, notis
@@ -19,8 +19,13 @@ const _middleware = require('../users/userMiddleware')
 	get all participated activities of the users
   */
 
-router.get('/', (req, res) => {
-  res.status(200).json({q: 'success'});
-})
+router.get('/',
+	_middleware.authenticating,
+	_notis.handleGetNotis
+)
+
+router.get('/count',
+	_middleware.authenticating,
+	_notis.handleGetAllNotis)
 
 module.exports = router;

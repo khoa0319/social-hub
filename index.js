@@ -24,8 +24,9 @@ app.use(express.json());
 app.use('/api/users', require('./components/users/userAPI'));
 app.use('/api/admins', require('./components/admins/adminAPI'));
 app.use('/api/activities', require('./components/activities/activityAPI'));
+app.use('/api/notis', require('./components/notis/notiAPI'));
 const port = process.env.PORT || 5000;
-const environment = process.env.NODE_ENV || 'production'
+const environment = process.env.NODE_ENV || 'Production'
 app.listen(port, () => {
   console.log(`Listening on port ${port} in ${environment}`);
 });
