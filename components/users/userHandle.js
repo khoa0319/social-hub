@@ -161,7 +161,7 @@ _user.handleLogInFB = (req, res) => {
     inner join CLASS c on s.C_ID = c.C_ID
     where s.FACEBOOKID = ? and s.ISACTIVE = true `, facebookID)
     .then(result => {
-      if (!result[0]) return res.status(404).json({ error: "facebookID not found or Not Activated" });
+      if (!result[0]) return res.status(404).json({ loginError: "không tìm thấy facebook hoặc tài khoản chưa kích hoạt" });
       let user = result[0];
       const payload = {
         ID: user.ID,
@@ -196,13 +196,13 @@ _user.handleLogIn = (req, res) => {
     where s.ID = ? and s.ISACTIVE = true `, ID)
     .then(result => {
 
-      if (!result[0]) return res.status(404).json({ error: "ID not found or Not Activated" });
+      if (!result[0]) return res.status(404).json({ loginError: "không tìm thấy MSSV hoặc chưa kích hoạt" });
 
       let user = result[0];
 
       bcrypt.compare(password, user.HASHPASSWORD)
         .then((match) => {
-          if (!match) return res.status(403).json({ error: "invalid id or password" });
+          if (!match) return res.status(403).json({ loginError: "sai MSSV hoặc mật khẩu" });
           const payload = {
             ID: user.ID,
             FullName: user.FULLNAME,
