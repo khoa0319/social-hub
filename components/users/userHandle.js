@@ -173,7 +173,7 @@ _user.handleLogInFB = (req, res) => {
         Academic_year: user.ACADEMIC_YEAR,
         BirthDate: user.BIRTHDATE
       };
-      jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1m' }, (err, token) => {
+      jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1h' }, (err, token) => {
         if (err) return res.status(500).json({ err });
         res.status(200).json({ token });
       })
@@ -213,7 +213,7 @@ _user.handleLogIn = (req, res) => {
             Academic_year: user.ACADEMIC_YEAR,
             BirthDate: user.BIRTHDATE
           };
-          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '10h' }, (err, token) => {
+          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1h' }, (err, token) => {
             if (err) return res.status(500).json({ err });
             res.status(200).json({ token });
           })
