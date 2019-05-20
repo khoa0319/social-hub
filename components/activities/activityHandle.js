@@ -49,8 +49,7 @@ _activities.handleGetJointActivities = (req, res) => {
       [req.user.ID, parseInt(skip), parseInt(limit)]
     )
     .then(result => {
-      if (result.length === 0)
-        return res.status(404).json({ error: "not found or no activities yet" });
+      if (result.length === 0)        
       return res.status(200).json({ result });
     })
     .catch(error => res.status(500).json(error));

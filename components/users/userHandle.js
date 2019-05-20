@@ -235,15 +235,14 @@ _user.handleActivate = (req, res) => {
   let { ID, FullName, BirthDate, Faculty, Major } = req.body;
   pool.query(`SELECT * from STUDENT s where ID = ? and ISACTIVE = false`, ID)
     .then(result => {
-      if (!result[0]) return res.status(404).json({ Error: "ID Not Found Or Already Active" });
+      if (!result[0]) return res.status(404).json({ activeError: "Sai MSSV hoặc đã kích hoạt" });
 
       pool.query(`
       SELECT * from STUDENT s 
       inner join FACULTY f on s.F_ID = f.F_ID
       inner join MAJOR m on s.M_ID = m.M_ID
       where ID = ?`, ID)
-        .then(result => {
-          if (!result[0]) return res.status(404).json({ Error: "Information Not Found" });
+        .then(result => {          
           const std = {
             FullName: result[0].FULLNAME,
             Faculty: result[0].FNAME,

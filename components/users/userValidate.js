@@ -34,12 +34,12 @@ _validator.validateRegisterInput = (data) => {
   Faculty = typeof (Faculty) == 'string' ? Faculty.trim() : '';
   Major = typeof (Major) == 'string' ? Major.trim() : '';
   
-  if (_.isNull(BirthDate)) errors.BirthDate = "BirthDate is required";
+  
   if (!validator.matches(BirthDate,/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/));
-  if (!validator.isLength(ID,{min: 10, max: 10})) errors.ID = "ID is invalid";
-  if (!validator.isLength(FullName,{min: 2})) errors.FullName = "Name is invalid";
-  if (!validator.isLength(Faculty, {min: 8, max: 40})) errors.Faculty = "Faculty is invalid";
-  if (!validator.isLength(Major, {min: 11, max: 40})) errors.Major = "Major is invalid";
+  if (!validator.isLength(ID,{min: 10, max: 10})) errors.ID = "MSSV không hợp lệ";
+  if (!validator.isLength(FullName,{min: 1})) errors.FullName = "Họ Tên không hợp lệ";
+  if (!validator.isLength(Faculty, {min: 8, max: 40})) errors.Faculty = "Khoa không hợp lệ";
+  if (!validator.isLength(Major, {min: 11, max: 40})) errors.Major = "Ngành không hợp lệ";
   
   if (validator.isEmpty(ID)) errors.ID = "ID is required";
   if (validator.isEmpty(FullName)) errors.FullName = "FullName is required";

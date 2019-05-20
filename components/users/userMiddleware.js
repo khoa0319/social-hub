@@ -30,7 +30,7 @@ _middleware.validateJoinYCInput = (req, res, next) => {
 
 _middleware.validateRegisterInput = (req, res, next) => {  
   const { errors, isValid } = validator.validateRegisterInput(req.body);
-  if (!isValid) return res.status(400).json(errors);
+  if (!isValid) return res.status(400).json({validateRegisterError: errors});
   next();
 }
 _middleware.validateUpdateInput = (req, res, next) => {
