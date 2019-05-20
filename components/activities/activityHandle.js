@@ -26,8 +26,10 @@ _activities.handleGetActivities = (req, res) => {
   if (!skip || !limit) return res.status(400).json({ error: "invalid query " });
   pool
     .query(
-      `SELECT * FROM ACTIVITY a inner join ACTIVITY_TYPE at on a.AT_ID = at.AT_ID ORDER BY CREATE_DATE LIMIT ? , ?`,
-      [parseInt(skip), parseInt(limit)]
+      `SELECT * FROM ACTIVITY a inner join ACTIVITY_TYPE at on a.AT_ID = at.AT_ID
+      WHERE a.A_ID not in (select A_ID from STUDENT_ACTIVITY where ID = ?)
+      ORDER BY CREATE_DATE LIMIT ? , ?`,
+      [req.user.ID, parseInt(skip), parseInt(limit)]
     )
     .then(result => {
       if (result.length === 0)
