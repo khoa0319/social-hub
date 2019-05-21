@@ -109,8 +109,8 @@ _user.handleUpdate = (req, res) => {
 }
 
 _user.handleGetUpdate = (req, res) => {
-  pool.query(`SELECT ADDRESS, PHONE, EMAIL FROM STUDENT WHERE ID = ?`, req.user.ID)
-    .then(result => {
+  pool.query(`SELECT ADDRESS,PHONE,EMAIL FROM STUDENT WHERE ID = ?`, req.user.ID)
+    .then(result => {      
       const info = {
         address: result[0].ADDRESS,
         phone: result[0].PHONE,
