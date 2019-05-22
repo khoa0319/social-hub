@@ -14,7 +14,11 @@ const _notis = require('../notis/notiHandle')
 
 	Admin: CRUD activities, notis, users in activities
  */
-
+router.post('/notipost',
+	_notis.handleCreateNotis)
+	router.post('/notisend',
+	_notis.handlesendNotis)
+	router.get('/notigetall',_notis.handleGetAllNotisA)
  /*
 	get all participated activities of the users
   */
