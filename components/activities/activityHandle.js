@@ -39,6 +39,20 @@ _activities.handleGetActivities = (req, res) => {
     .catch(error => res.status(500).json(error));
 };
 
+_activities.handleGetActivitiesAdmin = (req, res) => {
+  const { skip, limit } = req.query;
+  if (!skip || !limit) return res.status(400).json({ error: "invalid query"  });
+  pool
+    .query(
+      `SELECT * FROM ACTIVITY a inner join ACTIVITY_TYPE at on a.AT_ID = at.AT_ID ORDER BY CREATE_DATE desc LIMIT ? , ?`,
+      [parseInt(skip), parseInt(limit)]
+    )
+    .then(result => {
+      return res.status(200).json({ result });
+    })
+    .catch(error => res.status(500).json(error));
+};
+
 _activities.handleGetJointActivities = (req, res) => {
   const { skip, limit } = req.query;
   if (!skip || !limit) return res.status(400).json({ error: "invalid query " });
