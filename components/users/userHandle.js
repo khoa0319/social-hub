@@ -68,16 +68,24 @@ _user.handleJoinStudentCommunity = (req, res) => {
   required: validate-input, logged-in
  */
 _user.handleResetPassword = (req, res) => {
-  const password = req.body.password;
-  bcrypt.hash(password, 10)
-    .then(value => {
-      pool.query(`UPDATE STUDENT set ? where ID = ?`, [{ HASHPASSWORD: value }, req.user.ID])
-        .then(r => {
-          res.status(200).json({ msg: "success" })
-        })
-        .catch(err => res.status(500).json(err))
+  const { oldPassword, newPassword } = req.body;
+  pool.query(`select HASHPASSWORD from STUDENT where ID = ?`, req.user.ID)
+    .then(result => {
+      return bcrypt.compare(oldPassword, result[0].HASHPASSWORD)
     })
-    .catch(err => res.status(500).json(err))
+    .then(match => {
+      if (!match) return res.status(403).json({oldPasswordError: 'mật khẩu không đúng'})
+      // old password is match 
+      return bcrypt.hash(newPassword, 10)
+    })
+    .then(value => {      
+      pool.query(`UPDATE STUDENT set ? where ID = ?`, [{ HASHPASSWORD: value }, req.user.ID])
+      .then(r => {
+        return res.status(200).json({ msg: "SUCCESS" })
+      })
+      .catch(err => res.status(500).json(err))
+    })
+    .catch(err => res.status(500).json(err))  
 }
 
 /* 

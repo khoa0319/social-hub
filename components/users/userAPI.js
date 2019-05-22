@@ -10,7 +10,7 @@ const _middlware = require('./userMiddleware');
 // login fb
 router.post('/loginfb',
   _userHandle.handleLogInFB)
-  
+
 // update fb
 router.post('/updatefb',
   _middlware.authenticating,
@@ -43,21 +43,21 @@ router.post('/joinstdc',
   _middlware.authenticating,
   _userHandle.handleJoinStudentCommunity);
 
+router.post('/resetpassword', 
+  _middlware.authenticating,
+  _userHandle.handleResetPassword);
+
 /* un-auth actions */
 
 // first time update account
-router.post('/updateInfo', 
+router.post('/updateInfo',
   _userHandle.handleUpdateFirstTime)
 
-router.post('/activate', 
+router.post('/activate',
   _middlware.validateRegisterInput,
   _userHandle.handleActivate);
 
-router.post('/login', 
+router.post('/login',
   _userHandle.handleLogIn);
-
-router.post('/resetpwd',
-  _middlware.validateUpdatePasswordInput,
-  _userHandle.handleResetPassword);
 
 module.exports = router;

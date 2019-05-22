@@ -48,8 +48,7 @@ _activities.handleGetJointActivities = (req, res) => {
       where sa.ID = ? ORDER BY a.CREATE_DATE LIMIT ? , ?`,
       [req.user.ID, parseInt(skip), parseInt(limit)]
     )
-    .then(result => {
-      if (result.length === 0)        
+    .then(result => {      
       return res.status(200).json({ result });
     })
     .catch(error => res.status(500).json(error));
