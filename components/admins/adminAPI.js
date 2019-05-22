@@ -11,6 +11,9 @@ router.get('/activitystudent',_adminHandle.handleStudentActivity)
 router.post('/checkinstudent',_adminHandle.handleRegisterStudentActivity)
 router.get('/studentcommunity',_adminHandle.handleStudentJoinCommunity)
 router.post('/acceptstudent',_adminHandle.handleRegisterStudentCommunity)
-router.post('/rejectstudent',_adminHandle.handleRegisterStudentCommunity)
-
+router.post('/rejectstudent',_adminHandle.handleRejectStudentCommunity)
+router.post('/acceptstudentyc',_adminHandle.handleAcceptYouthCommunity)
+router.post('/rejectstudentyc',_adminHandle.handleRejectYouthCommunity)
+router.get('/getyclist',_adminHandle.handleListYouthCommunity)
+router.get('/getclass',_adminHandle.handleClass)
 module.exports = router;

@@ -79,18 +79,8 @@ _activities.newActivity = (req, res) => {
     ENDDATE,
     FEE
   } = req.body;
-  var time = new Date();
-  var id=Date.now()/1000;
-  const A_ID=id
-  console.log(req.body);
-  console.log(A_ID);
-  pool
-    .query(`SELECT * FROM ACTIVITY where A_ID=?`, A_ID)
-    .then(match => {
-      if (match[0]) return res.status(403).json({ error: "activity id exist" });
       var today = new Date();
       const newActivity = {
-        A_ID,
         ADMIN_ID,
         AT_ID,
         A_NAME,
@@ -100,12 +90,10 @@ _activities.newActivity = (req, res) => {
         ENDDATE,
         FEE
       };
-      console.log(newActivity)
       pool.query(`INSERT INTO ACTIVITY SET ?`, newActivity)
       .then(result => {
         res.status(200).json({ result,msg:"Create New Activity Success" });
-      });
-    })
+      })
     .catch(err => res.status(500).json(err));
 };
 _activities.editActivity = (req, res) => {
