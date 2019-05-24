@@ -10,7 +10,7 @@ const _user = {};
 _user.handleGetJoinYoungCommunist = (req, res) => {
   pool.query(`SELECT * from JOIN_YC WHERE ID = ?`, req.user.ID)
     .then(result => {
-      if (!result[0]) return res.status(404).json({ Error: "NOT FOUND" });
+      if (!result[0]) return res.status(200).json({ YCError: "NOT JOINT" });
       return res.status(200).json(result[0])
     })
     .catch(err => res.status(500).json(err))
@@ -35,7 +35,7 @@ _user.handleJoinYoungCommunist = (req, res) => {
 _user.handleGetStudentCommunity = (req, res) => {
   pool.query(`SELECT * from STUDENT_COMMUNITY WHERE ID = ?`, req.user.ID)
     .then(result => {
-      if (!result[0]) return res.status(404).json({ Error: "NOT FOUND" });
+      if (!result[0]) return res.status(200).json({ SCError: "NOT JOINT" });
       return res.status(200).json(result[0])
     })
     .catch(err => res.status(500).json(err))
