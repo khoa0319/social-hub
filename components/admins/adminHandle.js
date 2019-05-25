@@ -12,14 +12,14 @@ _admin.handleLogin = (req, res) => {
   pool
     .query(`SELECT * FROM  ADMINISTRATOR where USERNAME=?`, username)
     .then(result => {
-      if (!result[0]) return res.status(404).json({ error: "not found" });
+      if (!result[0]) return res.status(403).json({ error: "sai tài khoản hoặc mật khẩu" });
       let admin = result[0];
 
       bcrypt
         .compare(password, admin.HASHPASSWORD)
         .then(match => {
           if (!match)
-            return res.status(403).json({ error: "invalid id or password" });
+            return res.status(403).json({ error: "sai tài khoản hoặc mật khẩu" });
           const payload = {
             username: username,
             fullname: result[0].FULLNAME,
