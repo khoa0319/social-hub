@@ -31,7 +31,7 @@ _admin.handleLogin = (req, res) => {
             if (err) return res.status(500).json({ err });
             res.status(200).json({
               msg: "Login Success",
-              admintoken: "bearer " + token
+              admintoken: token
             });
           });
         })
