@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 /* App modules */
 const pool = require("../../models/database");
 const validator = require("./adminValidate");
-const request = require("request");
 // container for Handle
 const _admin = {};
 
