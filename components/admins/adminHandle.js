@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 /* App modules */
 const pool = require("../../models/database");
 const validator = require("./adminValidate");
+const request = require("request");
 // container for Handle
 const _admin = {};
 
@@ -301,8 +302,7 @@ _admin.handleAcceptYouthCommunity = (req, res) => {
               } else {
                 pool
                   .query(`INSERT INTO YC_FEE SET ? `, {
-                    AMOUNT: parseInt(AMOUNT),
-                    T_DATE: TDATE,
+                    AMOUNT: 0,
                     JYC_ID: parseInt(JYC_ID)
                   })
                   .then(result => {
@@ -361,13 +361,116 @@ _admin.handleListYouthCommunity = (req, res) => {
     .catch(err => res.status(500).json(err));
 };
 
-_admin.handleClass= (req, res) => {
+_admin.handleClass = (req, res) => {
   pool
     .query(`SELECT * FROM CLASS a ORDER BY a.CNAME`)
     .then(result => {
-     res.status(200).json(result)
+      res.status(200).json(result);
     })
     .catch(err => res.status(500).json(err));
+};
+_admin.handleReport = (req, res) => {
+  pool
+    .query(
+      `SELECT d.ID,d.FULLNAME,e.CNAME,SUM(a.AC_POINT) as SUMPOINT From activity_type a inner join activity b on a.AT_ID=b.AT_ID inner join student_activity c on b.A_ID=c.A_ID inner join student d on c.ID=d.ID inner join class e on e.C_ID=d.C_ID where c.STATE="Checked-in" group by d.ID`
+    )
+    .then(result => {
+      var data = {
+        template: { shortid: "q~Iwryl" },
+        data: { Items: result },
+        "Content-Disposition": "attachment; filename=myreport.pdf"
+      };
+      var options = {
+        url: "https://socialhub.jsreportonline.net/api/report",
+        protocol:"https:",
+        method: "POST",
+        headers: {
+          Authorization: "Basic YWRtaW4xMjphZG1pbg==",
+          "X-FP-API-KEY": "iphone", //it can be iPhone or your any other attribute
+          "Content-Type": "application/json",
+          "Content-Disposition": "attachment; filename=myreport.pdf"
+        },
+        data: data
+      };
+      // console.log(options)
+      // request(options).pipe(res)
+      return res.status(200).json({"options":options})
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err)});
+};
+_admin.handleCSHDReport = (req, res) => {
+  pool
+    .query(
+      `SELECT a.ID,a.FULLNAME,b.FNAME,c.MNAME,d.CNAME,a.EMAIL,a.ADDRESS,a.EMAIL,a.ACADEMIC_YEAR,a.BIRTHDATE,f.*
+      From JOIN_YC f
+      inner join STUDENT a on f.ID=a.ID
+      inner join FACULTY b on a.F_ID=b.F_ID 
+      inner join MAJOR c on a.M_ID=c.M_ID
+      inner join CLASS d on a.C_ID=d.C_ID
+      where f.STATE="Accepted"`
+    )
+    .then(result => {
+      var data = {
+        template: { shortid: "6pt23fM" },
+        data: { Items: result },
+        "Content-Disposition": "attachment; filename=myreport.pdf"
+      };
+      var options = {
+        url: "https://socialhub.jsreportonline.net/api/report",
+        protocol:"https:",
+        method: "POST",
+        headers: {
+          Authorization: "Basic YWRtaW4xMjphZG1pbg==",
+          "X-FP-API-KEY": "iphone", //it can be iPhone or your any other attribute
+          "Content-Type": "application/json",
+          "Content-Disposition": "attachment; filename=myreport.pdf"
+        },
+        data: data
+      };
+      // console.log(options)
+      // request(options).pipe(res)
+      return res.status(200).json({"options":options})
+    })
+    .catch(err => {
+      res.status(500).json(err)});
+};
+_admin.handleHSVReport = (req, res) => {
+  pool
+    .query(
+      `SELECT a.ID,a.FULLNAME,b.FNAME,c.MNAME,d.CNAME,a.EMAIL,a.ADDRESS,a.EMAIL,a.ACADEMIC_YEAR,a.BIRTHDATE,f.*
+      From STUDENT_COMMUNITY f
+      inner join STUDENT a on f.ID=a.ID
+      inner join FACULTY b on a.F_ID=b.F_ID 
+      inner join MAJOR c on a.M_ID=c.M_ID
+      inner join CLASS d on a.C_ID=d.C_ID
+      where f.STATE="Accepted"`
+    )
+    .then(result => {
+      var data = {
+        template: { shortid: "5QVSbX8" },
+        data: { Items: result },
+        "Content-Disposition": "attachment; filename=myreport.pdf"
+      };
+      var options = {
+        url: "https://socialhub.jsreportonline.net/api/report",
+        protocol:"https:",
+        method: "POST",
+        headers: {
+          Authorization: "Basic YWRtaW4xMjphZG1pbg==",
+          "X-FP-API-KEY": "iphone", //it can be iPhone or your any other attribute
+          "Content-Type": "application/json",
+          "Content-Disposition": "attachment; filename=myreport.pdf"
+        },
+        data: data
+      };
+      // console.log(options)
+      // request(options).pipe(res)
+      return res.status(200).json({"options":options})
+    })
+    .catch(err => {
+      res.status(500).json(err)});
 };
 
 module.exports = _admin;
