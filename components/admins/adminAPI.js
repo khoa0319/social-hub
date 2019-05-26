@@ -17,4 +17,7 @@ router.post('/acceptstudentyc',_adminHandle.handleAcceptYouthCommunity)
 router.post('/rejectstudentyc',_adminHandle.handleRejectYouthCommunity)
 router.get('/getyclist',_adminHandle.handleListYouthCommunity)
 router.get('/getclass',_adminHandle.handleClass)
+router.get('/reportpoint',_adminHandle.handleReport)
+router.get('/reportcshd',_adminHandle.handleCSHDReport)
+router.get('/reporthsv',_adminHandle.handleHSVReport)
 module.exports = router;
