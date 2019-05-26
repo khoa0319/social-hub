@@ -1,10 +1,10 @@
 const util = require('util')
 const mysql = require('mysql')
 const db = {
-	host: process.env.HOST,
-	user: process.env.MYSQLUSER,
-	password: process.env.PASSWORD,
-	database: process.env.DATABASE
+	host: process.env.HOST || 'remotemysql.com',
+	user: process.env.MYSQLUSER || 'FMGFqkTQzv',
+	password: process.env.PASSWORD || 'mGGyMWBHrV',
+	database: process.env.DATABASE || 'FMGFqkTQzv'
 };
 
 const pool = mysql.createPool({
