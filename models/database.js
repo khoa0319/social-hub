@@ -1,10 +1,10 @@
 const util = require('util')
 const mysql = require('mysql')
 const db = {
-	host: process.env.HOST,
-	user: process.env.MYSQLUSER,
-	password: process.env.PASSWORD,
-	database: process.env.DATABASE
+	host: process.env.HOST || 'localhost',
+	user: process.env.MYSQLUSER || 'root',
+	password: process.env.PASSWORD || 'khoa0319',
+	database: process.env.DATABASE || 'SocialHub'
 };
 
 const pool = mysql.createPool({

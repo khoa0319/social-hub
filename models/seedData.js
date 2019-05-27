@@ -1,6 +1,7 @@
 const pool = require('./database'); 
 const formatHelper = require('../lib/util/formatSTUDENTdata');
 const classOf16Data = require('../data/classOf16.json');
+const studentList = require('../data/data.json')
 /* const fData = require('../data/faculties.json');
 const mData = require('../data/Majors.json');
 const cData = require('../data/classes.json'); */
@@ -91,7 +92,7 @@ seedData.init = () => {
   seedData.seedClass(cData);
   seedData.seedUserType();
   seedData.seedActivityType(); */
-  seedData.seedStudent(classOf16Data);
+  seedData.seedStudent(studentList);
 }
 seedData.init();
 module.exports = seedData;
