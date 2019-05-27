@@ -264,7 +264,7 @@ _user.handleActivate = (req, res) => {
               })
               .catch(error => res.status(404).json(error));
           } else {
-            res.status(400).json({ Error: "You don't have permissions" });
+            res.status(400).json({ activeError: "Sai Thông Tin tài khoản" });
           }
         })
         .catch(error => res.status(404).json(error));
