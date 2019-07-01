@@ -17,7 +17,8 @@ const pool = mysql.createPool({
 });
 
 // Ping database to check for common exception errors.
-pool.getConnection((err, connection) => {
+pool.getConnection( async (err, connection) => {
+	
 	if (err) {
 		if (err.code === 'PROTOCOL_CONNECTION_LOST') {
 			console.error('Database connection was closed.')
@@ -32,13 +33,12 @@ pool.getConnection((err, connection) => {
 			console.error(`${err.sqlMessage}`)
 		}
 	}
-	
+		
 	if (connection) connection.release()
 
 	return
 })
 // Promisify for Node.js async/await.
-pool.getConnection = util.promisify(pool.getConnection);
-pool.query = util.promisify(pool.query)
+pool.query = util.promisify(pool.query);
 
 module.exports = pool;

@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "production": "export NODE_ENV=production && node index.js",
-    "server-darwin": "nodemon index.js",
-    "server-win32": "nodemon index.js",
-    "client": "node start-client.js"
+    "production": "export NODE_ENV=production && node index.js",    
+    "client": "node start-client.js",
+    "dev": "nodemon index.js"
   },
   "author": "Khoa Huynh, Hung Dang, Duy Pham, Ha Nguyen, Phu Pham",
   "license": "ISC",

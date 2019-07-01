@@ -20,7 +20,7 @@ worker.backupStudentLoop = () => {
 	_setTimeout(worker._CreateBackupStudentTable, 1000 * 60 * 60 * 24 * 365);
 }
 
-worker.backupActiveStudent = (year) => {	
+worker.backupActiveStudent = (year) => {
 	pool.query(`SELECT * FROM STUDENT WHERE ISACTIVE = true`)
 		.then(result => {
 			result.forEach(std => {
@@ -73,11 +73,13 @@ worker._CreateBackupStudentTable = () => {
 }
 
 worker.init = () => {
-	setTimeout(() => {
+	pool.getConnection((err, connection) => {
+		
 		worker._CreateBackupStudentTable()
 		worker.backupStudentLoop();
 		console.log("worker is running");
-	}, 5000);
+	})
+
 }
 
 module.exports = worker;

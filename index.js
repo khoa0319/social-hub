@@ -1,6 +1,6 @@
 /* App Initialize */
-require('dotenv').config();
-require('./spawnDatabase');
+const config = require('./config')
+if (config.env === 'development') require('./spawnDatabase');
 
 /* 3rd party modules */
 const express = require('express');
@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, fingerprint");
   next();
 });
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
@@ -25,11 +25,11 @@ app.use('/api/users', require('./components/users/userAPI'));
 app.use('/api/admins', require('./components/admins/adminAPI'));
 app.use('/api/activities', require('./components/activities/activityAPI'));
 app.use('/api/notis', require('./components/notis/notiAPI'));
-const port = process.env.PORT || 5000;
-const environment = process.env.NODE_ENV || 'Production'
+const port = config.port || 5000;
+const environment = config.env || 'development'
 app.listen(port, () => {
-
   console.log(`Listening on port ${port} in ${environment}`);
 });
 
-worker.init();
+// worker.init();
+
