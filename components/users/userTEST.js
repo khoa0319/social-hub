@@ -143,3 +143,22 @@ app.get16ClassData = (data) => {
    console.log("success");
  })
 }
+
+const testInner = async () => {
+  console.log('calling testInner');
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('hello from deep inside promise')
+    }, 500);
+  })
+}
+
+const testOuter = async () => {
+  console.log('calling testOuter');
+  return await testInner()
+}
+
+(async () => {
+  const value = await testOuter()
+  console.log(value);
+})()

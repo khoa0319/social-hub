@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 /* App modules */
 const pool = require('../../models/database');
 const validator = require('./userValidate');
+const config = require('../../config');
 // container for Handle
 const _user = {};
 
@@ -74,18 +75,18 @@ _user.handleResetPassword = (req, res) => {
       return bcrypt.compare(oldPassword, result[0].HASHPASSWORD)
     })
     .then(match => {
-      if (!match) return res.status(403).json({oldPasswordError: 'mật khẩu không đúng'})
+      if (!match) return res.status(403).json({ oldPasswordError: 'mật khẩu không đúng' })
       // old password is match 
       return bcrypt.hash(newPassword, 10)
     })
-    .then(value => {      
+    .then(value => {
       pool.query(`UPDATE STUDENT set ? where ID = ?`, [{ HASHPASSWORD: value }, req.user.ID])
-      .then(r => {
-        return res.status(200).json({ msg: "SUCCESS" })
-      })
-      .catch(err => res.status(500).json(err))
+        .then(r => {
+          return res.status(200).json({ msg: "SUCCESS" })
+        })
+        .catch(err => res.status(500).json(err))
     })
-    .catch(err => res.status(500).json(err))  
+    .catch(err => res.status(500).json(err))
 }
 
 /* 
@@ -118,7 +119,7 @@ _user.handleUpdate = (req, res) => {
 
 _user.handleGetUpdate = (req, res) => {
   pool.query(`SELECT ADDRESS,PHONE,EMAIL FROM STUDENT WHERE ID = ?`, req.user.ID)
-    .then(result => {      
+    .then(result => {
       const info = {
         address: result[0].ADDRESS,
         phone: result[0].PHONE,
@@ -195,40 +196,40 @@ _user.handleLogInFB = (req, res) => {
   Log-in
   require: validate-input, account is activated
  */
-_user.handleLogIn = (req, res) => {
+_user.handleLogIn = async (req, res) => {
   const { ID, password, fingerprint } = req.body;
-  pool.query(`SELECT * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID 
+
+  // create 
+  const result = await pool.query(`SELECT * from STUDENT s inner join USERTYPE u on s.UT_ID = u.UT_ID 
     inner join FACULTY f on s.F_ID = f.F_ID
     inner join MAJOR m on s.M_ID = m.M_ID
     inner join CLASS c on s.C_ID = c.C_ID
     where s.ID = ? and s.ISACTIVE = true `, ID)
-    .then(result => {
 
-      if (!result[0]) return res.status(404).json({ loginError: "không tìm thấy MSSV hoặc chưa kích hoạt" });
+  if (!result.length) return res.status(404).json({ loginError: "không tìm thấy MSSV hoặc chưa kích hoạt" });
 
-      let user = result[0];
+  const user = result[0];
 
-      bcrypt.compare(password, user.HASHPASSWORD)
-        .then((match) => {
-          if (!match) return res.status(403).json({ loginError: "sai MSSV hoặc mật khẩu" });
-          const payload = {
-            ID: user.ID,
-            FullName: user.FULLNAME,
-            Role: user.ROLENAME,
-            Faculty: user.FNAME,
-            Major: user.MNAME,
-            Class: user.CNAME,
-            Academic_year: user.ACADEMIC_YEAR,
-            BirthDate: user.BIRTHDATE
-          };
-          jwt.sign(payload, "socialhub" + fingerprint, { expiresIn: '1h' }, (err, token) => {
-            if (err) return res.status(500).json({ err });
-            res.status(200).json({ token });
-          })
-        })
-        .catch(err => res.status(500).json({ err }));
-    })
-    .catch(err => res.status(500).json({ err }));
+  const match = await bcrypt.compare(password, user.HASHPASSWORD)
+
+  if (!match) return res.status(403).json({ loginError: "sai MSSV hoặc mật khẩu" });
+
+  const payload = {
+    ID: user.ID,
+    FullName: user.FULLNAME,
+    Role: user.ROLENAME,
+    Faculty: user.FNAME,
+    Major: user.MNAME,
+    Class: user.CNAME,
+    Academic_year: user.ACADEMIC_YEAR,
+    BirthDate: user.BIRTHDATE
+  };
+
+  jwt.sign(payload, config.secretKey + fingerprint, { expiresIn: '1h' }, (err, token) => {
+    if (err) return res.status(500).json({ err });
+    res.status(200).json({ token });
+  })
+
 };
 
 /*
@@ -250,7 +251,7 @@ _user.handleActivate = (req, res) => {
       inner join FACULTY f on s.F_ID = f.F_ID
       inner join MAJOR m on s.M_ID = m.M_ID
       where ID = ?`, ID)
-        .then(result => {          
+        .then(result => {
           const std = {
             FullName: result[0].FULLNAME,
             Faculty: result[0].FNAME,

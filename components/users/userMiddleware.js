@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 /* app modules */
 const validator = require('../users/userValidate');
-
+const config = require('../../config')
 const _middleware = {}
 
 _middleware.authenticating = (req, res, next) => {
@@ -12,7 +12,7 @@ _middleware.authenticating = (req, res, next) => {
 
   if (!token) return res.status(400).json({error: "Token not provided"})
   try {
-    const decoded = jwt.verify(token, 'socialhub' + fingerprint)
+    const decoded = jwt.verify(token, config.secretKey + fingerprint)
     if (decoded) {
       req.user = decoded
       next()

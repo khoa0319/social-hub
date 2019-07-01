@@ -7,5 +7,6 @@ exports = module.exports = {
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   defaultPassword: process.env.DEFAULTPASSWORD,
-  file: process.env.FILE
+  file: process.env.FILE,
+  secretKey: process.env.SECRETKEY
 }

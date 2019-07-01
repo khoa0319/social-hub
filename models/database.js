@@ -1,18 +1,13 @@
 const util = require('util')
 const mysql = require('mysql')
-const db = {
-	host: process.env.HOST,
-	user: process.env.MYSQLUSER,
-	password: process.env.PASSWORD,
-	database: process.env.DATABASE
-};
+const config = require('../config')
 
 const pool = mysql.createPool({
-	connectionLimit: 10, 
-	host: db.host,
-	user: db.user,
-	password: db.password,
-	database: db.database,
+	connectionLimit: 20,
+	host: config.host,
+	user: config.user,
+	password: config.password,
+	database: config.database,
 	dateStrings: true
 });
 
